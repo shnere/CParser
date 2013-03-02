@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include "stack.c"
 #define eq(str1, str2) (strcmp(str1, str2) == 0)
 #define ERR -1
@@ -55,6 +56,15 @@ typedef struct siguiente {
 	int cuantos;
 }siguiente;
 
+char* itoa(int i){
+    int n = snprintf(NULL, 0, "%d", i) + 1;
+    char *s = (char *)malloc(n);
+    
+    if (s != NULL)
+        snprintf(s, n, "%d", i);
+    return s;
+}
+
 FILE * tablaReglasFuente;
 // Globales de cantidades
 int noTerminales;
@@ -66,7 +76,7 @@ char *arregloTerminales[34];
 char *arregloNoTerminales[27];
 int arregloEstados[30];
 char buf[BUFSIZ];
-char escritura[BUFSIZ];
+extern char escritura[BUFSIZ];
 char *input[BUFSIZ];
 char *inputReal[BUFSIZ];
 int inputSize;
@@ -189,7 +199,7 @@ char* imprimePila(char* ret){
 	memset(ret, '\0', BUFSIZ);
 	int pilaprint[BUFSIZ];
 	int k;
-	char s[BUFSIZ];
+	//char s[BUFSIZ];
 	despliega(&pila, pilaprint);
 	
 	for (k=0; k<pila.size; k++) {
@@ -294,7 +304,7 @@ char* imprimeInputReal(char* ret, int num){
 void imprimeFormato(int tipo,int i,int valor){
 	char ret[BUFSIZ];
 	char ret1[BUFSIZ];
-	int k;
+	//int k;
 	switch (tipo) {
 			// Header
 		case 0:
@@ -341,9 +351,8 @@ int anasin(){
     
 	push(&pila, convierteAInt("$"));
 	push(&pila, convierteAInt("0"));
-	int i = 0, j = 0, valor = 0, t, yapaso = 0;
+	int i = 0, t, yapaso = 0;
 	char *aux, *uno, *cero, *dos, *p;
-	char ret[BUFSIZ];
 	// Para escribir menos
 	regla actual;
 	
@@ -361,7 +370,7 @@ int anasin(){
 		if (actual.tipo == ACEPTA) {
 			imprimeFormato(3, i, -1);
 			
-			return;
+			return 0;
 		} else if (actual.tipo == D) {
 			// Imprime
 			imprimeFormato(1, i, actual.valor);
@@ -533,16 +542,16 @@ void inicializaTemp(){
     
 	
 	// Definir el tamaño de la matriz (tabla)
-	tablaR = malloc(sizeof(regla)*estados);
+	tablaR = (regla**)malloc(sizeof(regla)*estados);
 	int row;
 	for (row=0; row<estados; row++) {
-		tablaR[row] = malloc(sizeof(regla) * (terminales + noTerminales + 1));
+		tablaR[row] = (regla*)malloc(sizeof(regla) * (terminales + noTerminales + 1));
 	}
 	
     inicializaTabla(tablaR);
     
 	// Arreglo gramatica
-	gramatica = malloc(sizeof(derivacion)*derivacionesGramatica);
+	gramatica = (derivacion *)malloc(sizeof(derivacion)*derivacionesGramatica);
 	
     // PROGRAM -> GLOBAL_DECLARATIONS.
     gramatica[0].cadenaDerivacion[0] = "PROGRAM";

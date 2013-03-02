@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 #define cuantosAutomatas 11
 #define eq(str1, str2) (strcmp(str1, str2) == 0)
@@ -29,13 +30,13 @@ char **inputLex;
 char **inputRealLex;
 
 // Arreglo de palabras reservadas (keywords)
-char *keywords[24] = {"auto","struct","break","else","switch","case","enum",
+const char *keywords[24] = {"auto","struct","break","else","switch","case","enum",
     "register","typedef","extern","return","union",
     "const","continue","for","void","default","goto",
     "sizeof","volatile","do","if","static","while"};
 
 // Arreglo de tipos de datos
-char *dataType[10] = {"char","int","float","double","short","long","unsigned",
+const char *dataType[10] = {"char","int","float","double","short","long","unsigned",
     "signed","enum","const"};
 
 int isComment,isString;
@@ -71,11 +72,11 @@ void reset(automata arr[]){
 
 void resetInp(){
 	int i;
-	inputRealLex = malloc(sizeof(char)*100);
-	inputLex = malloc(sizeof(char)*100);
-    for(i = 0; i < 100; i++){
-        inputRealLex[i] = malloc(BUFSIZ);
-		inputLex[i] = malloc(BUFSIZ);
+	inputRealLex = (char **)malloc(sizeof(char)*1024);
+	inputLex = (char **)malloc(sizeof(char)*1024);
+    for(i = 0; i < 1024; i++){
+        inputRealLex[i] = (char *)malloc(BUFSIZ);
+		inputLex[i] = (char *)malloc(BUFSIZ);
     }
 }
 
@@ -861,6 +862,7 @@ int automataCadenaCaracteres(automata *a , char c) {
 			return 0;
 			break;
 	}
+    return 0;
 }
 
 /**
