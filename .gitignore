@@ -1,1 +1,6 @@
 Analizador Sintactico.xcodeproj
+.vagrant
+.c9revisions
+lexemas.txt
+tabla_simbolos.txt
+anasin
