@@ -4,17 +4,17 @@ int main () { return ; }
 int main () { ; ; }
 int main () { return ; ; }
 int main () { ; return ; }
-int main () { int potatoe ; }
+int main () { double potatoe ; }
 int main () { ; ; ; }
 int main () { return ; return ; }
-int main () { potatoe = potatoe ; }
-int main () { potatoe = constant ; }
-int main () { constant = potatoe ; }
-int main () { constant = constant ; }
+int main () { potatoe > potatoe ; }
+int main () { potatoe >= 3.0 ; }
+int main () { 4 <= potatoe ; }
+int main () { 'c' < 3.0 ; }
 int main () { potatoe + potatoe ; }
-int main () { potatoe + constant ; }
-int main () { potatoe && constant ; }
-int main () { constant && potatoe ; }
+int main () { potatoe - 12 ; }
+int main () { potatoe && 0 ; }
+int main () { -5 || potatoe ; }
 int main () { potatoe && potatoe ; }
-int main () { constant && constant ; }
-int main () { int potatoe ; ; }
+int main () { 3.0 || 3.0 ; }
+int main () { float potatoe ; ; }
