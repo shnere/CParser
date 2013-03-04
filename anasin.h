@@ -535,306 +535,204 @@ void inicializaTemp(){
 	gramatica[0].cadenaDerivacion[1] = "GLOBAL_DECLARATIONS";
 	gramatica[0].derivaciones		 = 2;
     
-    //GLOBAL_DECLARATIONS -> DECLARATION GLOBAL_DECLARATIONS | MAIN_DEF.
+    // GLOBAL_DECLARATIONS -> MAIN_DEF
     gramatica[1].cadenaDerivacion[0] = "GLOBAL_DECLARATIONS";
-	gramatica[1].cadenaDerivacion[1] = "DECLARATION";
-	gramatica[1].cadenaDerivacion[2] = "GLOBAL_DECLARATIONS";
-	gramatica[1].derivaciones		 = 3;
+	gramatica[1].cadenaDerivacion[1] = "MAIN_DEF";
+	gramatica[1].derivaciones		 = 2;
     
-    gramatica[2].cadenaDerivacion[0] = "GLOBAL_DECLARATIONS";
-	gramatica[2].cadenaDerivacion[1] = "MAIN_DEF";
-	gramatica[2].derivaciones		 = 2;
-    
-    //DECLARATION -> VAR_TYPE VAR_LIST ;.
+    // DECLARATION -> var_type VAR_LIST semi_colon
     gramatica[3].cadenaDerivacion[0] = "DECLARATION";
-	gramatica[3].cadenaDerivacion[1] = "VAR_TYPE";
+	gramatica[3].cadenaDerivacion[1] = "var_type";
     gramatica[3].cadenaDerivacion[2] = "VAR_LIST";
-	gramatica[3].derivaciones		 = 3;
+	gramatica[3].cadenaDerivacion[3] = "semi_colon";
+	gramatica[3].derivaciones		 = 4;
     
-    //VAR_TYPE -> void | int | float | char.
+    // VAR_LIST -> VAR_LIST comma VAR_ITEM
     gramatica[4].cadenaDerivacion[0] = "VAR_TYPE";
-    gramatica[4].cadenaDerivacion[1] = "void";
-    gramatica[4].derivaciones = 2;
+    gramatica[4].cadenaDerivacion[1] = "VAR_LIST";
+    gramatica[4].cadenaDerivacion[2] = "comma";
+    gramatica[4].cadenaDerivacion[3] = "VAR_ITEM";
+    gramatica[4].derivaciones = 4;
     
-    gramatica[5].cadenaDerivacion[0] = "VAR_TYPE";
-    gramatica[5].cadenaDerivacion[1] = "int";
+    // VAR_LIST -> VAR_ITEM
+    gramatica[5].cadenaDerivacion[0] = "VAR_LIST";
+    gramatica[5].cadenaDerivacion[1] = "VAR_ITEM";
+    gramatica[5].derivaciones = 2;
+	
+	
+	// VAR_ITEM -> var_name
+	gramatica[5].cadenaDerivacion[0] = "VAR_ITEM";
+    gramatica[5].cadenaDerivacion[1] = "var_name";
     gramatica[5].derivaciones = 2;
     
-    gramatica[6].cadenaDerivacion[0] = "VAR_TYPE";
-    gramatica[6].cadenaDerivacion[1] = "float";
-    gramatica[6].derivaciones = 2;
-    
-    gramatica[7].cadenaDerivacion[0] = "VAR_TYPE";
-    gramatica[7].cadenaDerivacion[1] = "char";
-    gramatica[7].derivaciones = 2;
-    
-    // VAR_LIST -> VAR_LIST comma VAR_ITEM | VAR_ITEM
-    gramatica[8].cadenaDerivacion[0] = "VAR_LIST";
-    gramatica[8].cadenaDerivacion[1] = "VAR_LIST";
-    gramatica[8].cadenaDerivacion[2] = "comma";
-    gramatica[8].cadenaDerivacion[3] = "VAR_ITEM";
-    gramatica[8].derivaciones = 4;
-    
-    gramatica[9].cadenaDerivacion[0] = "VAR_LIST";
-    gramatica[9].cadenaDerivacion[1] = "VAR_ITEM";
-    gramatica[9].derivaciones = 2;
-    
-    // VAR_ITEM -> ARRAY_VAR | SCALAR_VAR.
-    gramatica[10].cadenaDerivacion[0] = "VAR_ITEM";
-    gramatica[10].cadenaDerivacion[1] = "ARRAY_VAR";
-    gramatica[10].derivaciones = 2;
-    
-    gramatica[11].cadenaDerivacion[0] = "VAR_ITEM";
-    gramatica[11].cadenaDerivacion[1] = "SCALAR_VAR";
-    gramatica[11].derivaciones = 2;
-    
-    // ARRAY_VAR -> var_name left_bracket integer_number right_bracket.
-    gramatica[12].cadenaDerivacion[0] = "ARRAY_VAR";
-    gramatica[12].cadenaDerivacion[1] = "var_name";
-    gramatica[12].cadenaDerivacion[2] = "left_bracket";
-    gramatica[12].cadenaDerivacion[3] = "integer_number";
-    gramatica[12].cadenaDerivacion[4] = "right_bracket";
-    gramatica[12].derivaciones = 5;
-    
-    // SCALAR_VAR -> var_name.
-    gramatica[13].cadenaDerivacion[0] = "SCALAR_VAR";
-    gramatica[13].cadenaDerivacion[1] = "var_name";
-    gramatica[13].derivaciones = 2;
-    
-    
     // MAIN_DEF -> int main left_parenthesis right_parenthesis left_curly_bracket FUNCTION_BODY right_curly_bracket.
-    gramatica[14].cadenaDerivacion[0] = "MAIN_DEF";
-    gramatica[14].cadenaDerivacion[1] = "int";
-    gramatica[14].cadenaDerivacion[2] = "main";
-    gramatica[14].cadenaDerivacion[3] = "left_parenthesis";
-    gramatica[14].cadenaDerivacion[4] = "right_parenthesis";
-    gramatica[14].cadenaDerivacion[5] = "left_curly_bracket";
-    gramatica[14].cadenaDerivacion[6] = "FUNCTION_BODY";
-    gramatica[14].cadenaDerivacion[7] = "right_curly_bracket";
-    gramatica[14].derivaciones = 8;
+    gramatica[6].cadenaDerivacion[0] = "MAIN_DEF";
+    gramatica[6].cadenaDerivacion[1] = "int";
+    gramatica[6].cadenaDerivacion[2] = "main";
+    gramatica[6].cadenaDerivacion[3] = "left_parenthesis";
+    gramatica[6].cadenaDerivacion[4] = "right_parenthesis";
+    gramatica[6].cadenaDerivacion[5] = "left_curly_bracket";
+    gramatica[6].cadenaDerivacion[6] = "FUNCTION_BODY";
+    gramatica[6].cadenaDerivacion[7] = "right_curly_bracket";
+    gramatica[6].derivaciones = 8;
     
     // FUNCTION_BODY -> INTERNAL_DECLARATIONS STATEMENT_LIST.
-    gramatica[15].cadenaDerivacion[0] = "FUNCTION_BODY";
-    gramatica[15].cadenaDerivacion[1] = "INTERNAL_DECLARATIONS";
-    gramatica[15].cadenaDerivacion[2] = "STATEMENT_LIST";
-    gramatica[15].derivaciones = 3;
+    gramatica[7].cadenaDerivacion[0] = "FUNCTION_BODY";
+    gramatica[7].cadenaDerivacion[1] = "INTERNAL_DECLARATIONS";
+    gramatica[7].cadenaDerivacion[2] = "STATEMENT_LIST";
+    gramatica[7].derivaciones = 3;
     
-    // INTERNAL_DECLARATIONS -> DECLARATION INTERNAL_DECLARATIONS | .
-    gramatica[16].cadenaDerivacion[0] = "INTERNAL_DECLARATIONS";
-    gramatica[16].cadenaDerivacion[1] = "DECLARATION";
-    gramatica[16].cadenaDerivacion[2] = "INTERNAL_DECLARATIONS";
-    gramatica[16].derivaciones = 3;
+    // INTERNAL_DECLARATIONS -> DECLARATION INTERNAL_DECLARATIONS
+    gramatica[8].cadenaDerivacion[0] = "INTERNAL_DECLARATIONS";
+    gramatica[8].cadenaDerivacion[1] = "DECLARATION";
+    gramatica[8].cadenaDerivacion[2] = "INTERNAL_DECLARATIONS";
+    gramatica[8].derivaciones = 3;
+	
+	// INTERNAL_DECLARATIONS -> <epsilon>
+	gramatica[9].cadenaDerivacion[0] = "INTERNAL_DECLARATIONS";
+    gramatica[9].cadenaDerivacion[1] = "epsilon";
+    gramatica[9].derivaciones = 2;
+	
+    // STATEMENT_LIST -> STATEMENT STATEMENT_LIST
+    gramatica[10].cadenaDerivacion[0] = "STATEMENT_LIST";
+    gramatica[10].cadenaDerivacion[1] = "STATEMENT";
+	gramatica[10].cadenaDerivacion[2] = "STATEMENT_LIST";
+    gramatica[10].derivaciones = 3;
     
-    // PENDIENTE
+	// STATEMENT_LIST -> <epsilon>
+    gramatica[11].cadenaDerivacion[0] = "STATEMENT_LIST";
+    gramatica[11].cadenaDerivacion[1] = "epsilon";
+    gramatica[11].derivaciones = 2;
     
-    // STATEMENT_LIST -> STATEMENT STATEMENT_LIST | .
-    gramatica[17].cadenaDerivacion[0] = "STATEMENT_LIST";
-    gramatica[17].cadenaDerivacion[1] = "STATEMENT_LIST";
-    gramatica[17].derivaciones = 2;
+    // STATEMENT -> IF_STATEMENT
+    gramatica[12].cadenaDerivacion[0] = "STATEMENT";
+    gramatica[12].cadenaDerivacion[1] = "IF_STATEMENT";
+    gramatica[12].derivaciones = 2;
     
-    gramatica[18].cadenaDerivacion[0] = "STATEMENT_LIST";
-    gramatica[18].cadenaDerivacion[1] = "epsilon";
-    gramatica[18].derivaciones = 2;
+	// STATEMENT -> EXPRESSION semi_colon
+    gramatica[13].cadenaDerivacion[0] = "STATEMENT";
+    gramatica[13].cadenaDerivacion[1] = "EXPRESSION_STATEMENT";
+	gramatica[13].cadenaDerivacion[2] = "semi_colon";
+    gramatica[13].derivaciones = 3;
     
-    // STATEMENT -> IF_STATEMENT | EXPRESSION_STATEMENT | WHILE_STATEMENT | RETURN_STATEMENT | ;.
-    gramatica[19].cadenaDerivacion[0] = "STATEMENT";
-    gramatica[19].cadenaDerivacion[1] = "IF_STATEMENT";
-    gramatica[19].derivaciones = 2;
+	// STATEMENT -> WHILE_STATEMENT
+    gramatica[14].cadenaDerivacion[0] = "STATEMENT";
+    gramatica[14].cadenaDerivacion[1] = "WHILE_STATEMENT";
+    gramatica[14].derivaciones = 2;
     
-    gramatica[20].cadenaDerivacion[0] = "STATEMENT";
-    gramatica[20].cadenaDerivacion[1] = "EXPRESSION_STATEMENT";
-    gramatica[20].derivaciones = 2;
+	// STATEMENT -> RETURN_STATEMENT    
+    gramatica[15].cadenaDerivacion[0] = "STATEMENT";
+    gramatica[15].cadenaDerivacion[1] = "RETURN_STATEMENT";
+    gramatica[15].derivaciones = 2;
     
-    gramatica[21].cadenaDerivacion[0] = "STATEMENT";
-    gramatica[21].cadenaDerivacion[1] = "WHILE_STATEMENT";
-    gramatica[21].derivaciones = 2;
+	// STATEMENT -> semi_colon
+	gramatica[16].cadenaDerivacion[0] = "STATEMENT";
+    gramatica[16].cadenaDerivacion[1] = "semi_colon";
+    gramatica[16].derivaciones = 2;
     
-    gramatica[22].cadenaDerivacion[0] = "STATEMENT";
-    gramatica[22].cadenaDerivacion[1] = "WHILE_STATEMENT";
-    gramatica[22].derivaciones = 2;
+    // WHILE_STATEMENT -> while left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket
+    gramatica[17].cadenaDerivacion[0] = "WHILE_STATEMENT";
+    gramatica[17].cadenaDerivacion[1] = "while";
+    gramatica[17].cadenaDerivacion[2] = "left_parenthesis";
+    gramatica[17].cadenaDerivacion[3] = "EXPRESSION";
+    gramatica[17].cadenaDerivacion[4] = "right_parenthesis";
+    gramatica[17].cadenaDerivacion[5] = "left_curly_bracket";
+    gramatica[17].cadenaDerivacion[6] = "STATEMENT";
+    gramatica[17].cadenaDerivacion[7] = "right_curly_bracket";
+    gramatica[17].derivaciones = 8;
     
-    gramatica[23].cadenaDerivacion[0] = "STATEMENT";
-    gramatica[23].cadenaDerivacion[1] = "RETURN_STATEMENT";
+    // IF_STATEMENT -> if left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket
+    gramatica[18].cadenaDerivacion[0] = "IF_STATEMENT";
+    gramatica[18].cadenaDerivacion[1] = "if";
+    gramatica[18].cadenaDerivacion[2] = "left_parenthesis";
+    gramatica[18].cadenaDerivacion[3] = "EXPRESSION";
+    gramatica[18].cadenaDerivacion[4] = "right_parenthesis";
+    gramatica[18].cadenaDerivacion[5] = "left_curly_bracket";
+    gramatica[18].cadenaDerivacion[6] = "STATEMENT";
+    gramatica[18].cadenaDerivacion[7] = "right_curly_bracket";
+    gramatica[18].derivaciones = 8;
+    
+	
+	// IF_STATEMENT -> if left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket else left_curly_bracket STATEMENT right_curly_bracket
+    gramatica[19].cadenaDerivacion[0] = "IF_STATEMENT";
+    gramatica[19].cadenaDerivacion[1] = "if";
+    gramatica[19].cadenaDerivacion[2] = "left_parenthesis";
+    gramatica[19].cadenaDerivacion[3] = "EXPRESSION";
+    gramatica[19].cadenaDerivacion[4] = "right_parenthesis";
+    gramatica[19].cadenaDerivacion[5] = "left_curly_bracket";
+    gramatica[19].cadenaDerivacion[6] = "STATEMENT";
+    gramatica[19].cadenaDerivacion[7] = "right_curly_bracket";
+	gramatica[19].cadenaDerivacion[8] = "else";
+    gramatica[19].cadenaDerivacion[9] = "left_curly_bracket";
+    gramatica[19].cadenaDerivacion[10] = "STATEMENT";
+    gramatica[19].cadenaDerivacion[11] = "right_curly_bracket";
+    gramatica[19].derivaciones = 12;
+    
+    // RETURN_STATEMENT -> return EXPRESSION semi_colon
+    gramatica[20].cadenaDerivacion[0] = "RETURN_STATEMENT";
+    gramatica[20].cadenaDerivacion[1] = "return";
+    gramatica[20].cadenaDerivacion[2] = "EXPRESSION";
+    gramatica[20].cadenaDerivacion[3] = "semi_colon";
+    gramatica[20].derivaciones = 4;
+    
+	// RETURN_STATEMENT -> return semi_colon
+    gramatica[21].cadenaDerivacion[0] = "RETURN_STATEMENT";
+    gramatica[21].cadenaDerivacion[1] = "return";
+    gramatica[21].cadenaDerivacion[2] = "semi_colon";
+    gramatica[21].derivaciones = 3;
+    
+	// EXPRESSION -> PRIMARY_EXPR BINARY_OP PRIMARY_EXPR
+	gramatica[22].cadenaDerivacion[0] = "EXPRESSION";
+    gramatica[22].cadenaDerivacion[1] = "PRIMARY_EXPR";
+    gramatica[22].cadenaDerivacion[2] = "BINARY_OP";
+	gramatica[22].cadenaDerivacion[3] = "PRIMARY_EXPR";
+    gramatica[22].derivaciones = 4;
+	
+	// EXPRESSION -> ASSIGN_EXP
+	gramatica[23].cadenaDerivacion[0] = "EXPRESSION";
+    gramatica[23].cadenaDerivacion[1] = "ASSIGN_EXP";
     gramatica[23].derivaciones = 2;
+	
+	// ASSIGN_EXP-> var_name equal PRIMARY_EXPR BINARY_OP PRIMARY_EXPR
+	gramatica[24].cadenaDerivacion[0] = "ASSIGN_EXP";
+    gramatica[24].cadenaDerivacion[1] = "var_name";
+    gramatica[24].cadenaDerivacion[2] = "equal";
+    gramatica[24].cadenaDerivacion[3] = "PRIMARY_EXPR";
+    gramatica[24].cadenaDerivacion[4] = "BINARY_OP";
+	gramatica[24].cadenaDerivacion[5] = "PRIMARY_EXPR";
+    gramatica[24].derivaciones = 6;
+	
+	// BINARY_OP -> boolean_op
+	gramatica[25].cadenaDerivacion[0] = "BINARY_OP";
+    gramatica[25].cadenaDerivacion[1] = "boolean_op";
+    gramatica[25].derivaciones = 2;
+	
+	// BINARY_OP -> rel_op
+	gramatica[26].cadenaDerivacion[0] = "BINARY_OP";
+    gramatica[26].cadenaDerivacion[1] = "rel_op";
+    gramatica[26].derivaciones = 2;
+	
+	// BINARY_OP -> arith_op
+	gramatica[27].cadenaDerivacion[0] = "BINARY_OP";
+    gramatica[27].cadenaDerivacion[1] = "arith_op";
+    gramatica[27].derivaciones = 2;
+	
+    // PRIMARY_EXPR -> var_name
+    gramatica[28].cadenaDerivacion[0] = "PRIMARY_EXPR";
+    gramatica[28].cadenaDerivacion[1] = "var_name";
+    gramatica[28].derivaciones = 2;
     
-	gramatica[24].cadenaDerivacion[0] = "STATEMENT";
-    gramatica[24].cadenaDerivacion[1] = ";";
-    gramatica[24].derivaciones = 2;
+	// PRIMARY_EXPR -> constant
+    gramatica[29].cadenaDerivacion[0] = "PRIMARY_EXPR";
+    gramatica[29].cadenaDerivacion[1] = "constant";
+    gramatica[29].derivaciones = 2;
     
-    // WHILE_STATEMENT -> while left_parenthesis EXPRESSION right_parenthesis STATEMENT.
-    gramatica[25].cadenaDerivacion[0] = "WHILE_STATEMENT";
-    gramatica[25].cadenaDerivacion[1] = "while";
-    gramatica[25].cadenaDerivacion[2] = "left_parenthesis";
-    gramatica[25].cadenaDerivacion[3] = "EXPRESSION";
-    gramatica[25].cadenaDerivacion[4] = "right_parenthesis";
-    gramatica[25].cadenaDerivacion[5] = "STATEMENT";
-    gramatica[25].derivaciones = 6;
-    
-    // IF_STATEMENT -> if left_parenthesis EXPRESSION right_parenthesis STATEMENT | if left_parenthesis EXPRESSION right_parenthesis STATEMENT else STATEMENT.
-    gramatica[26].cadenaDerivacion[0] = "IF_STATEMENT";
-    gramatica[26].cadenaDerivacion[1] = "if";
-    gramatica[26].cadenaDerivacion[2] = "left_parenthesis";
-    gramatica[26].cadenaDerivacion[3] = "EXPRESSION";
-    gramatica[26].cadenaDerivacion[4] = "right_parenthesis";
-    gramatica[26].cadenaDerivacion[5] = "STATEMENT";
-    gramatica[26].derivaciones = 6;
-    
-    gramatica[27].cadenaDerivacion[0] = "IF_STATEMENT";
-    gramatica[27].cadenaDerivacion[1] = "if";
-    gramatica[27].cadenaDerivacion[2] = "left_parenthesis";
-    gramatica[27].cadenaDerivacion[3] = "EXPRESSION";
-    gramatica[27].cadenaDerivacion[4] = "right_parenthesis";
-    gramatica[27].cadenaDerivacion[5] = "STATEMENT";
-    gramatica[27].cadenaDerivacion[6] = "else";
-    gramatica[27].cadenaDerivacion[7] = "STATEMENT";
-    gramatica[27].derivaciones = 8;
-    
-    // RETURN_STATEMENT -> return EXPRESSION ; | return ;.
-    gramatica[28].cadenaDerivacion[0] = "RETURN_STATEMENT";
-    gramatica[28].cadenaDerivacion[1] = "return";
-    gramatica[28].cadenaDerivacion[2] = "EXPRESSION";
-    gramatica[28].cadenaDerivacion[3] = ";";
-    gramatica[28].derivaciones = 4;
-    
-    gramatica[29].cadenaDerivacion[0] = "RETURN_STATEMENT";
-    gramatica[29].cadenaDerivacion[1] = "return";
-    gramatica[29].cadenaDerivacion[2] = ";";
-    gramatica[29].derivaciones = 3;
-    
-    // EXPRESSION_STATEMENT -> EXPRESSION ;.
-    gramatica[30].cadenaDerivacion[0] = "EXPRESSION_STATEMENT";
-    gramatica[30].cadenaDerivacion[1] = "EXPRESSION";
-    gramatica[30].cadenaDerivacion[2] = ";";
-    gramatica[30].derivaciones = 3;
-    
-    
-    // EXPRESSION -> ASSIGNMENT_EXPRESSION.
-    gramatica[31].cadenaDerivacion[0] = "EXPRESSION";
-    gramatica[31].cadenaDerivacion[1] = "ASSIGNMENT_EXPRESSION";
-    gramatica[31].derivaciones = 2;
-    
-    // ASSIGNMENT_EXPRESSION -> BINARY_EXPR.
-    gramatica[32].cadenaDerivacion[0] = "ASSIGNMENT_EXPRESSION";
-    gramatica[32].cadenaDerivacion[1] = "BINARY_EXPR";
-    gramatica[32].derivaciones = 2;
-    
-    // BINARY_EXPR -> BINARY_EXPR BINARY_OP PRIMARY_EXPR | PRIMARY_EXPR.
-    gramatica[33].cadenaDerivacion[0] = "BINARY_EXPR";
-    gramatica[33].cadenaDerivacion[1] = "BINARY_EXPR";
-    gramatica[33].cadenaDerivacion[2] = "BINARY_OP";
-    gramatica[33].cadenaDerivacion[3] = "PRIMARY_EXPR";
-    gramatica[33].derivaciones = 4;
-    
-    gramatica[34].cadenaDerivacion[0] = "BINARY_EXPR";
-    gramatica[34].cadenaDerivacion[1] = "PRIMARY_EXPR";
-    gramatica[34].derivaciones = 2;
-    
-    // BINARY_OP -> BOOLEAN_OP | REL_OP | ARITH_OP.
-    gramatica[35].cadenaDerivacion[0] = "BINARY_OP";
-    gramatica[35].cadenaDerivacion[1] = "BOOLEAN_OP";
-    gramatica[35].derivaciones = 2;
-    
-    gramatica[36].cadenaDerivacion[0] = "BINARY_OP";
-    gramatica[36].cadenaDerivacion[1] = "REL_OP";
-    gramatica[36].derivaciones = 2;
-    
-    gramatica[37].cadenaDerivacion[0] = "BINARY_OP";
-    gramatica[37].cadenaDerivacion[1] = "ARITH_OP";
-    gramatica[37].derivaciones = 2;
-    
-    // BOOLEAN_OP -> ampersan ampersan | or_symbol or_symbol.
-    gramatica[36].cadenaDerivacion[0] = "BOOLEAN_OP";
-    gramatica[36].cadenaDerivacion[1] = "ampersan";
-    gramatica[36].cadenaDerivacion[2] = "ampersan";
-    gramatica[36].derivaciones = 3;
-    
-    gramatica[38].cadenaDerivacion[0] = "BOOLEAN_OP";
-    gramatica[38].cadenaDerivacion[1] = "or_symbol";
-    gramatica[38].cadenaDerivacion[2] = "or_symbol";
-    gramatica[38].derivaciones = 3;
-    
-    // REL_OP -> equal equal | not equal | minus_than | more_than equal | minus_than | minus_than equal.
-    gramatica[39].cadenaDerivacion[0] = "REL_OP";
-    gramatica[39].cadenaDerivacion[1] = "equal";
-    gramatica[39].cadenaDerivacion[2] = "equal";
-    gramatica[39].derivaciones = 3;
-    
-    gramatica[40].cadenaDerivacion[0] = "REL_OP";
-    gramatica[40].cadenaDerivacion[1] = "not";
-    gramatica[40].cadenaDerivacion[2] = "equal";
-    gramatica[40].derivaciones = 3;
-    
-    gramatica[41].cadenaDerivacion[0] = "REL_OP";
-    gramatica[41].cadenaDerivacion[1] = "minus_than";
-    gramatica[41].derivaciones = 2;
-    
-    gramatica[42].cadenaDerivacion[0] = "REL_OP";
-    gramatica[42].cadenaDerivacion[1] = "more_than";
-    gramatica[42].cadenaDerivacion[2] = "equal";
-    gramatica[42].derivaciones = 3;
-    
-    gramatica[43].cadenaDerivacion[0] = "REL_OP";
-    gramatica[43].cadenaDerivacion[1] = "minus_than";
-    gramatica[43].derivaciones = 2;
-    
-    gramatica[44].cadenaDerivacion[0] = "REL_OP";
-    gramatica[44].cadenaDerivacion[1] = "minus_than";
-    gramatica[44].cadenaDerivacion[2] = "equal";
-    gramatica[44].derivaciones = 3;
-    
-    
-    // ARITH_OP -> plus_sign | minus_sign | multiply_sign | divide_sign | mod_sign.
-    gramatica[45].cadenaDerivacion[0] = "ARITH_OP";
-    gramatica[45].cadenaDerivacion[1] = "plus_sign";
-    gramatica[45].derivaciones = 2;
-    
-    gramatica[46].cadenaDerivacion[0] = "ARITH_OP";
-    gramatica[46].cadenaDerivacion[1] = "minus_sign";
-    gramatica[46].derivaciones = 2;
-    
-    gramatica[47].cadenaDerivacion[0] = "ARITH_OP";
-    gramatica[47].cadenaDerivacion[1] = "multiply_sign";
-    gramatica[47].derivaciones = 2;
-    
-    gramatica[48].cadenaDerivacion[0] = "ARITH_OP";
-    gramatica[48].cadenaDerivacion[1] = "divide_sign";
-    gramatica[48].derivaciones = 2;
-    
-    gramatica[49].cadenaDerivacion[0] = "ARITH_OP";
-    gramatica[49].cadenaDerivacion[1] = "mod_sign";
-    gramatica[49].derivaciones = 2;
-    
-    // PRIMARY_EXPR -> var_name  |  CONSTANT  |  left_parenthesis EXPRESSION right_parenthesis.
-    gramatica[50].cadenaDerivacion[0] = "PRIMARY_EXPR";
-    gramatica[50].cadenaDerivacion[1] = "var_name";
-    gramatica[50].derivaciones = 2;
-    
-    gramatica[51].cadenaDerivacion[0] = "PRIMARY_EXPR";
-    gramatica[51].cadenaDerivacion[1] = "CONSTANT";
-    gramatica[51].derivaciones = 2;
-    
-    gramatica[52].cadenaDerivacion[0] = "PRIMARY_EXPR";
-    gramatica[52].cadenaDerivacion[1] = "left_parenthesis";
-    gramatica[52].cadenaDerivacion[2] = "EXPRESSION";
-    gramatica[52].cadenaDerivacion[3] = "right_parenthesis";
-    gramatica[52].derivaciones = 4;
-    
-    // CONSTANT -> integer_number |  float_number |  character | string.
-    gramatica[53].cadenaDerivacion[0] = "CONSTANT";
-    gramatica[53].cadenaDerivacion[1] = "integer_number";
-    gramatica[53].derivaciones = 2;
-    
-    gramatica[53].cadenaDerivacion[0] = "CONSTANT";
-    gramatica[53].cadenaDerivacion[1] = "float_number";
-    gramatica[53].derivaciones = 2;
-    
-    gramatica[54].cadenaDerivacion[0] = "CONSTANT";
-    gramatica[54].cadenaDerivacion[1] = "character";
-    gramatica[54].derivaciones = 2;
-    
-    gramatica[55].cadenaDerivacion[0] = "CONSTANT";
-    gramatica[55].cadenaDerivacion[1] = "string";
-    gramatica[55].derivaciones = 2;
+	// PRIMARY_EXPR -> left_parenthesis PRIMARY_EXPR right_parenthesis
+    gramatica[30].cadenaDerivacion[0] = "PRIMARY_EXPR";
+    gramatica[30].cadenaDerivacion[1] = "left_parenthesis";
+    gramatica[30].cadenaDerivacion[2] = "PRIMARY_EXPR";
+    gramatica[30].cadenaDerivacion[3] = "right_parenthesis";
+    gramatica[30].derivaciones = 4;
     
 	// Inicializa la tabla con valores default
 	inicializaTabla(tablaR);
