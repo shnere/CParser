@@ -1,2 +1,1 @@
-int main(){ int hola = 0; }
-
+int main(){ int hola,adios; float mi_fl = 3.2; char mi_char = 'c'; if(2.1 > 1 && 3 == 3){mi_fl = mi_fl + 1;}}
