@@ -385,12 +385,11 @@ int anasin(){
 			
 			// Pop hasta encontrar en pila el primer valor de derivacion
 			
-			cero    = gramatica[actual.valor -1].cadenaDerivacion[0];
-			uno     = gramatica[actual.valor -1].cadenaDerivacion[1];
-			if(gramatica[actual.valor - 1].derivaciones > 2)
-                dos	 = gramatica[actual.valor - 1].cadenaDerivacion[2];
-			
-            fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
+			cero	= gramatica[actual.valor].cadenaDerivacion[0];
+			uno		= gramatica[actual.valor].cadenaDerivacion[1];
+			if(gramatica[actual.valor].derivaciones > 2)
+                dos		= gramatica[actual.valor].cadenaDerivacion[2];
+			fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
 			
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
@@ -405,7 +404,7 @@ int anasin(){
 					}
 					if (eq(p,uno)) {
 						// Checa con el siguiente valor para el caso S->CC
-						if(gramatica[actual.valor - 1].derivaciones > 2)
+						if(gramatica[actual.valor].derivaciones > 2)
                             if (eq(uno,dos) && yapaso == 0) {
                                 yapaso = 1;
                                 continue;
@@ -414,7 +413,7 @@ int anasin(){
 					}
 				}
 			}
-			imprimeFormato(2, i, actual.valor - 1);
+			imprimeFormato(2, i, actual.valor);
 			// t siempre va a ser un numero (el renglon de la tabla)
 			t = top(&pila);
 			// Agrega el derivado a la pila
