@@ -1,0 +1,31 @@
+PROGRAM -> GLOBAL_DECLARATIONS.
+GLOBAL_DECLARATIONS -> MAIN_DEF.
+DECLARATION -> var_type VAR_LIST semi_colon.
+VAR_LIST -> VAR_LIST comma VAR_ITEM.
+VAR_LIST -> VAR_ITEM.
+VAR_ITEM -> var_name.
+MAIN_DEF -> int main left_parenthesis right_parenthesis left_curly_bracket FUNCTION_BODY right_curly_bracket.
+FUNCTION_BODY -> INTERNAL_DECLARATIONS STATEMENT_LIST.
+INTERNAL_DECLARATIONS -> DECLARATION INTERNAL_DECLARATIONS.
+INTERNAL_DECLARATIONS -> epsilon.
+STATEMENT_LIST -> STATEMENT STATEMENT_LIST.
+STATEMENT_LIST -> epsilon.
+STATEMENT -> IF_STATEMENT.
+STATEMENT -> EXPRESSION semi_colon.
+STATEMENT -> WHILE_STATEMENT.
+STATEMENT -> RETURN_STATEMENT.
+STATEMENT -> semi_colon.
+WHILE_STATEMENT -> while left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket.
+IF_STATEMENT -> if left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket.
+IF_STATEMENT -> if left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket else left_curly_bracket STATEMENT right_curly_bracket.
+RETURN_STATEMENT -> return EXPRESSION semi_colon.
+RETURN_STATEMENT -> return semi_colon.
+EXPRESSION -> PRIMARY_EXPR BINARY_OP PRIMARY_EXPR.
+EXPRESSION -> ASSIGN_EXP.
+ASSIGN_EXP-> var_name equal PRIMARY_EXPR BINARY_OP PRIMARY_EXPR.
+BINARY_OP -> boolean_op.
+BINARY_OP -> rel_op.
+BINARY_OP -> arith_op.
+PRIMARY_EXPR -> var_name.
+PRIMARY_EXPR -> constant.
+PRIMARY_EXPR -> left_parenthesis PRIMARY_EXPR right_parenthesis.
