@@ -1,4 +1,0 @@
-1:table-tr#tablaChida.row-td*3
-2:html-head|body-p.clase
-3:div.content-div#main-p*2
-4:ul#lista-li*5
