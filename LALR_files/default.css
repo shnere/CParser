@@ -1,0 +1,42 @@
+body { color : black ; background : rgb(88%, 92%, 100%) }
+a:link { color : rgb(87%, 9%, 20%) }
+a:visited { color : rgb(52%, 19%, 25%) }
+h1 { font-size : 180% ; font-family : sans-serif ; font-weight : bold ; color : rgb(20%, 17%, 3%) }
+h2 { font-size : 110% ; font-family : sans-serif ; text-decoration : underline ; color : rgb(20%, 13%, 1%) }
+error { font-size : 230% ; font-weight : bold ; color : rgb(60%, 11%, 3%) ; text-decoration : blink }
+
+conflict { background : rgb(100%, 88%, 94%) }
+accept { background : rgb(88%, 100%, 92%) }
+
+.good { background : rgb(83%, 100%, 84%) ; border : 1px ; border-style : dotted }
+.bad { background : rgb(100%, 81%, 93%) ; border : 1px ; border-style : dotted }
+.good strong { font-size : 120% ; font-weight : bolder ; color : rgb(20%, 3%, 17%) }
+.bad strong { font-size : 120% ; font-weight : bolder ; color : rgb(20%, 3%, 17%) }
+
+table.stats { background : rgb(35%, 25%, 5%) ; color : white }
+table.grammar { background : rgb(0%, 31%, 10%) ; font-size : 120% ; font-family : monospace ; margin-right : 20px ; color : white ; white-space : nowrap }
+caption.grammar { background : black ; font-family : sans-serif }
+caption.grammar a:link { color : white }
+caption.grammar a:visited { color : rgb(74%, 74%, 83%) }
+table.substitutions { background : rgb(36%, 11%, 31%) ; font-size : 120% ; font-family : monospace ; margin-right : 20px ; color : white ; white-space : nowrap }
+caption.substitutions { background : black ; font-family : sans-serif }
+
+comment { font-style : italic ; font-size : 80% ; color : rgb(100%, 96%, 75%) }	/* comments in grammars */
+special { color : rgb(72%, 79%, 72%) ; font-size : 80% }	/* special characters where terminals/nonterminals usually go */
+
+table.flowtable { border-collapse : separate ; border-spacing : 10pt }
+td.progoutput { vertical-align : top ; border : groove 9pt }
+td.transmenu { vertical-align : top ; border : groove 9pt }
+
+/* stuff for transformation page */
+table.transbuttons { background : rgb(56%, 60%, 74%) ; border-spacing : 20px 5px }
+table.transbuttons a:link { color : white ; text-decoration : none ; font-family : sans-serif }
+table.transbuttons a:visited { color : white ; text-decoration : none ; font-family : sans-serif }
+table.transbuttons a:hover { background : rgb(73%, 78%, 91%) ; color : black ; text-decoration : none ; font-family : sans-serif }
+td.transbutton { background : rgb(51%, 55%, 69%) ; text-align : center ; font-size : 80% }
+
+/* example grammars page */
+table.examples th { background : rgb(92%, 95%, 100%) }
+td.impossible { text-align : center ; vertical-align : center ; background : rgb(82%, 86%, 91%) ; color : rgb(53%, 55%, 58%) ; font-size : 70% }
+tr#1 { background : rgb(84%, 88%, 96%) }
+tr#1 td.impossible { background : rgb(78%, 82%, 89%) }

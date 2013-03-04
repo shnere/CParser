@@ -30,16 +30,13 @@ char **inputLex;
 char **inputRealLex;
 
 // Arreglo de palabras reservadas (keywords)
-const char *keywords[24] = {"auto","struct","break","else","switch","case","enum",
-    "register","typedef","extern","return","union",
-    "const","continue","for","void","default","goto",
-    "sizeof","volatile","do","if","static","while"};
+const char *keywords[5] = {"else","return","void","if","while"};
 
 // Arreglo de tipos de datos
 const char *dataType[10] = {"char","int","float","double","short","long","unsigned",
     "signed","enum","const"};
 
-int isComment,isString;
+int isComment,isString,isComma,isSemiColon;
 
 /* Estructura automata, contiene todo lo necesario para cada automata
  * buffer = buffer donde se escribe el lexema
@@ -68,6 +65,8 @@ void reset(automata arr[]){
     }
 	isComment = 0;
 	isString = 0;
+    isComma = 0;
+    isSemiColon = 0;
 }
 
 void resetInp(){
@@ -249,10 +248,11 @@ int automataNumerosReales(automata *a , char c) {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				return 0;
 			} else {
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Numero Real");
-				lexema((*a).buffer, "Numero Real");
+                // Numero Real se convierte a "constant" (junto con numeros naturales y char)
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"constant");
+				lexema((*a).buffer, "constant");
                 
-                strcpy(inputLex[inputSizeLex],"num");
+                strcpy(inputLex[inputSizeLex],"constant");
 				strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
@@ -308,10 +308,11 @@ int automataNumeros(automata *a , char c) {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				return 0;
 			} else if (c != '.'){
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Numero Natural");
-				lexema((*a).buffer, "Numero Natural");
+                // Numero Natural se convierte a "constant" (junto con numeros reales y char)
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"constant");
+				lexema((*a).buffer, "constant");
                 
-                strcpy(inputLex[inputSizeLex],"num");
+                strcpy(inputLex[inputSizeLex],"constant");
 				strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
@@ -362,49 +363,55 @@ int automataIdentificadores(automata *a , char c) {
 				return 0;
 			} else {
 				if (isKeyword((*a).buffer)) {
-                    if (eq((*a).buffer, "return")) {
+                    
+                    // Checo las 5 keywords porque cada una es diferente
+                    if (eq((*a).buffer, "else")) {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"else");
+                        lexema((*a).buffer, "else");
+                        
+                        strcpy(inputLex[inputSizeLex],(*a).buffer);
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    }else if (eq((*a).buffer, "return")) {
                         fprintf(stdout, "%s\t%s\n",(*a).buffer,"return");
                         lexema((*a).buffer, "return");
                         
                         strcpy(inputLex[inputSizeLex],(*a).buffer);
                         strcpy(inputRealLex[inputSizeLex],(*a).buffer);
                         
-                    } else{
-                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"Palabra reservada");
-                        lexema((*a).buffer, "Palabra reservada");
+                    } else if (eq((*a).buffer, "void")) {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"void");
+                        lexema((*a).buffer, "void");
+                        
+                        strcpy(inputLex[inputSizeLex],(*a).buffer);
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    } else if (eq((*a).buffer, "if")) {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"if");
+                        lexema((*a).buffer, "if");
+                        
+                        strcpy(inputLex[inputSizeLex],(*a).buffer);
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    } else if (eq((*a).buffer, "while")) {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"while");
+                        lexema((*a).buffer, "while");
                         
                         strcpy(inputLex[inputSizeLex],(*a).buffer);
                         strcpy(inputRealLex[inputSizeLex],(*a).buffer);
                     }
+                
 				} else if (isDataType((*a).buffer)) {
                     // Checa palabras especiales
-                    if (eq((*a).buffer, "int")) {
-                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"int");
-                        lexema((*a).buffer, "int");
-                        
-                        strcpy(inputLex[inputSizeLex],(*a).buffer);
-                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
-                    } else{
-                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"Palabra reservada - Tipo de dato");
-                        lexema((*a).buffer, "Palabra reservada - Tipo de dato");
-                        
-                        strcpy(inputLex[inputSizeLex],(*a).buffer);
-                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
-                    }
+                    fprintf(stdout, "%s\t%s\n",(*a).buffer,"var_type");
+                    lexema((*a).buffer, "var_type");
+                    
+                    strcpy(inputLex[inputSizeLex],"var_type");
+                    strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				} else {
-                    if (eq((*a).buffer, "main")) {
-                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"main");
-                        lexema((*a).buffer, "main");
-                        
-                        strcpy(inputLex[inputSizeLex],(*a).buffer);
-                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
-                    } else{
-                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"var_name");
-                        lexema((*a).buffer, "var_name");
-                        
-                        strcpy(inputLex[inputSizeLex],"var_name");
-                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
-                    }
+                    // No es ni tipo de dato ni palabra reservada, entonces es un identificador
+                    fprintf(stdout, "%s\t%s\n",(*a).buffer,"var_name");
+                    lexema((*a).buffer, "var_name");
+                
+                    strcpy(inputLex[inputSizeLex],"var_name");
+                    strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				}
 				tabla((*a).buffer);
                 
@@ -516,7 +523,7 @@ int automataComentarios(automata *a, char c){
 }
 
 /**
- * Automata para operadores de puntuacion
+ * Automata para operadores de puntuacion (; y ,)
  *
  * @param automata
  * @param char
@@ -527,9 +534,16 @@ int automataPuntuacion(automata *a , char c){
 	//fprintf(stdout, "Puntgestado:%d char:%c\n",(*a).estado,c);
     switch((*a).estado){
         case 0:
-            if(c == ';' || c == '.' || c== ','){
+            if(c == ';'){
                 sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				(*a).estado=1;
+                isSemiColon = 1;
+                return 0;
+            }
+            if(c == ','){
+                sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
+				(*a).estado=1;
+                isComma = 1;
                 return 0;
             }
 			if (c == ' ' || c == '\n') {
@@ -542,11 +556,19 @@ int automataPuntuacion(automata *a , char c){
                 //noEsPunto=1;
                 return 0;
             }else{
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Signo de puntuacion");
-				lexema((*a).buffer, "Signo de puntuacion");
-                
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
-                strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                if (isSemiColon == 1) {
+                    fprintf(stdout, "%s\t%s\n",(*a).buffer,"semi_colon");
+                    lexema((*a).buffer, "semi_colon");
+                    
+                    strcpy(inputLex[inputSizeLex],"semi_colon");
+                    strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                } else if (isComma == 1) {
+                    fprintf(stdout, "%s\t%s\n",(*a).buffer,"comma");
+                    lexema((*a).buffer, "comma");
+                    
+                    strcpy(inputLex[inputSizeLex],"comma");
+                    strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                }
 				
 				inputSizeLex++;
                 
@@ -573,6 +595,7 @@ int automataOperadoresAsignacion(automata *a, char c){
 	if (isComment == 1) {(*a).estado = -1;}
 	//fprintf(stdout, "Asigestado:%d char:%c\n",(*a).estado,c);
     switch((*a).estado){
+        /* TODO No tiene que leer += */
 		case 0:
 			if(c == '*' || c == '/' || c == '%'){
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
@@ -616,9 +639,8 @@ int automataOperadoresAsignacion(automata *a, char c){
 			return 0;
 			break;
 		case 2:
-			fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador de asignacion");
+			fprintf(stdout, "%s\t%s\n",(*a).buffer,"equal");
 			lexema((*a).buffer, "equal");
-            
             lexema((*a).buffer, "equal");
             
             strcpy(inputLex[inputSizeLex], "equal");
@@ -717,7 +739,6 @@ int automataOperadoresAgrupacion(automata *a , char c) {
                     strcpy(inputLex[inputSizeLex],(*a).buffer);
                     strcpy(inputRealLex[inputSizeLex],(*a).buffer);
                 }
-                
 				
 				inputSizeLex++;
                 
@@ -743,38 +764,18 @@ int automataAritmetico(automata *a , char c) {
 	//fprintf(stdout, "Arigestado:%d char:%c\n",(*a).estado,c);
 	switch ((*a).estado) {
 		case 0:
-			if (((c == '+') || (c == '-') || (c == '/') || (c == '%')) && isComment == 0) {
+			if (((c == '+') || (c == '-') || (c == '/') || (c == '%') || (c == '*')) && isComment == 0) {
 				(*a).estado = 1;
-				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
-				return 0;
-			}
-			if (c == '*') {
-				(*a).estado = 2;
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				return 0;
 			}
 			return 0;
 		case 1:
 			if ((isdigit(c) || c == ' ' || isalpha(c)) && isComment == 0) {
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador Aritmetico");
-				lexema((*a).buffer, "Operador Aritmetico");
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"arith_op");
+				lexema((*a).buffer, "arith_op");
                 
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
-                strcpy(inputRealLex[inputSizeLex],(*a).buffer);
-				
-				inputSizeLex++;
-                
-				fseek(fuente, -1, SEEK_CUR);
-				return 1;
-			}
-			return 0;
-			break;
-		case 2:
-			if ((isdigit(c) || c == ' ' || isalpha(c)) && isComment == 0) {
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador Aritmetico o Apuntador");
-				lexema((*a).buffer, "Operador Aritmetico o Apuntador");
-                
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
+                strcpy(inputLex[inputSizeLex],"arith_op");
                 strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
@@ -846,8 +847,8 @@ int automataCadenaCaracteres(automata *a , char c) {
 				return 0;
 			} else {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Char");
-				lexema((*a).buffer, "Char");
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"constant");
+				lexema((*a).buffer, "constant");
                 
                 strcpy(inputLex[inputSizeLex],(*a).buffer);
                 strcpy(inputRealLex[inputSizeLex],(*a).buffer);
@@ -907,8 +908,8 @@ int automataOperadoresComparacion(automata *a , char c) {
 		case 1:
 			if (c == '=') {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador de comparacion");
-				lexema((*a).buffer, "Operador de comparacion");
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"rel_op");
+				lexema((*a).buffer, "rel_op");
 				return 1;
 			}
 			(*a).estado = -1;
@@ -917,21 +918,21 @@ int automataOperadoresComparacion(automata *a , char c) {
 		case 2:
 			if (c == '=') {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador de comparacion");
-				lexema((*a).buffer, "Operador de comparacion");
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"rel_op");
+				lexema((*a).buffer, "rel_op");
                 
                 strcpy(inputLex[inputSizeLex],(*a).buffer);
-                strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                strcpy(inputRealLex[inputSizeLex],"rel_op");
 				
 				inputSizeLex++;
                 
 				return 1;
 			} else {
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador de comparacion");
-				lexema((*a).buffer, "Operador de comparacion");
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"rel_op");
+				lexema((*a).buffer, "rel_op");
                 
                 strcpy(inputLex[inputSizeLex],(*a).buffer);
-                strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                strcpy(inputRealLex[inputSizeLex],"rel_op");
 				
 				inputSizeLex++;
                 
@@ -947,7 +948,7 @@ int automataOperadoresComparacion(automata *a , char c) {
 }
 
 /**
- * Automata para operadores logicos (&&,||,!)
+ * Automata para operadores logicos (&&,||)
  *
  * @param automata
  * @param char
@@ -968,18 +969,6 @@ int automataOperadoresLogicos(automata *a , char c) {
 				(*a).estado = 2;
 				return 0;
 			}
-			if (c == '!') {
-				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador logico");
-				lexema((*a).buffer, "Operador logico");
-                
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
-                strcpy(inputRealLex[inputSizeLex],(*a).buffer);
-				
-				inputSizeLex++;
-                
-				return 1;
-			}
 			if (c == ' ' || c == '\n') {
 				return 0;
 			}
@@ -990,8 +979,8 @@ int automataOperadoresLogicos(automata *a , char c) {
 		case 1:
 			if (c == '&') {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador logico");
-				lexema((*a).buffer, "Operador logico");
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"boolean_op");
+				lexema((*a).buffer, "boolean_op");
                 
                 strcpy(inputLex[inputSizeLex],(*a).buffer);
                 strcpy(inputRealLex[inputSizeLex],(*a).buffer);
@@ -1006,8 +995,8 @@ int automataOperadoresLogicos(automata *a , char c) {
 		case 2:
 			if (c == '|') {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador logico");
-				lexema((*a).buffer, "Operador logico");
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"boolean_op");
+				lexema((*a).buffer, "boolean_op");
 
                 strcpy(inputLex[inputSizeLex],(*a).buffer);
                 strcpy(inputRealLex[inputSizeLex],(*a).buffer);

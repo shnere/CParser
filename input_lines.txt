@@ -1,0 +1,20 @@
+int main () { }
+int main () { ; }
+int main () { return ; }
+int main () { ; ; }
+int main () { return ; ; }
+int main () { ; return ; }
+int main () { int potatoe ; }
+int main () { ; ; ; }
+int main () { return ; return ; }
+int main () { potatoe = potatoe ; }
+int main () { potatoe = constant ; }
+int main () { constant = potatoe ; }
+int main () { constant = constant ; }
+int main () { potatoe + potatoe ; }
+int main () { potatoe + constant ; }
+int main () { potatoe && constant ; }
+int main () { constant && potatoe ; }
+int main () { potatoe && potatoe ; }
+int main () { constant && constant ; }
+int main () { int potatoe ; ; }
