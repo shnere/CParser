@@ -77,8 +77,8 @@ char *arregloNoTerminales[27];
 int arregloEstados[30];
 char buf[BUFSIZ];
 extern char escritura[BUFSIZ];
-char *input[BUFSIZ];
-char *inputReal[BUFSIZ];
+char *input[BUFSIZ]; // La traduccion, si es un no terminal o un terminal, por ejemplo VAR_TYPE
+char *inputReal[BUFSIZ]; // El buffer tal cual (los valores)
 int inputSize;
 int errorSintactico = 0;
 // Tabla de analisis SLR1
@@ -308,18 +308,18 @@ void imprimeFormato(int tipo,int i,int valor){
 	switch (tipo) {
 			// Header
 		case 0:
-			fprintf(stdout, "%-70s\t%-45s\tACCION\n","PILA","ENTRADA");
+			fprintf(stdout, "%-90s\t%-45s\tACCION\n","PILA","ENTRADA");
 			break;
 			// Derivacion normal D#
 		case 1:
-			fprintf(stdout,"%-70s\t%-45s\t", imprimePila(ret), imprimeInputReal(ret1,i));
+			fprintf(stdout,"%-90s\t%-45s\t", imprimePila(ret), imprimeInputReal(ret1,i));
 			// Tipo de accion
 			fprintf(stdout, "D%d",valor);
 			fprintf(stdout, "\n");
 			break;
 			// Reduccion R#
 		case 2:
-			fprintf(stdout,"%-70s\t%-45s\t", imprimePila(ret), imprimeInputReal(ret1,i));
+			fprintf(stdout,"%-90s\t%-45s\t", imprimePila(ret), imprimeInputReal(ret1,i));
 			// Tipo de accion
 			fprintf(stdout, "R%d: ",valor+1);
 			imprimeGramatica(valor);
@@ -327,11 +327,11 @@ void imprimeFormato(int tipo,int i,int valor){
 			break;
 			// Acepta
 		case 3:
-			fprintf(stdout, "%-70s\t%-45s\tCadena Aceptada\n", imprimePila(ret), imprimeInput(ret1,i));
+			fprintf(stdout, "%-90s\t%-45s\tCadena Aceptada\n", imprimePila(ret), imprimeInput(ret1,i));
 			break;
 			// Error Sintactico
 		case 4:
-			fprintf(stdout, "%-70s\t%-45s\tError Sintactico.", imprimePila(ret), imprimeInputReal(ret1,i));
+			fprintf(stdout, "%-90s\t%-45s\tError Sintactico.", imprimePila(ret), imprimeInputReal(ret1,i));
 			fprintf(stdout, "\n");
 			errorSintactico = 1;
 			break;
@@ -385,11 +385,12 @@ int anasin(){
 			
 			// Pop hasta encontrar en pila el primer valor de derivacion
 			
-			cero	= gramatica[actual.valor -1].cadenaDerivacion[0];
-			uno		= gramatica[actual.valor -1].cadenaDerivacion[1];
+			cero    = gramatica[actual.valor -1].cadenaDerivacion[0];
+			uno     = gramatica[actual.valor -1].cadenaDerivacion[1];
 			if(gramatica[actual.valor - 1].derivaciones > 2)
-                dos		= gramatica[actual.valor - 1].cadenaDerivacion[2];
-			fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
+                dos	 = gramatica[actual.valor - 1].cadenaDerivacion[2];
+			
+            fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
 			
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
