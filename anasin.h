@@ -378,42 +378,44 @@ int anasin(){
 			push(&pila, convierteAInt(input[i]));
 			// Mete el valor de D
 			push(&pila, convierteAInt(itoa(actual.valor)));
-			
+			//fprintf(stdout, "\nAcastoy, Meto %s %d\n",input[i],actual.valor);
 			// Incrementa Valor
 			i++;
 		} else if (actual.tipo == R) {
-			
 			// Pop hasta encontrar en pila el primer valor de derivacion
-			
-			cero	= gramatica[actual.valor].cadenaDerivacion[0];
-			uno		= gramatica[actual.valor].cadenaDerivacion[1];
-			if(gramatica[actual.valor].derivaciones > 2)
-                dos		= gramatica[actual.valor].cadenaDerivacion[2];
-			//fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
+			cero	= gramatica[actual.valor - 1].cadenaDerivacion[0];
+			uno		= gramatica[actual.valor - 1].cadenaDerivacion[1];
+			if(gramatica[actual.valor ].derivaciones > 2){
+                dos		= gramatica[actual.valor - 1].cadenaDerivacion[2];
+            }
+			fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
 			
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
 				
 				while ((p = convierteAString(pop(&pila))),uno) {
-					
-					//fprintf(stdout, "Pop:%s\n",p);
+					fprintf(stdout, "Pop:%s\n",p);
 					if (eq(p,"$")) {
 						imprimeFormato(4, i, -1);
-						//fprintf(stdout, "No encontre %s, salir.\n",uno);
+						fprintf(stdout, "No encontre %s, salir.\n",uno);
 						return -1;
 					}
 					if (eq(p,uno)) {
 						// Checa con el siguiente valor para el caso S->CC
-						if(gramatica[actual.valor].derivaciones > 2)
+						/*if(gramatica[actual.valor - 1].derivaciones > 2) {
+                            fprintf(stdout, "Dos:%s\n",dos);
                             if (eq(uno,dos) && yapaso == 0) {
+                                fprintf(stdout, "Uno igual a dos:%s\n",dos);
                                 yapaso = 1;
                                 continue;
                             }
-						break;
+                            break;
+                        }*/
+                        break;
 					}
 				}
 			}
-			imprimeFormato(2, i, actual.valor);
+			imprimeFormato(2, i, actual.valor - 1);
 			// t siempre va a ser un numero (el renglon de la tabla)
 			t = top(&pila);
 			// Agrega el derivado a la pila
@@ -470,29 +472,31 @@ void clearInput(){
  **/
 void inicializaTemp(){
 	// Inicializa cantidades
-	noTerminales = 16;
+	noTerminales = 18;
 	terminales	 = 19;
-	estados		 = 70;
-	derivacionesGramatica = 30;
+	estados		 = 68;
+	derivacionesGramatica = 32;
     siguientes = 0;
 	
 	// Crea arreglo de no terminales
     arregloNoTerminales[0] = "PROGRAM";
-    arregloNoTerminales[1] = "VAR_LIST";
-    arregloNoTerminales[2] = "VAR_ITEM";
-    arregloNoTerminales[3] = "MAIN_DEF";
-    arregloNoTerminales[4] = "FUNCTION_BODY";
-    arregloNoTerminales[5] = "DECLARATION";
-    arregloNoTerminales[6] = "INTERNAL_DECLARATIONS";
-    arregloNoTerminales[7] = "STATEMENT_LIST";
-    arregloNoTerminales[8] = "WHILE_STATEMENT";
-    arregloNoTerminales[9] = "IF_STATEMENT";
-    arregloNoTerminales[10] = "STATEMENT";
-    arregloNoTerminales[11] = "RETURN_STATEMENT";
-    arregloNoTerminales[12] = "EXPRESSION";
-    arregloNoTerminales[13] = "ASSIGN_EXP";
-    arregloNoTerminales[14] = "BINARY_OP";
-    arregloNoTerminales[15] = "PRIMARY_EXPR";
+    arregloNoTerminales[1] = "GLOBAL_DECLARATIONS";
+    arregloNoTerminales[2] = "VAR_LIST";
+    arregloNoTerminales[3] = "VAR_ITEM";
+    arregloNoTerminales[4] = "MAIN_DEF";
+    arregloNoTerminales[5] = "FUNCTION_BODY";
+    arregloNoTerminales[6] = "DECLARATION";
+    arregloNoTerminales[7] = "INTERNAL_DECLARATIONS";
+    arregloNoTerminales[8] = "STATEMENT_LIST";
+    arregloNoTerminales[9] = "WHILE_STATEMENT";
+    arregloNoTerminales[10] = "IF_STATEMENT";
+    arregloNoTerminales[11] = "STATEMENT";
+    arregloNoTerminales[12] = "RETURN_STATEMENT";
+    arregloNoTerminales[13] = "EXPRESSION";
+    arregloNoTerminales[14] = "ASSIGN_EXP";
+    arregloNoTerminales[15] = "BINARY_EXP";
+    arregloNoTerminales[16] = "BINARY_OP";
+    arregloNoTerminales[17] = "PRIMARY_EXPR";
 	
     // Crea arreglo de terminales
     arregloTerminales[0] = "$";
@@ -673,857 +677,924 @@ void inicializaTemp(){
     gramatica[20].cadenaDerivacion[2] = "semi_colon";
     gramatica[20].derivaciones = 3;
     
-    // EXPRESSION -> PRIMARY_EXPR BINARY_OP PRIMARY_EXPR
-    gramatica[21].cadenaDerivacion[0] = "EXPRESSION";
-    gramatica[21].cadenaDerivacion[1] = "PRIMARY_EXPR";
-    gramatica[21].cadenaDerivacion[2] = "BINARY_OP";
-    gramatica[21].cadenaDerivacion[3] = "PRIMARY_EXPR";
-    gramatica[21].derivaciones = 4;
-    
     // EXPRESSION -> ASSIGN_EXP
-    gramatica[22].cadenaDerivacion[0] = "EXPRESSION";
-    gramatica[22].cadenaDerivacion[1] = "ASSIGN_EXP";
-    gramatica[22].derivaciones = 2;
+    gramatica[21].cadenaDerivacion[0] = "EXPRESSION";
+    gramatica[21].cadenaDerivacion[1] = "ASSIGN_EXP";
+    gramatica[21].derivaciones = 2;
     
-    // ASSIGN_EXP-> var_name equal PRIMARY_EXPR BINARY_OP PRIMARY_EXPR
+    // ASSIGN_EXP -> var_name equal BINARY_EXP
+    gramatica[22].cadenaDerivacion[0] = "var_name";
+    gramatica[22].cadenaDerivacion[1] = "equal";
+    gramatica[22].cadenaDerivacion[2] = "BINARY_EXP";
+    gramatica[22].derivaciones = 3;
+    
+    // ASSIGN_EXP -> BINARY_EXP
     gramatica[23].cadenaDerivacion[0] = "ASSIGN_EXP";
-    gramatica[23].cadenaDerivacion[1] = "var_name";
-    gramatica[23].cadenaDerivacion[2] = "equal";
-    gramatica[23].cadenaDerivacion[3] = "PRIMARY_EXPR";
-    gramatica[23].cadenaDerivacion[4] = "BINARY_OP";
-    gramatica[23].cadenaDerivacion[5] = "PRIMARY_EXPR";
-    gramatica[23].derivaciones = 6;
+    gramatica[23].cadenaDerivacion[1] = "BINARY_EXP";
+    gramatica[23].derivaciones = 2;
     
-    // BINARY_OP -> boolean_op
-    gramatica[24].cadenaDerivacion[0] = "BINARY_OP";
-    gramatica[24].cadenaDerivacion[1] = "boolean_op";
-    gramatica[24].derivaciones = 2;
+    // BINARY_EXP -> BINARY_EXP BINARY_OP PRIMARY_EXPR
+    gramatica[24].cadenaDerivacion[0] = "BINARY_EXP";
+    gramatica[24].cadenaDerivacion[1] = "BINARY_EXP";
+    gramatica[24].cadenaDerivacion[2] = "BINARY_OP";
+    gramatica[24].cadenaDerivacion[3] = "PRIMARY_EXPR";
+    gramatica[24].derivaciones = 4;
     
-    // BINARY_OP -> rel_op
+    // BINARY_EXP -> PRIMARY_EXPR
     gramatica[25].cadenaDerivacion[0] = "BINARY_OP";
-    gramatica[25].cadenaDerivacion[1] = "rel_op";
+    gramatica[25].cadenaDerivacion[1] = "PRIMARY_EXPR";
     gramatica[25].derivaciones = 2;
     
-    // BINARY_OP -> arith_op
+    // BINARY_OP -> boolean_op
     gramatica[26].cadenaDerivacion[0] = "BINARY_OP";
-    gramatica[26].cadenaDerivacion[1] = "arith_op";
+    gramatica[26].cadenaDerivacion[1] = "boolean_op";
     gramatica[26].derivaciones = 2;
     
-    // PRIMARY_EXPR -> var_name
-    gramatica[27].cadenaDerivacion[0] = "PRIMARY_EXPR";
-    gramatica[27].cadenaDerivacion[1] = "var_name";
+    // BINARY_OP -> rel_op
+    gramatica[27].cadenaDerivacion[0] = "BINARY_OP";
+    gramatica[27].cadenaDerivacion[1] = "rel_op";
     gramatica[27].derivaciones = 2;
     
-    // PRIMARY_EXPR -> constant
-    gramatica[28].cadenaDerivacion[0] = "PRIMARY_EXPR";
-    gramatica[28].cadenaDerivacion[1] = "constant";
+    // BINARY_OP -> arith_op
+    gramatica[28].cadenaDerivacion[0] = "BINARY_OP";
+    gramatica[28].cadenaDerivacion[1] = "arith_op";
     gramatica[28].derivaciones = 2;
     
-    // PRIMARY_EXPR -> left_parenthesis PRIMARY_EXPR right_parenthesis
+    // PRIMARY_EXPR -> var_name
     gramatica[29].cadenaDerivacion[0] = "PRIMARY_EXPR";
-    gramatica[29].cadenaDerivacion[1] = "left_parenthesis";
-    gramatica[29].cadenaDerivacion[2] = "PRIMARY_EXPR";
-    gramatica[29].cadenaDerivacion[3] = "right_parenthesis";
-    gramatica[29].derivaciones = 4;
+    gramatica[29].cadenaDerivacion[1] = "var_name";
+    gramatica[29].derivaciones = 2;
+    
+    // PRIMARY_EXPR -> constant
+    gramatica[30].cadenaDerivacion[0] = "PRIMARY_EXPR";
+    gramatica[30].cadenaDerivacion[1] = "constant";
+    gramatica[30].derivaciones = 2;
+    
+    // PRIMARY_EXPR -> left_parenthesis PRIMARY_EXPR right_parenthesis
+    gramatica[31].cadenaDerivacion[0] = "PRIMARY_EXPR";
+    gramatica[31].cadenaDerivacion[1] = "left_parenthesis";
+    gramatica[31].cadenaDerivacion[2] = "PRIMARY_EXPR";
+    gramatica[31].cadenaDerivacion[3] = "right_parenthesis";
+    gramatica[31].derivaciones = 4;
     
 	// Inicializa la tabla con valores default
 	inicializaTabla(tablaR);
     
 	// Tabla
     tablaR[0][17].tipo = D;
-    tablaR[0][17].valor = 3;
+    tablaR[0][17].valor = 4;
     
     tablaR[0][19].tipo = D;
-    tablaR[0][19].valor = 2;
+    tablaR[0][19].valor = 3;
     
-    tablaR[0][22].tipo = D;
-    tablaR[0][22].valor = 1;
+    tablaR[0][20].tipo = D;
+    tablaR[0][20].valor = 2;
+    
+    tablaR[0][23].tipo = D;
+    tablaR[0][23].valor = 1;
     
     tablaR[1][0].tipo = R;
-    tablaR[1][0].valor = 0;
+    tablaR[1][0].valor = 1;
     
-    tablaR[2][0].tipo = ACEPTA;
-    tablaR[2][0].valor = ERR;
+    tablaR[2][0].tipo = R;
+    tablaR[2][0].valor = 0;
     
-    tablaR[3][16].tipo = D;
-    tablaR[3][16].valor = 4;
+    tablaR[3][0].tipo = ACEPTA;
+    tablaR[3][0].valor = ERR;
     
-    tablaR[4][2].tipo = D;
-    tablaR[4][2].valor = 5;
+    tablaR[4][16].tipo = D;
+    tablaR[4][16].valor = 5;
     
-    tablaR[5][1].tipo = D;
-    tablaR[5][1].valor = 6;
+    tablaR[5][2].tipo = D;
+    tablaR[5][2].valor = 6;
     
-    tablaR[6][12].tipo = D;
-    tablaR[6][12].valor = 7;
+    tablaR[6][1].tipo = D;
+    tablaR[6][1].valor = 7;
     
-    tablaR[7][2].tipo = R;
-    tablaR[7][2].valor = 8;
+    tablaR[7][12].tipo = D;
+    tablaR[7][12].valor = 8;
     
-    tablaR[7][3].tipo = R;
-    tablaR[7][3].valor = 8;
+    tablaR[8][2].tipo = R;
+    tablaR[8][2].valor = 9;
     
-    tablaR[7][4].tipo = R;
-    tablaR[7][4].valor = 8;
+    tablaR[8][3].tipo = R;
+    tablaR[8][3].valor = 9;
     
-    tablaR[7][9].tipo = R;
-    tablaR[7][9].valor = 8;
+    tablaR[8][4].tipo = R;
+    tablaR[8][4].valor = 9;
     
-    tablaR[7][10].tipo = R;
-    tablaR[7][10].valor = 8;
+    tablaR[8][9].tipo = R;
+    tablaR[8][9].valor = 9;
     
-    tablaR[7][11].tipo = R;
-    tablaR[7][11].valor = 8;
-    
-    tablaR[7][14].tipo = R;
-    tablaR[7][14].valor = 8;
-    
-    tablaR[7][15].tipo = R;
-    tablaR[7][15].valor = 8;
-    
-    tablaR[7][17].tipo = D;
-    tablaR[7][17].valor = 11;
-    
-    tablaR[7][23].tipo = D;
-    tablaR[7][23].valor = 10;
-    
-    tablaR[7][24].tipo = D;
-    tablaR[7][24].valor = 9;
-    
-    tablaR[7][25].tipo = D;
-    tablaR[7][25].valor = 8;
-    
-    tablaR[8][2].tipo = D;
-    tablaR[8][2].valor = 31;
-    
-    tablaR[8][3].tipo = D;
-    tablaR[8][3].valor = 30;
-    
-    tablaR[8][4].tipo = D;
-    tablaR[8][4].valor = 29;
-    
-    tablaR[8][9].tipo = D;
-    tablaR[8][9].valor = 28;
-    
-    tablaR[8][10].tipo = D;
-    tablaR[8][10].valor = 27;
+    tablaR[8][10].tipo = R;
+    tablaR[8][10].valor = 9;
     
     tablaR[8][11].tipo = R;
-    tablaR[8][11].valor = 10;
+    tablaR[8][11].valor = 9;
     
-    tablaR[8][14].tipo = D;
-    tablaR[8][14].valor = 26;
+    tablaR[8][14].tipo = R;
+    tablaR[8][14].valor = 9;
     
-    tablaR[8][15].tipo = D;
-    tablaR[8][15].valor = 25;
+    tablaR[8][15].tipo = R;
+    tablaR[8][15].valor = 9;
+    
+    tablaR[8][17].tipo = D;
+    tablaR[8][17].valor = 12;
+    
+    tablaR[8][24].tipo = D;
+    tablaR[8][24].valor = 11;
+    
+    tablaR[8][25].tipo = D;
+    tablaR[8][25].valor = 10;
     
     tablaR[8][26].tipo = D;
-    tablaR[8][26].valor = 24;
+    tablaR[8][26].valor = 9;
     
-    tablaR[8][27].tipo = D;
-    tablaR[8][27].valor = 23;
+    tablaR[9][2].tipo = D;
+    tablaR[9][2].valor = 33;
     
-    tablaR[8][28].tipo = D;
-    tablaR[8][28].valor = 22;
+    tablaR[9][3].tipo = D;
+    tablaR[9][3].valor = 32;
     
-    tablaR[8][29].tipo = D;
-    tablaR[8][29].valor = 21;
+    tablaR[9][4].tipo = D;
+    tablaR[9][4].valor = 31;
     
-    tablaR[8][30].tipo = D;
-    tablaR[8][30].valor = 20;
+    tablaR[9][9].tipo = D;
+    tablaR[9][9].valor = 30;
     
-    tablaR[8][31].tipo = D;
-    tablaR[8][31].valor = 19;
-    
-    tablaR[8][32].tipo = D;
-    tablaR[8][32].valor = 18;
-    
-    tablaR[8][34].tipo = D;
-    tablaR[8][34].valor = 17;
-    
-    tablaR[9][2].tipo = R;
-    tablaR[9][2].valor = 8;
-    
-    tablaR[9][3].tipo = R;
-    tablaR[9][3].valor = 8;
-    
-    tablaR[9][4].tipo = R;
-    tablaR[9][4].valor = 8;
-    
-    tablaR[9][9].tipo = R;
-    tablaR[9][9].valor = 8;
-    
-    tablaR[9][10].tipo = R;
-    tablaR[9][10].valor = 8;
+    tablaR[9][10].tipo = D;
+    tablaR[9][10].valor = 29;
     
     tablaR[9][11].tipo = R;
-    tablaR[9][11].valor = 8;
+    tablaR[9][11].valor = 11;
     
-    tablaR[9][14].tipo = R;
-    tablaR[9][14].valor = 8;
+    tablaR[9][14].tipo = D;
+    tablaR[9][14].valor = 28;
     
-    tablaR[9][15].tipo = R;
-    tablaR[9][15].valor = 8;
+    tablaR[9][15].tipo = D;
+    tablaR[9][15].valor = 27;
     
-    tablaR[9][17].tipo = D;
-    tablaR[9][17].valor = 11;
+    tablaR[9][27].tipo = D;
+    tablaR[9][27].valor = 26;
     
-    tablaR[9][24].tipo = D;
-    tablaR[9][24].valor = 9;
+    tablaR[9][28].tipo = D;
+    tablaR[9][28].valor = 25;
     
-    tablaR[9][25].tipo = D;
-    tablaR[9][25].valor = 16;
+    tablaR[9][29].tipo = D;
+    tablaR[9][29].valor = 24;
     
-    tablaR[10][11].tipo = D;
-    tablaR[10][11].valor = 15;
+    tablaR[9][30].tipo = D;
+    tablaR[9][30].valor = 23;
     
-    tablaR[11][4].tipo = D;
-    tablaR[11][4].valor = 14;
+    tablaR[9][31].tipo = D;
+    tablaR[9][31].valor = 22;
     
-    tablaR[11][20].tipo = D;
-    tablaR[11][20].valor = 13;
+    tablaR[9][32].tipo = D;
+    tablaR[9][32].valor = 21;
     
-    tablaR[11][21].tipo = D;
-    tablaR[11][21].valor = 12;
+    tablaR[9][33].tipo = D;
+    tablaR[9][33].valor = 20;
     
-    tablaR[12][9].tipo = R;
-    tablaR[12][9].valor = 3;
+    tablaR[9][34].tipo = D;
+    tablaR[9][34].valor = 19;
     
-    tablaR[12][18].tipo = R;
-    tablaR[12][18].valor = 3;
+    tablaR[9][36].tipo = D;
+    tablaR[9][36].valor = 18;
     
-    tablaR[13][9].tipo = D;
-    tablaR[13][9].valor = 46;
+    tablaR[10][2].tipo = R;
+    tablaR[10][2].valor = 9;
     
-    tablaR[13][18].tipo = D;
-    tablaR[13][18].valor = 45;
+    tablaR[10][3].tipo = R;
+    tablaR[10][3].valor = 8;
     
-    tablaR[14][9].tipo = R;
-    tablaR[14][9].valor = 4;
+    tablaR[10][4].tipo = R;
+    tablaR[10][4].valor = 9;
     
-    tablaR[14][18].tipo = R;
-    tablaR[14][18].valor = 4;
+    tablaR[10][9].tipo = R;
+    tablaR[10][9].valor = 9;
     
-    tablaR[15][0].tipo = R;
-    tablaR[15][0].valor = 5;
+    tablaR[10][10].tipo = R;
+    tablaR[10][10].valor = 9;
     
-    tablaR[16][2].tipo = R;
-    tablaR[16][2].valor = 7;
+    tablaR[10][11].tipo = R;
+    tablaR[10][11].valor = 9;
     
-    tablaR[16][3].tipo = R;
-    tablaR[16][3].valor = 7;
+    tablaR[10][14].tipo = R;
+    tablaR[10][14].valor = 9;
     
-    tablaR[16][4].tipo = R;
-    tablaR[16][4].valor = 7;
+    tablaR[10][15].tipo = R;
+    tablaR[10][15].valor = 9;
     
-    tablaR[16][9].tipo = R;
-    tablaR[16][9].valor = 7;
+    tablaR[10][17].tipo = D;
+    tablaR[10][17].valor = 12;
     
-    tablaR[16][10].tipo = R;
-    tablaR[16][10].valor = 7;
+    tablaR[10][25].tipo = D;
+    tablaR[10][25].valor = 10;
     
-    tablaR[16][11].tipo = R;
-    tablaR[16][11].valor = 7;
+    tablaR[10][26].tipo = D;
+    tablaR[10][26].valor = 17;
     
-    tablaR[16][14].tipo = R;
-    tablaR[16][14].valor = 7;
+    tablaR[11][11].tipo = D;
+    tablaR[11][11].valor = 16;
     
-    tablaR[16][15].tipo = R;
-    tablaR[16][15].valor = 7;
+    tablaR[12][4].tipo = D;
+    tablaR[12][4].valor = 15;
     
-    tablaR[17][5].tipo = D;
-    tablaR[17][5].valor = 44;
+    tablaR[12][21].tipo = D;
+    tablaR[12][21].valor = 14;
     
-    tablaR[17][6].tipo = D;
-    tablaR[17][6].valor = 43;
+    tablaR[12][22].tipo = D;
+    tablaR[12][22].valor = 13;
     
-    tablaR[17][7].tipo = D;
-    tablaR[17][7].valor = 42;
+    tablaR[13][9].tipo = R;
+    tablaR[13][9].valor = 4;
     
-    tablaR[17][33].tipo = D;
-    tablaR[17][33].valor = 41;
+    tablaR[13][18].tipo = R;
+    tablaR[13][18].valor = 4;
+    
+    tablaR[14][9].tipo = D;
+    tablaR[14][9].valor = 48;
+    
+    tablaR[14][18].tipo = D;
+    tablaR[14][18].valor = 47;
+    
+    tablaR[15][9].tipo = R;
+    tablaR[15][9].valor = 5;
+    
+    tablaR[15][18].tipo = R;
+    tablaR[15][18].valor = 5;
+    
+    tablaR[16][0].tipo = R;
+    tablaR[16][0].valor = 6;
+    
+    tablaR[17][2].tipo = R;
+    tablaR[17][2].valor = 8;
+    
+    tablaR[17][3].tipo = R;
+    tablaR[17][3].valor = 8;
+    
+    tablaR[17][4].tipo = R;
+    tablaR[17][4].valor = 8;
+    
+    tablaR[17][9].tipo = R;
+    tablaR[17][9].valor = 8;
+    
+    tablaR[17][10].tipo = R;
+    tablaR[17][10].valor = 8;
+    
+    tablaR[17][11].tipo = R;
+    tablaR[17][11].valor = 8;
+    
+    tablaR[17][14].tipo = R;
+    tablaR[17][14].valor = 8;
+    
+    tablaR[17][15].tipo = R;
+    tablaR[17][15].valor = 8;
     
     tablaR[18][1].tipo = R;
-    tablaR[18][1].valor = 22;
+    tablaR[18][1].valor = 26;
+    
+    tablaR[18][5].tipo = R;
+    tablaR[18][5].valor = 26;
+    
+    tablaR[18][6].tipo = R;
+    tablaR[18][6].valor = 26;
+    
+    tablaR[18][7].tipo = R;
+    tablaR[18][7].valor = 26;
     
     tablaR[18][9].tipo = R;
-    tablaR[18][9].valor = 22;
+    tablaR[18][9].valor = 26;
     
-    tablaR[19][9].tipo = D;
-    tablaR[19][9].valor = 40;
+    tablaR[19][1].tipo = R;
+    tablaR[19][1].valor = 24;
     
-    tablaR[20][2].tipo = R;
-    tablaR[20][2].valor = 14;
+    tablaR[19][5].tipo = D;
+    tablaR[19][5].valor = 46;
     
-    tablaR[20][3].tipo = R;
-    tablaR[20][3].valor = 14;
+    tablaR[19][6].tipo = D;
+    tablaR[19][6].valor = 45;
     
-    tablaR[20][4].tipo = R;
-    tablaR[20][4].valor = 14;
+    tablaR[19][7].tipo = D;
+    tablaR[19][7].valor = 44;
+    
+    tablaR[19][9].tipo = R;
+    tablaR[19][9].valor = 24;
+    
+    tablaR[19][35].tipo = D;
+    tablaR[19][35].valor = 43;
+    
+    tablaR[20][1].tipo = R;
+    tablaR[20][1].valor = 22;
     
     tablaR[20][9].tipo = R;
-    tablaR[20][9].valor = 14;
-    
-    tablaR[20][10].tipo = R;
-    tablaR[20][10].valor = 14;
-    
-    tablaR[20][11].tipo = R;
-    tablaR[20][11].valor = 14;
-    
-    tablaR[20][14].tipo = R;
-    tablaR[20][14].valor = 14;
-    
-    tablaR[20][15].tipo = R;
-    tablaR[20][15].valor = 14;
-    
-    tablaR[21][2].tipo = D;
-    tablaR[21][2].valor = 31;
-    
-    tablaR[21][3].tipo = D;
-    tablaR[21][3].valor = 30;
-    
-    tablaR[21][4].tipo = D;
-    tablaR[21][4].valor = 29;
+    tablaR[20][9].valor = 22;
     
     tablaR[21][9].tipo = D;
-    tablaR[21][9].valor = 28;
-    
-    tablaR[21][10].tipo = D;
-    tablaR[21][10].valor = 27;
-    
-    tablaR[21][11].tipo = R;
-    tablaR[21][11].valor = 10;
-    
-    tablaR[21][14].tipo = D;
-    tablaR[21][14].valor = 26;
-    
-    tablaR[21][15].tipo = D;
-    tablaR[21][15].valor = 25;
-    
-    tablaR[21][26].tipo = D;
-    tablaR[21][26].valor = 39;
-    
-    tablaR[21][27].tipo = D;
-    tablaR[21][27].valor = 23;
-    
-    tablaR[21][28].tipo = D;
-    tablaR[21][28].valor = 22;
-    
-    tablaR[21][29].tipo = D;
-    tablaR[21][29].valor = 21;
-    
-    tablaR[21][30].tipo = D;
-    tablaR[21][30].valor = 20;
-    
-    tablaR[21][31].tipo = D;
-    tablaR[21][31].valor = 19;
-    
-    tablaR[21][32].tipo = D;
-    tablaR[21][32].valor = 18;
-    
-    tablaR[21][34].tipo = D;
-    tablaR[21][34].valor = 17;
+    tablaR[21][9].valor = 42;
     
     tablaR[22][2].tipo = R;
-    tablaR[22][2].valor = 11;
+    tablaR[22][2].valor = 15;
     
     tablaR[22][3].tipo = R;
-    tablaR[22][3].valor = 11;
+    tablaR[22][3].valor = 15;
     
     tablaR[22][4].tipo = R;
-    tablaR[22][4].valor = 11;
+    tablaR[22][4].valor = 15;
     
     tablaR[22][9].tipo = R;
-    tablaR[22][9].valor = 11;
+    tablaR[22][9].valor = 15;
     
     tablaR[22][10].tipo = R;
-    tablaR[22][10].valor = 11;
+    tablaR[22][10].valor = 15;
     
     tablaR[22][11].tipo = R;
-    tablaR[22][11].valor = 11;
+    tablaR[22][11].valor = 15;
     
     tablaR[22][14].tipo = R;
-    tablaR[22][14].valor = 11;
+    tablaR[22][14].valor = 15;
     
     tablaR[22][15].tipo = R;
-    tablaR[22][15].valor = 11;
+    tablaR[22][15].valor = 15;
     
-    tablaR[23][2].tipo = R;
-    tablaR[23][2].valor = 13;
+    tablaR[23][2].tipo = D;
+    tablaR[23][2].valor = 33;
     
-    tablaR[23][3].tipo = R;
-    tablaR[23][3].valor = 13;
+    tablaR[23][3].tipo = D;
+    tablaR[23][3].valor = 32;
     
-    tablaR[23][4].tipo = R;
-    tablaR[23][4].valor = 13;
+    tablaR[23][4].tipo = D;
+    tablaR[23][4].valor = 31;
     
-    tablaR[23][9].tipo = R;
-    tablaR[23][9].valor = 13;
+    tablaR[23][9].tipo = D;
+    tablaR[23][9].valor = 30;
     
-    tablaR[23][10].tipo = R;
-    tablaR[23][10].valor = 13;
+    tablaR[23][10].tipo = D;
+    tablaR[23][10].valor = 29;
     
     tablaR[23][11].tipo = R;
-    tablaR[23][11].valor = 13;
+    tablaR[23][11].valor = 11;
     
-    tablaR[23][14].tipo = R;
-    tablaR[23][14].valor = 13;
+    tablaR[23][14].tipo = D;
+    tablaR[23][14].valor = 28;
     
-    tablaR[23][15].tipo = R;
-    tablaR[23][15].valor = 13;
+    tablaR[23][15].tipo = D;
+    tablaR[23][15].valor = 27;
+    
+    tablaR[23][27].tipo = D;
+    tablaR[23][27].valor = 41;
+    
+    tablaR[23][28].tipo = D;
+    tablaR[23][28].valor = 25;
+    
+    tablaR[23][29].tipo = D;
+    tablaR[23][29].valor = 24;
+    
+    tablaR[23][30].tipo = D;
+    tablaR[23][30].valor = 23;
+    
+    tablaR[23][31].tipo = D;
+    tablaR[23][31].valor = 22;
+    
+    tablaR[23][32].tipo = D;
+    tablaR[23][32].valor = 21;
+    
+    tablaR[23][33].tipo = D;
+    tablaR[23][33].valor = 20;
+    
+    tablaR[23][34].tipo = D;
+    tablaR[23][34].valor = 19;
+    
+    tablaR[23][36].tipo = D;
+    tablaR[23][36].valor = 18;
+    
+    tablaR[24][2].tipo = R;
+    tablaR[24][2].valor = 12;
+    
+    tablaR[24][3].tipo = R;
+    tablaR[24][3].valor = 12;
+    
+    tablaR[24][4].tipo = R;
+    tablaR[24][4].valor = 12;
+    
+    tablaR[24][9].tipo = R;
+    tablaR[24][9].valor = 12;
+    
+    tablaR[24][10].tipo = R;
+    tablaR[24][10].valor = 12;
     
     tablaR[24][11].tipo = R;
-    tablaR[24][11].valor = 6;
+    tablaR[24][11].valor = 12;
     
-    tablaR[25][2].tipo = D;
-    tablaR[25][2].valor = 38;
+    tablaR[24][14].tipo = R;
+    tablaR[24][14].valor = 12;
     
-    tablaR[26][2].tipo = D;
-    tablaR[26][2].valor = 37;
+    tablaR[24][15].tipo = R;
+    tablaR[24][15].valor = 12;
+    
+    tablaR[25][2].tipo = R;
+    tablaR[25][2].valor = 14;
+    
+    tablaR[25][3].tipo = R;
+    tablaR[25][3].valor = 14;
+    
+    tablaR[25][4].tipo = R;
+    tablaR[25][4].valor = 14;
+    
+    tablaR[25][9].tipo = R;
+    tablaR[25][9].valor = 14;
+    
+    tablaR[25][10].tipo = R;
+    tablaR[25][10].valor = 14;
+    
+    tablaR[25][11].tipo = R;
+    tablaR[25][11].valor = 14;
+    
+    tablaR[25][14].tipo = R;
+    tablaR[25][14].valor = 14;
+    
+    tablaR[25][15].tipo = R;
+    tablaR[25][15].valor = 14;
+    
+    tablaR[26][11].tipo = R;
+    tablaR[26][11].valor = 7;
     
     tablaR[27][2].tipo = D;
-    tablaR[27][2].valor = 31;
+    tablaR[27][2].valor = 40;
     
-    tablaR[27][3].tipo = D;
-    tablaR[27][3].valor = 30;
+    tablaR[28][2].tipo = D;
+    tablaR[28][2].valor = 39;
     
-    tablaR[27][4].tipo = D;
-    tablaR[27][4].valor = 29;
+    tablaR[29][2].tipo = D;
+    tablaR[29][2].valor = 33;
     
-    tablaR[27][9].tipo = D;
-    tablaR[27][9].valor = 36;
+    tablaR[29][3].tipo = D;
+    tablaR[29][3].valor = 32;
     
-    tablaR[27][31].tipo = D;
-    tablaR[27][31].valor = 35;
+    tablaR[29][4].tipo = D;
+    tablaR[29][4].valor = 31;
     
-    tablaR[27][32].tipo = D;
-    tablaR[27][32].valor = 18;
+    tablaR[29][9].tipo = D;
+    tablaR[29][9].valor = 38;
     
-    tablaR[27][34].tipo = D;
-    tablaR[27][34].valor = 17;
+    tablaR[29][32].tipo = D;
+    tablaR[29][32].valor = 37;
     
-    tablaR[28][2].tipo = R;
-    tablaR[28][2].valor = 15;
+    tablaR[29][33].tipo = D;
+    tablaR[29][33].valor = 20;
     
-    tablaR[28][3].tipo = R;
-    tablaR[28][3].valor = 15;
+    tablaR[29][34].tipo = D;
+    tablaR[29][34].valor = 19;
     
-    tablaR[28][4].tipo = R;
-    tablaR[28][4].valor = 15;
+    tablaR[29][36].tipo = D;
+    tablaR[29][36].valor = 18;
     
-    tablaR[28][9].tipo = R;
-    tablaR[28][9].valor = 15;
+    tablaR[30][2].tipo = R;
+    tablaR[30][2].valor = 16;
     
-    tablaR[28][10].tipo = R;
-    tablaR[28][10].valor = 15;
+    tablaR[30][3].tipo = R;
+    tablaR[30][3].valor = 16;
     
-    tablaR[28][11].tipo = R;
-    tablaR[28][11].valor = 15;
+    tablaR[30][4].tipo = R;
+    tablaR[30][4].valor = 16;
     
-    tablaR[28][14].tipo = R;
-    tablaR[28][14].valor = 15;
+    tablaR[30][9].tipo = R;
+    tablaR[30][9].valor = 16;
     
-    tablaR[28][15].tipo = R;
-    tablaR[28][15].valor = 15;
+    tablaR[30][10].tipo = R;
+    tablaR[30][10].valor = 16;
     
-    tablaR[29][5].tipo = R;
-    tablaR[29][5].valor = 27;
+    tablaR[30][11].tipo = R;
+    tablaR[30][11].valor = 16;
     
-    tablaR[29][6].tipo = R;
-    tablaR[29][6].valor = 27;
+    tablaR[30][14].tipo = R;
+    tablaR[30][14].valor = 16;
     
-    tablaR[29][7].tipo = R;
-    tablaR[29][7].valor = 27;
+    tablaR[30][15].tipo = R;
+    tablaR[30][15].valor = 16;
     
-    tablaR[29][8].tipo = D;
-    tablaR[29][8].valor = 34;
+    tablaR[31][1].tipo = R;
+    tablaR[31][1].valor = 30;
     
-    tablaR[30][1].tipo = R;
-    tablaR[30][1].valor = 28;
+    tablaR[31][5].tipo = R;
+    tablaR[31][5].valor = 30;
     
-    tablaR[30][5].tipo = R;
-    tablaR[30][5].valor = 28;
+    tablaR[31][6].tipo = R;
+    tablaR[31][6].valor = 30;
     
-    tablaR[30][6].tipo = R;
-    tablaR[30][6].valor = 28;
+    tablaR[31][7].tipo = R;
+    tablaR[31][7].valor = 30;
     
-    tablaR[30][7].tipo = R;
-    tablaR[30][7].valor = 28;
+    tablaR[31][8].tipo = D;
+    tablaR[31][8].valor = 36;
     
-    tablaR[31][2].tipo = D;
-    tablaR[31][2].valor = 31;
+    tablaR[31][9].tipo = R;
+    tablaR[31][9].valor = 30;
     
-    tablaR[31][3].tipo = D;
-    tablaR[31][3].valor = 30;
+    tablaR[32][1].tipo = R;
+    tablaR[32][1].valor = 31;
     
-    tablaR[31][4].tipo = D;
-    tablaR[31][4].valor = 33;
+    tablaR[32][5].tipo = R;
+    tablaR[32][5].valor = 31;
     
-    tablaR[31][34].tipo = D;
-    tablaR[31][34].valor = 32;
+    tablaR[32][6].tipo = R;
+    tablaR[32][6].valor = 31;
     
-    tablaR[32][1].tipo = D;
-    tablaR[32][1].valor = 53;
+    tablaR[32][7].tipo = R;
+    tablaR[32][7].valor = 31;
     
-    tablaR[33][1].tipo = R;
-    tablaR[33][1].valor = 27;
+    tablaR[32][9].tipo = R;
+    tablaR[32][9].valor = 31;
     
-    tablaR[33][5].tipo = R;
-    tablaR[33][5].valor = 27;
+    tablaR[33][2].tipo = D;
+    tablaR[33][2].valor = 33;
     
-    tablaR[33][6].tipo = R;
-    tablaR[33][6].valor = 27;
+    tablaR[33][3].tipo = D;
+    tablaR[33][3].valor = 32;
     
-    tablaR[33][7].tipo = R;
-    tablaR[33][7].valor = 27;
+    tablaR[33][4].tipo = D;
+    tablaR[33][4].valor = 35;
     
-    tablaR[34][2].tipo = D;
-    tablaR[34][2].valor = 31;
+    tablaR[33][36].tipo = D;
+    tablaR[33][36].valor = 34;
     
-    tablaR[34][3].tipo = D;
-    tablaR[34][3].valor = 30;
+    tablaR[34][1].tipo = D;
+    tablaR[34][1].valor = 55;
     
-    tablaR[34][4].tipo = D;
-    tablaR[34][4].valor = 33;
+    tablaR[35][1].tipo = R;
+    tablaR[35][1].valor = 30;
     
-    tablaR[34][34].tipo = D;
-    tablaR[34][34].valor = 52;
+    tablaR[35][5].tipo = R;
+    tablaR[35][5].valor = 30;
     
-    tablaR[35][9].tipo = D;
-    tablaR[35][9].valor = 51;
+    tablaR[35][6].tipo = R;
+    tablaR[35][6].valor = 30;
     
-    tablaR[36][2].tipo = R;
-    tablaR[36][2].valor = 20;
+    tablaR[35][7].tipo = R;
+    tablaR[35][7].valor = 30;
     
-    tablaR[36][3].tipo = R;
-    tablaR[36][3].valor = 20;
+    tablaR[36][2].tipo = D;
+    tablaR[36][2].valor = 33;
     
-    tablaR[36][4].tipo = R;
-    tablaR[36][4].valor = 20;
+    tablaR[36][3].tipo = D;
+    tablaR[36][3].valor = 32;
     
-    tablaR[36][9].tipo = R;
-    tablaR[36][9].valor = 20;
+    tablaR[36][4].tipo = D;
+    tablaR[36][4].valor = 35;
     
-    tablaR[36][10].tipo = R;
-    tablaR[36][10].valor = 20;
+    tablaR[36][34].tipo = D;
+    tablaR[36][34].valor = 54;
     
-    tablaR[36][11].tipo = R;
-    tablaR[36][11].valor = 20;
+    tablaR[36][36].tipo = D;
+    tablaR[36][36].valor = 18;
     
-    tablaR[36][14].tipo = R;
-    tablaR[36][14].valor = 20;
+    tablaR[37][9].tipo = D;
+    tablaR[37][9].valor = 53;
     
-    tablaR[36][15].tipo = R;
-    tablaR[36][15].valor = 20;
+    tablaR[38][2].tipo = R;
+    tablaR[38][2].valor = 21;
     
-    tablaR[37][2].tipo = D;
-    tablaR[37][2].valor = 31;
+    tablaR[38][3].tipo = R;
+    tablaR[38][3].valor = 21;
     
-    tablaR[37][3].tipo = D;
-    tablaR[37][3].valor = 30;
+    tablaR[38][4].tipo = R;
+    tablaR[38][4].valor = 21;
     
-    tablaR[37][4].tipo = D;
-    tablaR[37][4].valor = 29;
+    tablaR[38][9].tipo = R;
+    tablaR[38][9].valor = 21;
     
-    tablaR[37][31].tipo = D;
-    tablaR[37][31].valor = 50;
+    tablaR[38][10].tipo = R;
+    tablaR[38][10].valor = 21;
     
-    tablaR[37][32].tipo = D;
-    tablaR[37][32].valor = 18;
+    tablaR[38][11].tipo = R;
+    tablaR[38][11].valor = 21;
     
-    tablaR[37][34].tipo = D;
-    tablaR[37][34].valor = 17;
+    tablaR[38][14].tipo = R;
+    tablaR[38][14].valor = 21;
     
-    tablaR[38][2].tipo = D;
-    tablaR[38][2].valor = 31;
+    tablaR[38][15].tipo = R;
+    tablaR[38][15].valor = 21;
     
-    tablaR[38][3].tipo = D;
-    tablaR[38][3].valor = 30;
+    tablaR[39][2].tipo = D;
+    tablaR[39][2].valor = 33;
     
-    tablaR[38][4].tipo = D;
-    tablaR[38][4].valor = 29;
+    tablaR[39][3].tipo = D;
+    tablaR[39][3].valor = 32;
     
-    tablaR[38][31].tipo = D;
-    tablaR[38][31].valor = 49;
+    tablaR[39][4].tipo = D;
+    tablaR[39][4].valor = 31;
     
-    tablaR[38][32].tipo = D;
-    tablaR[38][32].valor = 18;
+    tablaR[39][32].tipo = D;
+    tablaR[39][32].valor = 52;
     
-    tablaR[38][34].tipo = D;
-    tablaR[38][34].valor = 17;
+    tablaR[39][33].tipo = D;
+    tablaR[39][33].valor = 20;
     
-    tablaR[39][11].tipo = R;
-    tablaR[39][11].valor = 9;
+    tablaR[39][34].tipo = D;
+    tablaR[39][34].valor = 19;
     
-    tablaR[40][2].tipo = R;
-    tablaR[40][2].valor = 12;
+    tablaR[39][36].tipo = D;
+    tablaR[39][36].valor = 18;
     
-    tablaR[40][3].tipo = R;
-    tablaR[40][3].valor = 12;
+    tablaR[40][2].tipo = D;
+    tablaR[40][2].valor = 33;
     
-    tablaR[40][4].tipo = R;
-    tablaR[40][4].valor = 12;
+    tablaR[40][3].tipo = D;
+    tablaR[40][3].valor = 32;
     
-    tablaR[40][9].tipo = R;
-    tablaR[40][9].valor = 12;
+    tablaR[40][4].tipo = D;
+    tablaR[40][4].valor = 31;
     
-    tablaR[40][10].tipo = R;
-    tablaR[40][10].valor = 12;
+    tablaR[40][32].tipo = D;
+    tablaR[40][32].valor = 51;
     
-    tablaR[40][11].tipo = R;
-    tablaR[40][11].valor = 12;
+    tablaR[40][33].tipo = D;
+    tablaR[40][33].valor = 20;
     
-    tablaR[40][14].tipo = R;
-    tablaR[40][14].valor = 12;
+    tablaR[40][34].tipo = D;
+    tablaR[40][34].valor = 19;
     
-    tablaR[40][15].tipo = R;
-    tablaR[40][15].valor = 12;
+    tablaR[40][36].tipo = D;
+    tablaR[40][36].valor = 18;
     
-    tablaR[41][2].tipo = D;
-    tablaR[41][2].valor = 31;
-    
-    tablaR[41][3].tipo = D;
-    tablaR[41][3].valor = 30;
-    
-    tablaR[41][4].tipo = D;
-    tablaR[41][4].valor = 33;
-    
-    tablaR[41][34].tipo = D;
-    tablaR[41][34].valor = 48;
+    tablaR[41][11].tipo = R;
+    tablaR[41][11].valor = 10;
     
     tablaR[42][2].tipo = R;
-    tablaR[42][2].valor = 24;
+    tablaR[42][2].valor = 13;
     
     tablaR[42][3].tipo = R;
-    tablaR[42][3].valor = 24;
+    tablaR[42][3].valor = 13;
     
     tablaR[42][4].tipo = R;
-    tablaR[42][4].valor = 24;
+    tablaR[42][4].valor = 13;
     
-    tablaR[43][2].tipo = R;
-    tablaR[43][2].valor = 25;
+    tablaR[42][9].tipo = R;
+    tablaR[42][9].valor = 13;
     
-    tablaR[43][3].tipo = R;
-    tablaR[43][3].valor = 25;
+    tablaR[42][10].tipo = R;
+    tablaR[42][10].valor = 13;
     
-    tablaR[43][4].tipo = R;
-    tablaR[43][4].valor = 25;
+    tablaR[42][11].tipo = R;
+    tablaR[42][11].valor = 13;
+    
+    tablaR[42][14].tipo = R;
+    tablaR[42][14].valor = 13;
+    
+    tablaR[42][15].tipo = R;
+    tablaR[42][15].valor = 13;
+    
+    tablaR[43][2].tipo = D;
+    tablaR[43][2].valor = 33;
+    
+    tablaR[43][3].tipo = D;
+    tablaR[43][3].valor = 32;
+    
+    tablaR[43][4].tipo = D;
+    tablaR[43][4].valor = 35;
+    
+    tablaR[43][36].tipo = D;
+    tablaR[43][36].valor = 50;
     
     tablaR[44][2].tipo = R;
-    tablaR[44][2].valor = 26;
+    tablaR[44][2].valor = 27;
     
     tablaR[44][3].tipo = R;
-    tablaR[44][3].valor = 26;
+    tablaR[44][3].valor = 27;
     
     tablaR[44][4].tipo = R;
-    tablaR[44][4].valor = 26;
+    tablaR[44][4].valor = 27;
     
-    tablaR[45][4].tipo = D;
-    tablaR[45][4].valor = 14;
+    tablaR[45][2].tipo = R;
+    tablaR[45][2].valor = 28;
     
-    tablaR[45][21].tipo = D;
-    tablaR[45][21].valor = 47;
+    tablaR[45][3].tipo = R;
+    tablaR[45][3].valor = 28;
+    
+    tablaR[45][4].tipo = R;
+    tablaR[45][4].valor = 28;
     
     tablaR[46][2].tipo = R;
-    tablaR[46][2].valor = 1;
+    tablaR[46][2].valor = 29;
     
     tablaR[46][3].tipo = R;
-    tablaR[46][3].valor = 1;
+    tablaR[46][3].valor = 29;
     
     tablaR[46][4].tipo = R;
-    tablaR[46][4].valor = 1;
+    tablaR[46][4].valor = 29;
     
-    tablaR[46][9].tipo = R;
-    tablaR[46][9].valor = 1;
+    tablaR[47][4].tipo = D;
+    tablaR[47][4].valor = 15;
     
-    tablaR[46][10].tipo = R;
-    tablaR[46][10].valor = 1;
+    tablaR[47][22].tipo = D;
+    tablaR[47][22].valor = 49;
     
-    tablaR[46][11].tipo = R;
-    tablaR[46][11].valor = 1;
+    tablaR[48][2].tipo = R;
+    tablaR[48][2].valor = 2;
     
-    tablaR[46][14].tipo = R;
-    tablaR[46][14].valor = 1;
+    tablaR[48][3].tipo = R;
+    tablaR[48][3].valor = 2;
     
-    tablaR[46][15].tipo = R;
-    tablaR[46][15].valor = 1;
-    
-    tablaR[46][17].tipo = R;
-    tablaR[46][17].valor = 1;
-    
-    tablaR[47][9].tipo = R;
-    tablaR[47][9].valor = 2;
-    
-    tablaR[47][18].tipo = R;
-    tablaR[47][18].valor = 2;
-    
-    tablaR[48][1].tipo = R;
-    tablaR[48][1].valor = 21;
+    tablaR[48][4].tipo = R;
+    tablaR[48][4].valor = 2;
     
     tablaR[48][9].tipo = R;
-    tablaR[48][9].valor = 21;
+    tablaR[48][9].valor = 2;
     
-    tablaR[49][1].tipo = D;
-    tablaR[49][1].valor = 56;
+    tablaR[48][10].tipo = R;
+    tablaR[48][10].valor = 2;
     
-    tablaR[50][1].tipo = D;
-    tablaR[50][1].valor = 55;
+    tablaR[48][11].tipo = R;
+    tablaR[48][11].valor = 2;
     
-    tablaR[51][2].tipo = R;
-    tablaR[51][2].valor = 19;
+    tablaR[48][14].tipo = R;
+    tablaR[48][14].valor = 2;
     
-    tablaR[51][3].tipo = R;
-    tablaR[51][3].valor = 19;
+    tablaR[48][15].tipo = R;
+    tablaR[48][15].valor = 2;
     
-    tablaR[51][4].tipo = R;
-    tablaR[51][4].valor = 19;
+    tablaR[48][17].tipo = R;
+    tablaR[48][17].valor = 2;
     
-    tablaR[51][9].tipo = R;
-    tablaR[51][9].valor = 19;
+    tablaR[49][9].tipo = R;
+    tablaR[49][9].valor = 3;
     
-    tablaR[51][10].tipo = R;
-    tablaR[51][10].valor = 19;
+    tablaR[49][18].tipo = R;
+    tablaR[49][18].valor = 3;
     
-    tablaR[51][11].tipo = R;
-    tablaR[51][11].valor = 19;
+    tablaR[50][1].tipo = R;
+    tablaR[50][1].valor = 25;
     
-    tablaR[51][14].tipo = R;
-    tablaR[51][14].valor = 19;
+    tablaR[50][5].tipo = R;
+    tablaR[50][5].valor = 25;
     
-    tablaR[51][15].tipo = R;
-    tablaR[51][15].valor = 19;
+    tablaR[50][6].tipo = R;
+    tablaR[50][6].valor = 25;
     
-    tablaR[52][5].tipo = D;
-    tablaR[52][5].valor = 44;
+    tablaR[50][7].tipo = R;
+    tablaR[50][7].valor = 25;
     
-    tablaR[52][6].tipo = D;
-    tablaR[52][6].valor = 43;
+    tablaR[50][9].tipo = R;
+    tablaR[50][9].valor = 25;
     
-    tablaR[52][7].tipo = D;
-    tablaR[52][7].valor = 42;
+    tablaR[51][1].tipo = D;
+    tablaR[51][1].valor = 57;
     
-    tablaR[52][33].tipo = D;
-    tablaR[52][33].valor = 54;
+    tablaR[52][1].tipo = D;
+    tablaR[52][1].valor = 56;
     
-    tablaR[53][1].tipo = R;
-    tablaR[53][1].valor = 29;
+    tablaR[53][2].tipo = R;
+    tablaR[53][2].valor = 20;
     
-    tablaR[53][5].tipo = R;
-    tablaR[53][5].valor = 29;
+    tablaR[53][3].tipo = R;
+    tablaR[53][3].valor = 20;
     
-    tablaR[53][6].tipo = R;
-    tablaR[53][6].valor = 29;
+    tablaR[53][4].tipo = R;
+    tablaR[53][4].valor = 20;
     
-    tablaR[53][7].tipo = R;
-    tablaR[53][7].valor = 29;
+    tablaR[53][9].tipo = R;
+    tablaR[53][9].valor = 20;
     
-    tablaR[54][2].tipo = D;
-    tablaR[54][2].valor = 31;
+    tablaR[53][10].tipo = R;
+    tablaR[53][10].valor = 20;
     
-    tablaR[54][3].tipo = D;
-    tablaR[54][3].valor = 30;
+    tablaR[53][11].tipo = R;
+    tablaR[53][11].valor = 20;
     
-    tablaR[54][4].tipo = D;
-    tablaR[54][4].valor = 33;
+    tablaR[53][14].tipo = R;
+    tablaR[53][14].valor = 20;
     
-    tablaR[54][34].tipo = D;
-    tablaR[54][34].valor = 59;
+    tablaR[53][15].tipo = R;
+    tablaR[53][15].valor = 20;
     
-    tablaR[55][12].tipo = D;
-    tablaR[55][12].valor = 58;
+    tablaR[54][1].tipo = R;
+    tablaR[54][1].valor = 23;
+    
+    tablaR[54][5].tipo = D;
+    tablaR[54][5].valor = 46;
+    
+    tablaR[54][6].tipo = D;
+    tablaR[54][6].valor = 45;
+    
+    tablaR[54][7].tipo = D;
+    tablaR[54][7].valor = 44;
+    
+    tablaR[54][9].tipo = R;
+    tablaR[54][9].valor = 23;
+    
+    tablaR[54][35].tipo = D;
+    tablaR[54][35].valor = 43;
+    
+    tablaR[55][1].tipo = R;
+    tablaR[55][1].valor = 32;
+    
+    tablaR[55][5].tipo = R;
+    tablaR[55][5].valor = 32;
+    
+    tablaR[55][6].tipo = R;
+    tablaR[55][6].valor = 32;
+    
+    tablaR[55][7].tipo = R;
+    tablaR[55][7].valor = 32;
+    
+    tablaR[55][9].tipo = R;
+    tablaR[55][9].valor = 32;
     
     tablaR[56][12].tipo = D;
-    tablaR[56][12].valor = 57;
+    tablaR[56][12].valor = 59;
     
-    tablaR[57][2].tipo = D;
-    tablaR[57][2].valor = 31;
-    
-    tablaR[57][3].tipo = D;
-    tablaR[57][3].valor = 30;
-    
-    tablaR[57][4].tipo = D;
-    tablaR[57][4].valor = 29;
-    
-    tablaR[57][9].tipo = D;
-    tablaR[57][9].valor = 28;
-    
-    tablaR[57][10].tipo = D;
-    tablaR[57][10].valor = 27;
-    
-    tablaR[57][14].tipo = D;
-    tablaR[57][14].valor = 26;
-    
-    tablaR[57][15].tipo = D;
-    tablaR[57][15].valor = 25;
-    
-    tablaR[57][27].tipo = D;
-    tablaR[57][27].valor = 23;
-    
-    tablaR[57][28].tipo = D;
-    tablaR[57][28].valor = 22;
-    
-    tablaR[57][29].tipo = D;
-    tablaR[57][29].valor = 61;
-    
-    tablaR[57][30].tipo = D;
-    tablaR[57][30].valor = 20;
-    
-    tablaR[57][31].tipo = D;
-    tablaR[57][31].valor = 19;
-    
-    tablaR[57][32].tipo = D;
-    tablaR[57][32].valor = 18;
-    
-    tablaR[57][34].tipo = D;
-    tablaR[57][34].valor = 17;
+    tablaR[57][12].tipo = D;
+    tablaR[57][12].valor = 58;
     
     tablaR[58][2].tipo = D;
-    tablaR[58][2].valor = 31;
+    tablaR[58][2].valor = 33;
     
     tablaR[58][3].tipo = D;
-    tablaR[58][3].valor = 30;
+    tablaR[58][3].valor = 32;
     
     tablaR[58][4].tipo = D;
-    tablaR[58][4].valor = 29;
+    tablaR[58][4].valor = 31;
     
     tablaR[58][9].tipo = D;
-    tablaR[58][9].valor = 28;
+    tablaR[58][9].valor = 30;
     
     tablaR[58][10].tipo = D;
-    tablaR[58][10].valor = 27;
+    tablaR[58][10].valor = 29;
     
     tablaR[58][14].tipo = D;
-    tablaR[58][14].valor = 26;
+    tablaR[58][14].valor = 28;
     
     tablaR[58][15].tipo = D;
-    tablaR[58][15].valor = 25;
-    
-    tablaR[58][27].tipo = D;
-    tablaR[58][27].valor = 23;
+    tablaR[58][15].valor = 27;
     
     tablaR[58][28].tipo = D;
-    tablaR[58][28].valor = 22;
+    tablaR[58][28].valor = 25;
     
     tablaR[58][29].tipo = D;
-    tablaR[58][29].valor = 60;
+    tablaR[58][29].valor = 24;
     
     tablaR[58][30].tipo = D;
-    tablaR[58][30].valor = 20;
+    tablaR[58][30].valor = 61;
     
     tablaR[58][31].tipo = D;
-    tablaR[58][31].valor = 19;
+    tablaR[58][31].valor = 22;
     
     tablaR[58][32].tipo = D;
-    tablaR[58][32].valor = 18;
+    tablaR[58][32].valor = 21;
+    
+    tablaR[58][33].tipo = D;
+    tablaR[58][33].valor = 20;
     
     tablaR[58][34].tipo = D;
-    tablaR[58][34].valor = 17;
+    tablaR[58][34].valor = 19;
     
-    tablaR[59][1].tipo = R;
-    tablaR[59][1].valor = 23;
+    tablaR[58][36].tipo = D;
+    tablaR[58][36].valor = 18;
     
-    tablaR[59][9].tipo = R;
-    tablaR[59][9].valor = 23;
+    tablaR[59][2].tipo = D;
+    tablaR[59][2].valor = 33;
+    
+    tablaR[59][3].tipo = D;
+    tablaR[59][3].valor = 32;
+    
+    tablaR[59][4].tipo = D;
+    tablaR[59][4].valor = 31;
+    
+    tablaR[59][9].tipo = D;
+    tablaR[59][9].valor = 30;
+    
+    tablaR[59][10].tipo = D;
+    tablaR[59][10].valor = 29;
+    
+    tablaR[59][14].tipo = D;
+    tablaR[59][14].valor = 28;
+    
+    tablaR[59][15].tipo = D;
+    tablaR[59][15].valor = 27;
+    
+    tablaR[59][28].tipo = D;
+    tablaR[59][28].valor = 25;
+    
+    tablaR[59][29].tipo = D;
+    tablaR[59][29].valor = 24;
+    
+    tablaR[59][30].tipo = D;
+    tablaR[59][30].valor = 60;
+    
+    tablaR[59][31].tipo = D;
+    tablaR[59][31].valor = 22;
+    
+    tablaR[59][32].tipo = D;
+    tablaR[59][32].valor = 21;
+    
+    tablaR[59][33].tipo = D;
+    tablaR[59][33].valor = 20;
+    
+    tablaR[59][34].tipo = D;
+    tablaR[59][34].valor = 19;
+    
+    tablaR[59][36].tipo = D;
+    tablaR[59][36].valor = 18;
     
     tablaR[60][11].tipo = D;
     tablaR[60][11].valor = 63;
@@ -1532,125 +1603,128 @@ void inicializaTemp(){
     tablaR[61][11].valor = 62;
     
     tablaR[62][2].tipo = R;
-    tablaR[62][2].valor = 16;
+    tablaR[62][2].valor = 17;
     
     tablaR[62][3].tipo = R;
-    tablaR[62][3].valor = 16;
+    tablaR[62][3].valor = 17;
     
     tablaR[62][4].tipo = R;
-    tablaR[62][4].valor = 16;
+    tablaR[62][4].valor = 17;
     
     tablaR[62][9].tipo = R;
-    tablaR[62][9].valor = 16;
+    tablaR[62][9].valor = 17;
     
     tablaR[62][10].tipo = R;
-    tablaR[62][10].valor = 16;
+    tablaR[62][10].valor = 17;
     
     tablaR[62][11].tipo = R;
-    tablaR[62][11].valor = 16;
+    tablaR[62][11].valor = 17;
     
     tablaR[62][14].tipo = R;
-    tablaR[62][14].valor = 16;
+    tablaR[62][14].valor = 17;
     
     tablaR[62][15].tipo = R;
-    tablaR[62][15].valor = 16;
+    tablaR[62][15].valor = 17;
     
     tablaR[63][2].tipo = R;
-    tablaR[63][2].valor = 17;
+    tablaR[63][2].valor = 18;
     
     tablaR[63][3].tipo = R;
-    tablaR[63][3].valor = 17;
+    tablaR[63][3].valor = 18;
     
     tablaR[63][4].tipo = R;
-    tablaR[63][4].valor = 17;
+    tablaR[63][4].valor = 18;
     
     tablaR[63][9].tipo = R;
-    tablaR[63][9].valor = 17;
+    tablaR[63][9].valor = 18;
     
     tablaR[63][10].tipo = R;
-    tablaR[63][10].valor = 17;
+    tablaR[63][10].valor = 18;
     
     tablaR[63][11].tipo = R;
-    tablaR[63][11].valor = 17;
+    tablaR[63][11].valor = 18;
     
     tablaR[63][13].tipo = D;
     tablaR[63][13].valor = 64;
     
     tablaR[63][14].tipo = R;
-    tablaR[63][14].valor = 17;
+    tablaR[63][14].valor = 18;
     
     tablaR[63][15].tipo = R;
-    tablaR[63][15].valor = 17;
+    tablaR[63][15].valor = 18;
     
     tablaR[64][12].tipo = D;
     tablaR[64][12].valor = 65;
     
     tablaR[65][2].tipo = D;
-    tablaR[65][2].valor = 31;
+    tablaR[65][2].valor = 33;
     
     tablaR[65][3].tipo = D;
-    tablaR[65][3].valor = 30;
+    tablaR[65][3].valor = 32;
     
     tablaR[65][4].tipo = D;
-    tablaR[65][4].valor = 29;
+    tablaR[65][4].valor = 31;
     
     tablaR[65][9].tipo = D;
-    tablaR[65][9].valor = 28;
+    tablaR[65][9].valor = 30;
     
     tablaR[65][10].tipo = D;
-    tablaR[65][10].valor = 27;
+    tablaR[65][10].valor = 29;
     
     tablaR[65][14].tipo = D;
-    tablaR[65][14].valor = 26;
+    tablaR[65][14].valor = 28;
     
     tablaR[65][15].tipo = D;
-    tablaR[65][15].valor = 25;
-    
-    tablaR[65][27].tipo = D;
-    tablaR[65][27].valor = 23;
+    tablaR[65][15].valor = 27;
     
     tablaR[65][28].tipo = D;
-    tablaR[65][28].valor = 22;
+    tablaR[65][28].valor = 25;
     
     tablaR[65][29].tipo = D;
-    tablaR[65][29].valor = 66;
+    tablaR[65][29].valor = 24;
     
     tablaR[65][30].tipo = D;
-    tablaR[65][30].valor = 20;
+    tablaR[65][30].valor = 66;
     
     tablaR[65][31].tipo = D;
-    tablaR[65][31].valor = 19;
+    tablaR[65][31].valor = 22;
     
     tablaR[65][32].tipo = D;
-    tablaR[65][32].valor = 18;
+    tablaR[65][32].valor = 21;
+    
+    tablaR[65][33].tipo = D;
+    tablaR[65][33].valor = 20;
     
     tablaR[65][34].tipo = D;
-    tablaR[65][34].valor = 17;
+    tablaR[65][34].valor = 19;
+    
+    tablaR[65][36].tipo = D;
+    tablaR[65][36].valor = 18;
     
     tablaR[66][11].tipo = D;
     tablaR[66][11].valor = 67;
     
     tablaR[67][2].tipo = R;
-    tablaR[67][2].valor = 18;
+    tablaR[67][2].valor = 19;
     
     tablaR[67][3].tipo = R;
-    tablaR[67][3].valor = 18;
+    tablaR[67][3].valor = 19;
     
     tablaR[67][4].tipo = R;
-    tablaR[67][4].valor = 18;
+    tablaR[67][4].valor = 19;
     
     tablaR[67][9].tipo = R;
-    tablaR[67][9].valor = 18;
+    tablaR[67][9].valor = 19;
     
     tablaR[67][10].tipo = R;
-    tablaR[67][10].valor = 18;
+    tablaR[67][10].valor = 19;
     
     tablaR[67][11].tipo = R;
-    tablaR[67][11].valor = 18;
+    tablaR[67][11].valor = 19;
     
     tablaR[67][14].tipo = R;
-    tablaR[67][14].valor = 18;
+    tablaR[67][14].valor = 19;
     
     tablaR[67][15].tipo = R;
-    tablaR[67][15].valor = 18;
+    tablaR[67][15].valor = 19;
 }

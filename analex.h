@@ -647,7 +647,6 @@ int automataOperadoresAsignacion(automata *a, char c){
 		case 2:
 			fprintf(stdout, "%s\t%s\n",(*a).buffer,"equal");
 			lexema((*a).buffer, "equal");
-            lexema((*a).buffer, "equal");
             
             strcpy(inputLex[inputSizeLex], "equal");
             strcpy(inputRealLex[inputSizeLex],(*a).buffer);
@@ -927,8 +926,8 @@ int automataOperadoresComparacion(automata *a , char c) {
 				fprintf(stdout, "%s\t%s\n",(*a).buffer,"rel_op");
 				lexema((*a).buffer, "rel_op");
                 
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
-                strcpy(inputRealLex[inputSizeLex],"rel_op");
+                strcpy(inputLex[inputSizeLex],"rel_op");
+                strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
                 
@@ -937,8 +936,8 @@ int automataOperadoresComparacion(automata *a , char c) {
 				fprintf(stdout, "%s\t%s\n",(*a).buffer,"rel_op");
 				lexema((*a).buffer, "rel_op");
                 
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
-                strcpy(inputRealLex[inputSizeLex],"rel_op");
+                strcpy(inputLex[inputSizeLex],"rel_op");
+                strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
                 
