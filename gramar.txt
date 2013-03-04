@@ -7,9 +7,9 @@ VAR_ITEM -> var_name.
 MAIN_DEF -> int main left_parenthesis right_parenthesis left_curly_bracket FUNCTION_BODY right_curly_bracket.
 FUNCTION_BODY -> INTERNAL_DECLARATIONS STATEMENT_LIST.
 INTERNAL_DECLARATIONS -> DECLARATION INTERNAL_DECLARATIONS.
-INTERNAL_DECLARATIONS -> epsilon.
+INTERNAL_DECLARATIONS -> .
 STATEMENT_LIST -> STATEMENT STATEMENT_LIST.
-STATEMENT_LIST -> epsilon.
+STATEMENT_LIST -> .
 STATEMENT -> IF_STATEMENT.
 STATEMENT -> EXPRESSION semi_colon.
 STATEMENT -> WHILE_STATEMENT.
@@ -20,9 +20,11 @@ IF_STATEMENT -> if left_parenthesis EXPRESSION right_parenthesis left_curly_brac
 IF_STATEMENT -> if left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket else left_curly_bracket STATEMENT right_curly_bracket.
 RETURN_STATEMENT -> return EXPRESSION semi_colon.
 RETURN_STATEMENT -> return semi_colon.
-EXPRESSION -> PRIMARY_EXPR BINARY_OP PRIMARY_EXPR.
 EXPRESSION -> ASSIGN_EXP.
-ASSIGN_EXP-> var_name equal PRIMARY_EXPR BINARY_OP PRIMARY_EXPR.
+ASSIGN_EXP -> var_name equal BINARY_EXP.
+ASSIGN_EXP -> BINARY_EXP.
+BINARY_EXP -> BINARY_EXP BINARY_OP PRIMARY_EXPR.
+BINARY_EXP -> PRIMARY_EXPR.
 BINARY_OP -> boolean_op.
 BINARY_OP -> rel_op.
 BINARY_OP -> arith_op.
