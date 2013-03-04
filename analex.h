@@ -30,7 +30,7 @@ char **inputLex;
 char **inputRealLex;
 
 // Arreglo de palabras reservadas (keywords)
-const char *keywords[5] = {"else","return","void","if","while"};
+const char *keywords[6] = {"else","return","void","if","while","main"};
 
 // Arreglo de tipos de datos
 const char *dataType[10] = {"char","int","float","double","short","long","unsigned",
@@ -393,6 +393,12 @@ int automataIdentificadores(automata *a , char c) {
                     } else if (eq((*a).buffer, "while")) {
                         fprintf(stdout, "%s\t%s\n",(*a).buffer,"while");
                         lexema((*a).buffer, "while");
+                        
+                        strcpy(inputLex[inputSizeLex],(*a).buffer);
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    } else if (eq((*a).buffer, "main")) {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"main");
+                        lexema((*a).buffer, "main");
                         
                         strcpy(inputLex[inputSizeLex],(*a).buffer);
                         strcpy(inputRealLex[inputSizeLex],(*a).buffer);
