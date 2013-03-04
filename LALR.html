@@ -1,0 +1,3311 @@
+
+<!-- saved from url=(1673)http://smlweb.cpsc.ucalgary.ca/lalr1.php?grammar=PROGRAM+-%3E+GLOBAL_DECLARATIONS.%0AGLOBAL_DECLARATIONS+-%3E+MAIN_DEF.%0ADECLARATION+-%3E+var_type+VAR_LIST+semi_colon.%0AVAR_LIST+-%3E+VAR_LIST+comma+VAR_ITEM.%0AVAR_LIST+-%3E+VAR_ITEM.%0AVAR_ITEM+-%3E+var_name.%0AMAIN_DEF+-%3E+int+main+left_parenthesis+right_parenthesis+left_curly_bracket+FUNCTION_BODY+right_curly_bracket.%0AFUNCTION_BODY+-%3E+INTERNAL_DECLARATIONS+STATEMENT_LIST.%0AINTERNAL_DECLARATIONS+-%3E+DECLARATION+INTERNAL_DECLARATIONS.%0AINTERNAL_DECLARATIONS+-%3E+epsilon.%0ASTATEMENT_LIST+-%3E+STATEMENT+STATEMENT_LIST.%0ASTATEMENT_LIST+-%3E+epsilon.%0ASTATEMENT+-%3E+IF_STATEMENT.%0ASTATEMENT+-%3E+EXPRESSION+semi_colon.%0ASTATEMENT+-%3E+WHILE_STATEMENT.%0ASTATEMENT+-%3E+RETURN_STATEMENT.%0ASTATEMENT+-%3E+semi_colon.%0AWHILE_STATEMENT+-%3E+while+left_parenthesis+EXPRESSION+right_parenthesis+left_curly_bracket+STATEMENT+right_curly_bracket.%0AIF_STATEMENT+-%3E+if+left_parenthesis+EXPRESSION+right_parenthesis+left_curly_bracket+STATEMENT+right_curly_bracket.%0AIF_STATEMENT+-%3E+if+left_parenthesis+EXPRESSION+right_parenthesis+left_curly_bracket+STATEMENT+right_curly_bracket+else+left_curly_bracket+STATEMENT+right_curly_bracket.%0ARETURN_STATEMENT+-%3E+return+EXPRESSION+semi_colon.%0ARETURN_STATEMENT+-%3E+return+semi_colon.%0AEXPRESSION+-%3E+PRIMARY_EXPR+BINARY_OP+PRIMARY_EXPR.%0AEXPRESSION+-%3E+ASSIGN_EXP.%0AASSIGN_EXP-%3E+var_name+equal+PRIMARY_EXPR+BINARY_OP+PRIMARY_EXPR.%0ABINARY_OP+-%3E+boolean_op.%0ABINARY_OP+-%3E+rel_op.%0ABINARY_OP+-%3E+arith_op.%0APRIMARY_EXPR+-%3E+var_name.%0APRIMARY_EXPR+-%3E+constant.%0APRIMARY_EXPR+-%3E+left_parenthesis+PRIMARY_EXPR+right_parenthesis.%0A&substs= -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="./LALR_files/default.css" title="default" rel="stylesheet" type="text/css">
+<title>LALR(1) information</title>
+<style type="text/css"></style></head>
+<body>
+
+<!-- output from transformation is ignored
+<p>Performing the 'LALR(1) &rArr; SLR(1)' transformation.<p>
+<h1>New grammar</h1>
+<table class="grammar"><caption class="grammar"><a target="_top" href="raw-grammar.php?grammar=%0A%0APROGRAM_0+-%3E+GLOBAL_DECLARATIONS_0+.%0A%0AGLOBAL_DECLARATIONS_0+-%3E+MAIN_DEF_0+.%0A%0AMAIN_DEF_0+-%3E+int+main+left_parenthesis+right_parenthesis+left_curly_bracket+FUNCTION_BODY_8+right_curly_bracket+.%0A%0AFUNCTION_BODY_8+-%3E+INTERNAL_DECLARATIONS_8+STATEMENT_LIST_9+.%0A%0AINTERNAL_DECLARATIONS_8+-%3E+DECLARATION_8+INTERNAL_DECLARATIONS_10+%0A++++++++++++++++++++++++++%7Cepsilon+.%0A%0ADECLARATION_8+-%3E+var_type+VAR_LIST_12+semi_colon+.%0A%0ASTATEMENT_LIST_9+-%3E+STATEMENT_9+STATEMENT_LIST_23+%0A+++++++++++++++++++%7Cepsilon+.%0A%0ASTATEMENT_9+-%3E+IF_STATEMENT_9+%0A++++++++++++++%7CEXPRESSION_9+semi_colon+%0A++++++++++++++%7CWHILE_STATEMENT_9+%0A++++++++++++++%7CRETURN_STATEMENT_9+%0A++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_9+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A+++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_9+-%3E+PRIMARY_EXPR_9+BINARY_OP_19+PRIMARY_EXPR_44+%0A+++++++++++++++%7CASSIGN_EXP_9+.%0A%0AWHILE_STATEMENT_9+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_9+-%3E+return+EXPRESSION_30+semi_colon+%0A+++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_9+-%3E+var_name+%0A+++++++++++++++++%7Cconstant+%0A+++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_9+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0AINTERNAL_DECLARATIONS_10+-%3E+DECLARATION_10+INTERNAL_DECLARATIONS_10+%0A+++++++++++++++++++++++++++%7Cepsilon+.%0A%0ADECLARATION_10+-%3E+var_type+VAR_LIST_12+semi_colon+.%0A%0AVAR_LIST_12+-%3E+VAR_LIST_12+comma+VAR_ITEM_48+%0A++++++++++++++%7CVAR_ITEM_12+.%0A%0AVAR_ITEM_12+-%3E+var_name+.%0A%0ABINARY_OP_19+-%3E+boolean_op+%0A+++++++++++++++%7Crel_op+%0A+++++++++++++++%7Carith_op+.%0A%0ASTATEMENT_LIST_23+-%3E+STATEMENT_23+STATEMENT_LIST_23+%0A++++++++++++++++++++%7Cepsilon+.%0A%0ASTATEMENT_23+-%3E+IF_STATEMENT_23+%0A+++++++++++++++%7CEXPRESSION_23+semi_colon+%0A+++++++++++++++%7CWHILE_STATEMENT_23+%0A+++++++++++++++%7CRETURN_STATEMENT_23+%0A+++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_23+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A++++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_23+-%3E+PRIMARY_EXPR_23+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_23+.%0A%0AWHILE_STATEMENT_23+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_23+-%3E+return+EXPRESSION_30+semi_colon+%0A++++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_23+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_23+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0AEXPRESSION_30+-%3E+PRIMARY_EXPR_30+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_30+.%0A%0APRIMARY_EXPR_30+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_30+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0APRIMARY_EXPR_34+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0APRIMARY_EXPR_37+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AEXPRESSION_40+-%3E+PRIMARY_EXPR_40+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_40+.%0A%0APRIMARY_EXPR_40+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_40+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0AEXPRESSION_41+-%3E+PRIMARY_EXPR_41+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_41+.%0A%0APRIMARY_EXPR_41+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_41+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0APRIMARY_EXPR_44+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AVAR_ITEM_48+-%3E+var_name+.%0A%0ABINARY_OP_55+-%3E+boolean_op+%0A+++++++++++++++%7Crel_op+%0A+++++++++++++++%7Carith_op+.%0A%0APRIMARY_EXPR_57+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0ASTATEMENT_60+-%3E+IF_STATEMENT_60+%0A+++++++++++++++%7CEXPRESSION_60+semi_colon+%0A+++++++++++++++%7CWHILE_STATEMENT_60+%0A+++++++++++++++%7CRETURN_STATEMENT_60+%0A+++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_60+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A++++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_60+-%3E+PRIMARY_EXPR_60+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_60+.%0A%0AWHILE_STATEMENT_60+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_60+-%3E+return+EXPRESSION_30+semi_colon+%0A++++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_60+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_60+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0ASTATEMENT_61+-%3E+IF_STATEMENT_61+%0A+++++++++++++++%7CEXPRESSION_61+semi_colon+%0A+++++++++++++++%7CWHILE_STATEMENT_61+%0A+++++++++++++++%7CRETURN_STATEMENT_61+%0A+++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_61+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A++++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_61+-%3E+PRIMARY_EXPR_61+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_61+.%0A%0AWHILE_STATEMENT_61+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_61+-%3E+return+EXPRESSION_30+semi_colon+%0A++++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_61+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_61+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0ASTATEMENT_68+-%3E+IF_STATEMENT_68+%0A+++++++++++++++%7CEXPRESSION_68+semi_colon+%0A+++++++++++++++%7CWHILE_STATEMENT_68+%0A+++++++++++++++%7CRETURN_STATEMENT_68+%0A+++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_68+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A++++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_68+-%3E+PRIMARY_EXPR_68+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_68+.%0A%0AWHILE_STATEMENT_68+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_68+-%3E+return+EXPRESSION_30+semi_colon+%0A++++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_68+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_68+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0A&substs=%0A">Grammar</a></caption><tr><td>
+<br />
+<b>Deprecated</b>:  Function ereg_replace() is deprecated in <b>/home/smlweb/public_html/common.php</b> on line <b>194</b><br />
+
+
+PROGRAM<sub>0</sub> &rarr;</td><td> GLOBAL_DECLARATIONS<sub>0</sub> .</td></tr><tr><td>
+
+GLOBAL_DECLARATIONS<sub>0</sub> &rarr;</td><td> MAIN_DEF<sub>0</sub> .</td></tr><tr><td>
+
+MAIN_DEF<sub>0</sub> &rarr;</td><td> int main left_parenthesis right_parenthesis left_curly_bracket FUNCTION_BODY<sub>8</sub> right_curly_bracket .</td></tr><tr><td>
+
+FUNCTION_BODY<sub>8</sub> &rarr;</td><td> INTERNAL_DECLARATIONS<sub>8</sub> STATEMENT_LIST<sub>9</sub> .</td></tr><tr><td>
+
+INTERNAL_DECLARATIONS<sub>8</sub> &rarr;</td><td> DECLARATION<sub>8</sub> INTERNAL_DECLARATIONS<sub>10</sub> 
+                          </td></tr><tr><td align="right">|</td><td>epsilon .</td></tr><tr><td>
+
+DECLARATION<sub>8</sub> &rarr;</td><td> var_type VAR_LIST<sub>12</sub> semi_colon .</td></tr><tr><td>
+
+STATEMENT_LIST<sub>9</sub> &rarr;</td><td> STATEMENT<sub>9</sub> STATEMENT_LIST<sub>23</sub> 
+                   </td></tr><tr><td align="right">|</td><td>epsilon .</td></tr><tr><td>
+
+STATEMENT<sub>9</sub> &rarr;</td><td> IF_STATEMENT<sub>9</sub> 
+              </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>9</sub> semi_colon 
+              </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>9</sub> 
+              </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>9</sub> 
+              </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>9</sub> &rarr;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                 </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>9</sub> &rarr;</td><td> PRIMARY_EXPR<sub>9</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+               </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>9</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>9</sub> &rarr;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>9</sub> &rarr;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                     </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>9</sub> &rarr;</td><td> var_name 
+                 </td></tr><tr><td align="right">|</td><td>constant 
+                 </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>9</sub> &rarr;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+INTERNAL_DECLARATIONS<sub>10</sub> &rarr;</td><td> DECLARATION<sub>10</sub> INTERNAL_DECLARATIONS<sub>10</sub> 
+                           </td></tr><tr><td align="right">|</td><td>epsilon .</td></tr><tr><td>
+
+DECLARATION<sub>10</sub> &rarr;</td><td> var_type VAR_LIST<sub>12</sub> semi_colon .</td></tr><tr><td>
+
+VAR_LIST<sub>12</sub> &rarr;</td><td> VAR_LIST<sub>12</sub> comma VAR_ITEM<sub>48</sub> 
+              </td></tr><tr><td align="right">|</td><td>VAR_ITEM<sub>12</sub> .</td></tr><tr><td>
+
+VAR_ITEM<sub>12</sub> &rarr;</td><td> var_name .</td></tr><tr><td>
+
+BINARY_OP<sub>19</sub> &rarr;</td><td> boolean_op 
+               </td></tr><tr><td align="right">|</td><td>rel_op 
+               </td></tr><tr><td align="right">|</td><td>arith_op .</td></tr><tr><td>
+
+STATEMENT_LIST<sub>23</sub> &rarr;</td><td> STATEMENT<sub>23</sub> STATEMENT_LIST<sub>23</sub> 
+                    </td></tr><tr><td align="right">|</td><td>epsilon .</td></tr><tr><td>
+
+STATEMENT<sub>23</sub> &rarr;</td><td> IF_STATEMENT<sub>23</sub> 
+               </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>23</sub> semi_colon 
+               </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>23</sub> 
+               </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>23</sub> 
+               </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>23</sub> &rarr;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                  </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>23</sub> &rarr;</td><td> PRIMARY_EXPR<sub>23</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>23</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>23</sub> &rarr;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>23</sub> &rarr;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                      </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>23</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>23</sub> &rarr;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+EXPRESSION<sub>30</sub> &rarr;</td><td> PRIMARY_EXPR<sub>30</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>30</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>30</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>30</sub> &rarr;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>34</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>37</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+EXPRESSION<sub>40</sub> &rarr;</td><td> PRIMARY_EXPR<sub>40</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>40</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>40</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>40</sub> &rarr;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+EXPRESSION<sub>41</sub> &rarr;</td><td> PRIMARY_EXPR<sub>41</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>41</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>41</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>41</sub> &rarr;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>44</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+VAR_ITEM<sub>48</sub> &rarr;</td><td> var_name .</td></tr><tr><td>
+
+BINARY_OP<sub>55</sub> &rarr;</td><td> boolean_op 
+               </td></tr><tr><td align="right">|</td><td>rel_op 
+               </td></tr><tr><td align="right">|</td><td>arith_op .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>57</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+STATEMENT<sub>60</sub> &rarr;</td><td> IF_STATEMENT<sub>60</sub> 
+               </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>60</sub> semi_colon 
+               </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>60</sub> 
+               </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>60</sub> 
+               </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>60</sub> &rarr;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                  </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>60</sub> &rarr;</td><td> PRIMARY_EXPR<sub>60</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>60</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>60</sub> &rarr;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>60</sub> &rarr;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                      </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>60</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>60</sub> &rarr;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+STATEMENT<sub>61</sub> &rarr;</td><td> IF_STATEMENT<sub>61</sub> 
+               </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>61</sub> semi_colon 
+               </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>61</sub> 
+               </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>61</sub> 
+               </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>61</sub> &rarr;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                  </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>61</sub> &rarr;</td><td> PRIMARY_EXPR<sub>61</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>61</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>61</sub> &rarr;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>61</sub> &rarr;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                      </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>61</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>61</sub> &rarr;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+STATEMENT<sub>68</sub> &rarr;</td><td> IF_STATEMENT<sub>68</sub> 
+               </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>68</sub> semi_colon 
+               </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>68</sub> 
+               </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>68</sub> 
+               </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>68</sub> &rarr;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                  </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>68</sub> &rarr;</td><td> PRIMARY_EXPR<sub>68</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>68</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>68</sub> &rarr;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>68</sub> &rarr;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                      </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>68</sub> &rarr;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>68</sub> &rarr;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+</td></tr></table>
+<p>View <a target="_top" href="vital-stats.php?grammar=PROGRAM_0+-%3E+GLOBAL_DECLARATIONS_0+.%0A%0AGLOBAL_DECLARATIONS_0+-%3E+MAIN_DEF_0+.%0A%0AMAIN_DEF_0+-%3E+int+main+left_parenthesis+right_parenthesis+left_curly_bracket+FUNCTION_BODY_8+right_curly_bracket+.%0A%0AFUNCTION_BODY_8+-%3E+INTERNAL_DECLARATIONS_8+STATEMENT_LIST_9+.%0A%0AINTERNAL_DECLARATIONS_8+-%3E+DECLARATION_8+INTERNAL_DECLARATIONS_10+%0A++++++++++++++++++++++++++%7Cepsilon+.%0A%0ADECLARATION_8+-%3E+var_type+VAR_LIST_12+semi_colon+.%0A%0ASTATEMENT_LIST_9+-%3E+STATEMENT_9+STATEMENT_LIST_23+%0A+++++++++++++++++++%7Cepsilon+.%0A%0ASTATEMENT_9+-%3E+IF_STATEMENT_9+%0A++++++++++++++%7CEXPRESSION_9+semi_colon+%0A++++++++++++++%7CWHILE_STATEMENT_9+%0A++++++++++++++%7CRETURN_STATEMENT_9+%0A++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_9+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A+++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_9+-%3E+PRIMARY_EXPR_9+BINARY_OP_19+PRIMARY_EXPR_44+%0A+++++++++++++++%7CASSIGN_EXP_9+.%0A%0AWHILE_STATEMENT_9+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_9+-%3E+return+EXPRESSION_30+semi_colon+%0A+++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_9+-%3E+var_name+%0A+++++++++++++++++%7Cconstant+%0A+++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_9+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0AINTERNAL_DECLARATIONS_10+-%3E+DECLARATION_10+INTERNAL_DECLARATIONS_10+%0A+++++++++++++++++++++++++++%7Cepsilon+.%0A%0ADECLARATION_10+-%3E+var_type+VAR_LIST_12+semi_colon+.%0A%0AVAR_LIST_12+-%3E+VAR_LIST_12+comma+VAR_ITEM_48+%0A++++++++++++++%7CVAR_ITEM_12+.%0A%0AVAR_ITEM_12+-%3E+var_name+.%0A%0ABINARY_OP_19+-%3E+boolean_op+%0A+++++++++++++++%7Crel_op+%0A+++++++++++++++%7Carith_op+.%0A%0ASTATEMENT_LIST_23+-%3E+STATEMENT_23+STATEMENT_LIST_23+%0A++++++++++++++++++++%7Cepsilon+.%0A%0ASTATEMENT_23+-%3E+IF_STATEMENT_23+%0A+++++++++++++++%7CEXPRESSION_23+semi_colon+%0A+++++++++++++++%7CWHILE_STATEMENT_23+%0A+++++++++++++++%7CRETURN_STATEMENT_23+%0A+++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_23+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A++++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_23+-%3E+PRIMARY_EXPR_23+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_23+.%0A%0AWHILE_STATEMENT_23+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_23+-%3E+return+EXPRESSION_30+semi_colon+%0A++++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_23+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_23+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0AEXPRESSION_30+-%3E+PRIMARY_EXPR_30+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_30+.%0A%0APRIMARY_EXPR_30+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_30+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0APRIMARY_EXPR_34+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0APRIMARY_EXPR_37+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AEXPRESSION_40+-%3E+PRIMARY_EXPR_40+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_40+.%0A%0APRIMARY_EXPR_40+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_40+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0AEXPRESSION_41+-%3E+PRIMARY_EXPR_41+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_41+.%0A%0APRIMARY_EXPR_41+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_41+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0APRIMARY_EXPR_44+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AVAR_ITEM_48+-%3E+var_name+.%0A%0ABINARY_OP_55+-%3E+boolean_op+%0A+++++++++++++++%7Crel_op+%0A+++++++++++++++%7Carith_op+.%0A%0APRIMARY_EXPR_57+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0ASTATEMENT_60+-%3E+IF_STATEMENT_60+%0A+++++++++++++++%7CEXPRESSION_60+semi_colon+%0A+++++++++++++++%7CWHILE_STATEMENT_60+%0A+++++++++++++++%7CRETURN_STATEMENT_60+%0A+++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_60+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A++++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_60+-%3E+PRIMARY_EXPR_60+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_60+.%0A%0AWHILE_STATEMENT_60+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_60+-%3E+return+EXPRESSION_30+semi_colon+%0A++++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_60+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_60+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0ASTATEMENT_61+-%3E+IF_STATEMENT_61+%0A+++++++++++++++%7CEXPRESSION_61+semi_colon+%0A+++++++++++++++%7CWHILE_STATEMENT_61+%0A+++++++++++++++%7CRETURN_STATEMENT_61+%0A+++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_61+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A++++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_61+-%3E+PRIMARY_EXPR_61+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_61+.%0A%0AWHILE_STATEMENT_61+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_61+-%3E+return+EXPRESSION_30+semi_colon+%0A++++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_61+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_61+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.%0A%0ASTATEMENT_68+-%3E+IF_STATEMENT_68+%0A+++++++++++++++%7CEXPRESSION_68+semi_colon+%0A+++++++++++++++%7CWHILE_STATEMENT_68+%0A+++++++++++++++%7CRETURN_STATEMENT_68+%0A+++++++++++++++%7Csemi_colon+.%0A%0AIF_STATEMENT_68+-%3E+if+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+%0A++++++++++++++++++%7Cif+left_parenthesis+EXPRESSION_40+right_parenthesis+left_curly_bracket+STATEMENT_61+right_curly_bracket+else+left_curly_bracket+STATEMENT_68+right_curly_bracket+.%0A%0AEXPRESSION_68+-%3E+PRIMARY_EXPR_68+BINARY_OP_19+PRIMARY_EXPR_44+%0A++++++++++++++++%7CASSIGN_EXP_68+.%0A%0AWHILE_STATEMENT_68+-%3E+while+left_parenthesis+EXPRESSION_41+right_parenthesis+left_curly_bracket+STATEMENT_60+right_curly_bracket+.%0A%0ARETURN_STATEMENT_68+-%3E+return+EXPRESSION_30+semi_colon+%0A++++++++++++++++++++++%7Creturn+semi_colon+.%0A%0APRIMARY_EXPR_68+-%3E+var_name+%0A++++++++++++++++++%7Cconstant+%0A++++++++++++++++++%7Cleft_parenthesis+PRIMARY_EXPR_34+right_parenthesis+.%0A%0AASSIGN_EXP_68+-%3E+var_name+equal+PRIMARY_EXPR_37+BINARY_OP_55+PRIMARY_EXPR_57+.&substs=">vital stats</a> for new grammar.<p>
+Unfortunately the grammar is still not LL(1).  Transforming it more might help.<p>
+-->
+The following is the auxiliary grammar (G'), as per Bermudez and Logothetis 1989:
+<table class="Auxiliary grammar"><caption class="Auxiliary grammar">Auxiliary Grammar</caption><tbody><tr><td>
+<br>
+<b>Deprecated</b>:  Function ereg_replace() is deprecated in <b>/home/smlweb/public_html/common.php</b> on line <b>194</b><br>
+
+
+PROGRAM<sub>0</sub> &#8594;</td><td> GLOBAL_DECLARATIONS<sub>0</sub> .</td></tr><tr><td>
+
+GLOBAL_DECLARATIONS<sub>0</sub> &#8594;</td><td> MAIN_DEF<sub>0</sub> .</td></tr><tr><td>
+
+MAIN_DEF<sub>0</sub> &#8594;</td><td> int main left_parenthesis right_parenthesis left_curly_bracket FUNCTION_BODY<sub>8</sub> right_curly_bracket .</td></tr><tr><td>
+
+FUNCTION_BODY<sub>8</sub> &#8594;</td><td> INTERNAL_DECLARATIONS<sub>8</sub> STATEMENT_LIST<sub>9</sub> .</td></tr><tr><td>
+
+INTERNAL_DECLARATIONS<sub>8</sub> &#8594;</td><td> DECLARATION<sub>8</sub> INTERNAL_DECLARATIONS<sub>10</sub> 
+                          </td></tr><tr><td align="right">|</td><td>epsilon .</td></tr><tr><td>
+
+DECLARATION<sub>8</sub> &#8594;</td><td> var_type VAR_LIST<sub>12</sub> semi_colon .</td></tr><tr><td>
+
+STATEMENT_LIST<sub>9</sub> &#8594;</td><td> STATEMENT<sub>9</sub> STATEMENT_LIST<sub>23</sub> 
+                   </td></tr><tr><td align="right">|</td><td>epsilon .</td></tr><tr><td>
+
+STATEMENT<sub>9</sub> &#8594;</td><td> IF_STATEMENT<sub>9</sub> 
+              </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>9</sub> semi_colon 
+              </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>9</sub> 
+              </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>9</sub> 
+              </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>9</sub> &#8594;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                 </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>9</sub> &#8594;</td><td> PRIMARY_EXPR<sub>9</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+               </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>9</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>9</sub> &#8594;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>9</sub> &#8594;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                     </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>9</sub> &#8594;</td><td> var_name 
+                 </td></tr><tr><td align="right">|</td><td>constant 
+                 </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>9</sub> &#8594;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+INTERNAL_DECLARATIONS<sub>10</sub> &#8594;</td><td> DECLARATION<sub>10</sub> INTERNAL_DECLARATIONS<sub>10</sub> 
+                           </td></tr><tr><td align="right">|</td><td>epsilon .</td></tr><tr><td>
+
+DECLARATION<sub>10</sub> &#8594;</td><td> var_type VAR_LIST<sub>12</sub> semi_colon .</td></tr><tr><td>
+
+VAR_LIST<sub>12</sub> &#8594;</td><td> VAR_LIST<sub>12</sub> comma VAR_ITEM<sub>48</sub> 
+              </td></tr><tr><td align="right">|</td><td>VAR_ITEM<sub>12</sub> .</td></tr><tr><td>
+
+VAR_ITEM<sub>12</sub> &#8594;</td><td> var_name .</td></tr><tr><td>
+
+BINARY_OP<sub>19</sub> &#8594;</td><td> boolean_op 
+               </td></tr><tr><td align="right">|</td><td>rel_op 
+               </td></tr><tr><td align="right">|</td><td>arith_op .</td></tr><tr><td>
+
+STATEMENT_LIST<sub>23</sub> &#8594;</td><td> STATEMENT<sub>23</sub> STATEMENT_LIST<sub>23</sub> 
+                    </td></tr><tr><td align="right">|</td><td>epsilon .</td></tr><tr><td>
+
+STATEMENT<sub>23</sub> &#8594;</td><td> IF_STATEMENT<sub>23</sub> 
+               </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>23</sub> semi_colon 
+               </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>23</sub> 
+               </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>23</sub> 
+               </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>23</sub> &#8594;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                  </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>23</sub> &#8594;</td><td> PRIMARY_EXPR<sub>23</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>23</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>23</sub> &#8594;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>23</sub> &#8594;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                      </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>23</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>23</sub> &#8594;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+EXPRESSION<sub>30</sub> &#8594;</td><td> PRIMARY_EXPR<sub>30</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>30</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>30</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>30</sub> &#8594;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>34</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>37</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+EXPRESSION<sub>40</sub> &#8594;</td><td> PRIMARY_EXPR<sub>40</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>40</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>40</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>40</sub> &#8594;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+EXPRESSION<sub>41</sub> &#8594;</td><td> PRIMARY_EXPR<sub>41</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>41</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>41</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>41</sub> &#8594;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>44</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+VAR_ITEM<sub>48</sub> &#8594;</td><td> var_name .</td></tr><tr><td>
+
+BINARY_OP<sub>55</sub> &#8594;</td><td> boolean_op 
+               </td></tr><tr><td align="right">|</td><td>rel_op 
+               </td></tr><tr><td align="right">|</td><td>arith_op .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>57</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+STATEMENT<sub>60</sub> &#8594;</td><td> IF_STATEMENT<sub>60</sub> 
+               </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>60</sub> semi_colon 
+               </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>60</sub> 
+               </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>60</sub> 
+               </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>60</sub> &#8594;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                  </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>60</sub> &#8594;</td><td> PRIMARY_EXPR<sub>60</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>60</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>60</sub> &#8594;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>60</sub> &#8594;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                      </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>60</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>60</sub> &#8594;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+STATEMENT<sub>61</sub> &#8594;</td><td> IF_STATEMENT<sub>61</sub> 
+               </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>61</sub> semi_colon 
+               </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>61</sub> 
+               </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>61</sub> 
+               </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>61</sub> &#8594;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                  </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>61</sub> &#8594;</td><td> PRIMARY_EXPR<sub>61</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>61</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>61</sub> &#8594;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>61</sub> &#8594;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                      </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>61</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>61</sub> &#8594;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+STATEMENT<sub>68</sub> &#8594;</td><td> IF_STATEMENT<sub>68</sub> 
+               </td></tr><tr><td align="right">|</td><td>EXPRESSION<sub>68</sub> semi_colon 
+               </td></tr><tr><td align="right">|</td><td>WHILE_STATEMENT<sub>68</sub> 
+               </td></tr><tr><td align="right">|</td><td>RETURN_STATEMENT<sub>68</sub> 
+               </td></tr><tr><td align="right">|</td><td>semi_colon .</td></tr><tr><td>
+
+IF_STATEMENT<sub>68</sub> &#8594;</td><td> if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket 
+                  </td></tr><tr><td align="right">|</td><td>if left_parenthesis EXPRESSION<sub>40</sub> right_parenthesis left_curly_bracket STATEMENT<sub>61</sub> right_curly_bracket else left_curly_bracket STATEMENT<sub>68</sub> right_curly_bracket .</td></tr><tr><td>
+
+EXPRESSION<sub>68</sub> &#8594;</td><td> PRIMARY_EXPR<sub>68</sub> BINARY_OP<sub>19</sub> PRIMARY_EXPR<sub>44</sub> 
+                </td></tr><tr><td align="right">|</td><td>ASSIGN_EXP<sub>68</sub> .</td></tr><tr><td>
+
+WHILE_STATEMENT<sub>68</sub> &#8594;</td><td> while left_parenthesis EXPRESSION<sub>41</sub> right_parenthesis left_curly_bracket STATEMENT<sub>60</sub> right_curly_bracket .</td></tr><tr><td>
+
+RETURN_STATEMENT<sub>68</sub> &#8594;</td><td> return EXPRESSION<sub>30</sub> semi_colon 
+                      </td></tr><tr><td align="right">|</td><td>return semi_colon .</td></tr><tr><td>
+
+PRIMARY_EXPR<sub>68</sub> &#8594;</td><td> var_name 
+                  </td></tr><tr><td align="right">|</td><td>constant 
+                  </td></tr><tr><td align="right">|</td><td>left_parenthesis PRIMARY_EXPR<sub>34</sub> right_parenthesis .</td></tr><tr><td>
+
+ASSIGN_EXP<sub>68</sub> &#8594;</td><td> var_name equal PRIMARY_EXPR<sub>37</sub> BINARY_OP<sub>55</sub> PRIMARY_EXPR<sub>57</sub> .</td></tr><tr><td>
+
+</td></tr></tbody></table>
+<img src="./LALR_files/lalr1-automaton.php">
+<p><table><tbody><tr><td valign="top">
+<table class="grammar"><caption class="grammar"><a target="_top" href="http://smlweb.cpsc.ucalgary.ca/raw-grammar.php?grammar=PROGRAM+-%3E+GLOBAL_DECLARATIONS.%0AGLOBAL_DECLARATIONS+-%3E+MAIN_DEF.%0ADECLARATION+-%3E+var_type+VAR_LIST+semi_colon.%0AVAR_LIST+-%3E+VAR_LIST+comma+VAR_ITEM.%0AVAR_LIST+-%3E+VAR_ITEM.%0AVAR_ITEM+-%3E+var_name.%0AMAIN_DEF+-%3E+int+main+left_parenthesis+right_parenthesis+left_curly_bracket+FUNCTION_BODY+right_curly_bracket.%0AFUNCTION_BODY+-%3E+INTERNAL_DECLARATIONS+STATEMENT_LIST.%0AINTERNAL_DECLARATIONS+-%3E+DECLARATION+INTERNAL_DECLARATIONS.%0AINTERNAL_DECLARATIONS+-%3E+epsilon.%0ASTATEMENT_LIST+-%3E+STATEMENT+STATEMENT_LIST.%0ASTATEMENT_LIST+-%3E+epsilon.%0ASTATEMENT+-%3E+IF_STATEMENT.%0ASTATEMENT+-%3E+EXPRESSION+semi_colon.%0ASTATEMENT+-%3E+WHILE_STATEMENT.%0ASTATEMENT+-%3E+RETURN_STATEMENT.%0ASTATEMENT+-%3E+semi_colon.%0AWHILE_STATEMENT+-%3E+while+left_parenthesis+EXPRESSION+right_parenthesis+left_curly_bracket+STATEMENT+right_curly_bracket.%0AIF_STATEMENT+-%3E+if+left_parenthesis+EXPRESSION+right_parenthesis+left_curly_bracket+STATEMENT+right_curly_bracket.%0AIF_STATEMENT+-%3E+if+left_parenthesis+EXPRESSION+right_parenthesis+left_curly_bracket+STATEMENT+right_curly_bracket+else+left_curly_bracket+STATEMENT+right_curly_bracket.%0ARETURN_STATEMENT+-%3E+return+EXPRESSION+semi_colon.%0ARETURN_STATEMENT+-%3E+return+semi_colon.%0AEXPRESSION+-%3E+PRIMARY_EXPR+BINARY_OP+PRIMARY_EXPR.%0AEXPRESSION+-%3E+ASSIGN_EXP.%0AASSIGN_EXP-%3E+var_name+equal+PRIMARY_EXPR+BINARY_OP+PRIMARY_EXPR.%0ABINARY_OP+-%3E+boolean_op.%0ABINARY_OP+-%3E+rel_op.%0ABINARY_OP+-%3E+arith_op.%0APRIMARY_EXPR+-%3E+var_name.%0APRIMARY_EXPR+-%3E+constant.%0APRIMARY_EXPR+-%3E+left_parenthesis+PRIMARY_EXPR+right_parenthesis.%0A&substs=">Grammar</a></caption><tbody><tr><td>
+<br>
+<b>Deprecated</b>:  Function ereg_replace() is deprecated in <b>/home/smlweb/public_html/common.php</b> on line <b>194</b><br>
+PROGRAM &#8594;</td><td> GLOBAL_DECLARATIONS.</td></tr><tr><td>
+GLOBAL_DECLARATIONS &#8594;</td><td> MAIN_DEF.</td></tr><tr><td>
+DECLARATION &#8594;</td><td> var_type VAR_LIST semi_colon.</td></tr><tr><td>
+VAR_LIST &#8594;</td><td> VAR_LIST comma VAR_ITEM.</td></tr><tr><td>
+VAR_LIST &#8594;</td><td> VAR_ITEM.</td></tr><tr><td>
+VAR_ITEM &#8594;</td><td> var_name.</td></tr><tr><td>
+MAIN_DEF &#8594;</td><td> int main left_parenthesis right_parenthesis left_curly_bracket FUNCTION_BODY right_curly_bracket.</td></tr><tr><td>
+FUNCTION_BODY &#8594;</td><td> INTERNAL_DECLARATIONS STATEMENT_LIST.</td></tr><tr><td>
+INTERNAL_DECLARATIONS &#8594;</td><td> DECLARATION INTERNAL_DECLARATIONS.</td></tr><tr><td>
+INTERNAL_DECLARATIONS &#8594;</td><td> epsilon.</td></tr><tr><td>
+STATEMENT_LIST &#8594;</td><td> STATEMENT STATEMENT_LIST.</td></tr><tr><td>
+STATEMENT_LIST &#8594;</td><td> epsilon.</td></tr><tr><td>
+STATEMENT &#8594;</td><td> IF_STATEMENT.</td></tr><tr><td>
+STATEMENT &#8594;</td><td> EXPRESSION semi_colon.</td></tr><tr><td>
+STATEMENT &#8594;</td><td> WHILE_STATEMENT.</td></tr><tr><td>
+STATEMENT &#8594;</td><td> RETURN_STATEMENT.</td></tr><tr><td>
+STATEMENT &#8594;</td><td> semi_colon.</td></tr><tr><td>
+WHILE_STATEMENT &#8594;</td><td> while left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket.</td></tr><tr><td>
+IF_STATEMENT &#8594;</td><td> if left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket.</td></tr><tr><td>
+IF_STATEMENT &#8594;</td><td> if left_parenthesis EXPRESSION right_parenthesis left_curly_bracket STATEMENT right_curly_bracket else left_curly_bracket STATEMENT right_curly_bracket.</td></tr><tr><td>
+RETURN_STATEMENT &#8594;</td><td> return EXPRESSION semi_colon.</td></tr><tr><td>
+RETURN_STATEMENT &#8594;</td><td> return semi_colon.</td></tr><tr><td>
+EXPRESSION &#8594;</td><td> PRIMARY_EXPR BINARY_OP PRIMARY_EXPR.</td></tr><tr><td>
+EXPRESSION &#8594;</td><td> ASSIGN_EXP.</td></tr><tr><td>
+ASSIGN_EXP&#8594;</td><td> var_name equal PRIMARY_EXPR BINARY_OP PRIMARY_EXPR.</td></tr><tr><td>
+BINARY_OP &#8594;</td><td> boolean_op.</td></tr><tr><td>
+BINARY_OP &#8594;</td><td> rel_op.</td></tr><tr><td>
+BINARY_OP &#8594;</td><td> arith_op.</td></tr><tr><td>
+PRIMARY_EXPR &#8594;</td><td> var_name.</td></tr><tr><td>
+PRIMARY_EXPR &#8594;</td><td> constant.</td></tr><tr><td>
+PRIMARY_EXPR &#8594;</td><td> left_parenthesis PRIMARY_EXPR right_parenthesis.</td></tr><tr><td>
+</td></tr></tbody></table></td><td valign="top">
+<table class="parse_table" border="1">
+<caption class="parse_table">LALR(1) Table</caption>
+<tbody><tr><td></td><th><term>$</term></th><th><term>right_parenthesis</term></th><th><term>left_parenthesis</term></th><th><term>constant</term></th><th><term>var_name</term></th><th><term>arith_op</term></th><th><term>rel_op</term></th><th><term>boolean_op</term></th><th><term>equal</term></th><th><term>semi_colon</term></th><th><term>return</term></th><th><term>right_curly_bracket</term></th><th><term>left_curly_bracket</term></th><th><term>else</term></th><th><term>if</term></th><th><term>while</term></th><th><term>epsilon</term></th><th><term>main</term></th><th><term>int</term></th><th><term>comma</term></th><th><term>var_type</term></th><th><nonterm>PROGRAM</nonterm></th><th><nonterm>GLOBAL_DECLARATIONS</nonterm></th><th><nonterm>VAR_LIST</nonterm></th><th><nonterm>VAR_ITEM</nonterm></th><th><nonterm>MAIN_DEF</nonterm></th><th><nonterm>FUNCTION_BODY</nonterm></th><th><nonterm>DECLARATION</nonterm></th><th><nonterm>INTERNAL_DECLARATIONS</nonterm></th><th><nonterm>STATEMENT_LIST</nonterm></th><th><nonterm>WHILE_STATEMENT</nonterm></th><th><nonterm>IF_STATEMENT</nonterm></th><th><nonterm>STATEMENT</nonterm></th><th><nonterm>RETURN_STATEMENT</nonterm></th><th><nonterm>EXPRESSION</nonterm></th><th><nonterm>ASSIGN_EXP</nonterm></th><th><nonterm>BINARY_OP</nonterm></th><th><nonterm>PRIMARY_EXPR</nonterm></th></tr>
+<tr><th>0</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s4</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s3</shift></td>
+<td><shift>s2</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s1</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>1</th>
+<td><reduce>r(<nonterm>GLOBAL_DECLARATIONS</nonterm> &#8594; <nonterm>MAIN_DEF</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>2</th>
+<td><reduce>r(<nonterm>PROGRAM</nonterm> &#8594; <nonterm>GLOBAL_DECLARATIONS</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>3</th>
+<td><accept>acc</accept></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>4</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s5</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>5</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s6</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>6</th>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s7</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>7</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s8</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>8</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s13</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s12</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s11</shift></td>
+<td><shift>s10</shift></td>
+<td><shift>s9</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>9</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s32</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s31</shift></td>
+<td><shift>s30</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s29</shift></td>
+<td><shift>s28</shift></td>
+<td><shift>s27</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s26</shift></td>
+<td><shift>s25</shift></td>
+<td><shift>s24</shift></td>
+<td><shift>s23</shift></td>
+<td><shift>s22</shift></td>
+<td><shift>s21</shift></td>
+<td><shift>s20</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s19</shift></td>
+</tr>
+<tr><th>10</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s13</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s12</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s10</shift></td>
+<td><shift>s18</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>11</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s17</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>12</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s16</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s15</shift></td>
+<td><shift>s14</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>13</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <term>epsilon</term>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <term>epsilon</term>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <term>epsilon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <term>epsilon</term>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <term>epsilon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <term>epsilon</term>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <term>epsilon</term>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <term>epsilon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>14</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>VAR_LIST</nonterm> &#8594; <nonterm>VAR_ITEM</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>VAR_LIST</nonterm> &#8594; <nonterm>VAR_ITEM</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>15</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s49</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s48</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>16</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>VAR_ITEM</nonterm> &#8594; <term>var_name</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>VAR_ITEM</nonterm> &#8594; <term>var_name</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>17</th>
+<td><reduce>r(<nonterm>MAIN_DEF</nonterm> &#8594; <term>int</term> <term>main</term> <term>left_parenthesis</term> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>FUNCTION_BODY</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>18</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <nonterm>DECLARATION</nonterm> <nonterm>INTERNAL_DECLARATIONS</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <nonterm>DECLARATION</nonterm> <nonterm>INTERNAL_DECLARATIONS</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <nonterm>DECLARATION</nonterm> <nonterm>INTERNAL_DECLARATIONS</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <nonterm>DECLARATION</nonterm> <nonterm>INTERNAL_DECLARATIONS</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <nonterm>DECLARATION</nonterm> <nonterm>INTERNAL_DECLARATIONS</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <nonterm>DECLARATION</nonterm> <nonterm>INTERNAL_DECLARATIONS</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <nonterm>DECLARATION</nonterm> <nonterm>INTERNAL_DECLARATIONS</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>INTERNAL_DECLARATIONS</nonterm> &#8594; <nonterm>DECLARATION</nonterm> <nonterm>INTERNAL_DECLARATIONS</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>19</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s47</shift></td>
+<td><shift>s46</shift></td>
+<td><shift>s45</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s44</shift></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>20</th>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>EXPRESSION</nonterm> &#8594; <nonterm>ASSIGN_EXP</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>EXPRESSION</nonterm> &#8594; <nonterm>ASSIGN_EXP</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>21</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s43</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>22</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>RETURN_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>RETURN_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>RETURN_STATEMENT</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>RETURN_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>RETURN_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>RETURN_STATEMENT</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>RETURN_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>RETURN_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>RETURN_STATEMENT</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>23</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s32</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s31</shift></td>
+<td><shift>s30</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s29</shift></td>
+<td><shift>s28</shift></td>
+<td><shift>s27</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s42</shift></td>
+<td><shift>s25</shift></td>
+<td><shift>s24</shift></td>
+<td><shift>s23</shift></td>
+<td><shift>s22</shift></td>
+<td><shift>s21</shift></td>
+<td><shift>s20</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s19</shift></td>
+</tr>
+<tr><th>24</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>IF_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>IF_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>IF_STATEMENT</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>IF_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>IF_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>IF_STATEMENT</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>IF_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>IF_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>IF_STATEMENT</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>25</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>WHILE_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>WHILE_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>WHILE_STATEMENT</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>WHILE_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>WHILE_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>WHILE_STATEMENT</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>WHILE_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>WHILE_STATEMENT</nonterm>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>WHILE_STATEMENT</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>26</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>FUNCTION_BODY</nonterm> &#8594; <nonterm>INTERNAL_DECLARATIONS</nonterm> <nonterm>STATEMENT_LIST</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>27</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT_LIST</nonterm> &#8594; <term>epsilon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>28</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s41</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>29</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s40</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>30</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s32</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s39</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s38</shift></td>
+<td><shift>s20</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s19</shift></td>
+</tr>
+<tr><th>31</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>32</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>var_name</term>)</reduce></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>var_name</term>)</reduce></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>var_name</term>)</reduce></td>
+<td><shift>s37</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>33</th>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>constant</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>constant</term>)</reduce></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>constant</term>)</reduce></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>constant</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>34</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s36</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s35</shift></td>
+</tr>
+<tr><th>35</th>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s56</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>36</th>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>var_name</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>var_name</term>)</reduce></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>var_name</term>)</reduce></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>var_name</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>37</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s36</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s55</shift></td>
+</tr>
+<tr><th>38</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s54</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>39</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>40</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s32</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s53</shift></td>
+<td><shift>s20</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s19</shift></td>
+</tr>
+<tr><th>41</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s32</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s52</shift></td>
+<td><shift>s20</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s19</shift></td>
+</tr>
+<tr><th>42</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT_LIST</nonterm> &#8594; <nonterm>STATEMENT</nonterm> <nonterm>STATEMENT_LIST</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>43</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>STATEMENT</nonterm> &#8594; <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>44</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s36</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s51</shift></td>
+</tr>
+<tr><th>45</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>BINARY_OP</nonterm> &#8594; <term>boolean_op</term>)</reduce></td>
+<td><reduce>r(<nonterm>BINARY_OP</nonterm> &#8594; <term>boolean_op</term>)</reduce></td>
+<td><reduce>r(<nonterm>BINARY_OP</nonterm> &#8594; <term>boolean_op</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>46</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>BINARY_OP</nonterm> &#8594; <term>rel_op</term>)</reduce></td>
+<td><reduce>r(<nonterm>BINARY_OP</nonterm> &#8594; <term>rel_op</term>)</reduce></td>
+<td><reduce>r(<nonterm>BINARY_OP</nonterm> &#8594; <term>rel_op</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>47</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>BINARY_OP</nonterm> &#8594; <term>arith_op</term>)</reduce></td>
+<td><reduce>r(<nonterm>BINARY_OP</nonterm> &#8594; <term>arith_op</term>)</reduce></td>
+<td><reduce>r(<nonterm>BINARY_OP</nonterm> &#8594; <term>arith_op</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>48</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s16</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s50</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>49</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>DECLARATION</nonterm> &#8594; <term>var_type</term> <nonterm>VAR_LIST</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>DECLARATION</nonterm> &#8594; <term>var_type</term> <nonterm>VAR_LIST</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>50</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>VAR_LIST</nonterm> &#8594; <nonterm>VAR_LIST</nonterm> <term>comma</term> <nonterm>VAR_ITEM</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>VAR_LIST</nonterm> &#8594; <nonterm>VAR_LIST</nonterm> <term>comma</term> <nonterm>VAR_ITEM</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>51</th>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>EXPRESSION</nonterm> &#8594; <nonterm>PRIMARY_EXPR</nonterm> <nonterm>BINARY_OP</nonterm> <nonterm>PRIMARY_EXPR</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>EXPRESSION</nonterm> &#8594; <nonterm>PRIMARY_EXPR</nonterm> <nonterm>BINARY_OP</nonterm> <nonterm>PRIMARY_EXPR</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>52</th>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s59</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>53</th>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s58</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>54</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reduce>r(<nonterm>RETURN_STATEMENT</nonterm> &#8594; <term>return</term> <nonterm>EXPRESSION</nonterm> <term>semi_colon</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>55</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s47</shift></td>
+<td><shift>s46</shift></td>
+<td><shift>s45</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s57</shift></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>56</th>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>left_parenthesis</term> <nonterm>PRIMARY_EXPR</nonterm> <term>right_parenthesis</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>left_parenthesis</term> <nonterm>PRIMARY_EXPR</nonterm> <term>right_parenthesis</term>)</reduce></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>left_parenthesis</term> <nonterm>PRIMARY_EXPR</nonterm> <term>right_parenthesis</term>)</reduce></td>
+<td><reduce>r(<nonterm>PRIMARY_EXPR</nonterm> &#8594; <term>left_parenthesis</term> <nonterm>PRIMARY_EXPR</nonterm> <term>right_parenthesis</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>57</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s36</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s62</shift></td>
+</tr>
+<tr><th>58</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s61</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>59</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s60</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>60</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s32</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s31</shift></td>
+<td><shift>s30</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s29</shift></td>
+<td><shift>s28</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s25</shift></td>
+<td><shift>s24</shift></td>
+<td><shift>s64</shift></td>
+<td><shift>s22</shift></td>
+<td><shift>s21</shift></td>
+<td><shift>s20</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s19</shift></td>
+</tr>
+<tr><th>61</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s32</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s31</shift></td>
+<td><shift>s30</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s29</shift></td>
+<td><shift>s28</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s25</shift></td>
+<td><shift>s24</shift></td>
+<td><shift>s63</shift></td>
+<td><shift>s22</shift></td>
+<td><shift>s21</shift></td>
+<td><shift>s20</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s19</shift></td>
+</tr>
+<tr><th>62</th>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>ASSIGN_EXP</nonterm> &#8594; <term>var_name</term> <term>equal</term> <nonterm>PRIMARY_EXPR</nonterm> <nonterm>BINARY_OP</nonterm> <nonterm>PRIMARY_EXPR</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>ASSIGN_EXP</nonterm> &#8594; <term>var_name</term> <term>equal</term> <nonterm>PRIMARY_EXPR</nonterm> <nonterm>BINARY_OP</nonterm> <nonterm>PRIMARY_EXPR</nonterm>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>63</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s66</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>64</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s65</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>65</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>WHILE_STATEMENT</nonterm> &#8594; <term>while</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>WHILE_STATEMENT</nonterm> &#8594; <term>while</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>WHILE_STATEMENT</nonterm> &#8594; <term>while</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>WHILE_STATEMENT</nonterm> &#8594; <term>while</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>WHILE_STATEMENT</nonterm> &#8594; <term>while</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>WHILE_STATEMENT</nonterm> &#8594; <term>while</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>WHILE_STATEMENT</nonterm> &#8594; <term>while</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>WHILE_STATEMENT</nonterm> &#8594; <term>while</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>WHILE_STATEMENT</nonterm> &#8594; <term>while</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>66</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s67</shift></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>67</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s68</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>68</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s34</shift></td>
+<td><shift>s33</shift></td>
+<td><shift>s32</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s31</shift></td>
+<td><shift>s30</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s29</shift></td>
+<td><shift>s28</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s25</shift></td>
+<td><shift>s24</shift></td>
+<td><shift>s69</shift></td>
+<td><shift>s22</shift></td>
+<td><shift>s21</shift></td>
+<td><shift>s20</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s19</shift></td>
+</tr>
+<tr><th>69</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><shift>s70</shift></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+<tr><th>70</th>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term> <term>else</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term> <term>else</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term> <term>else</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term> <term>else</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term> <term>else</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term> <term>else</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term> <term>else</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term> <term>else</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reduce>r(<nonterm>IF_STATEMENT</nonterm> &#8594; <term>if</term> <term>left_parenthesis</term> <nonterm>EXPRESSION</nonterm> <term>right_parenthesis</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term> <term>else</term> <term>left_curly_bracket</term> <nonterm>STATEMENT</nonterm> <term>right_curly_bracket</term>)</reduce></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+<td><reject>&nbsp;</reject></td>
+</tr>
+</tbody></table>
+It is LALR(1).<p>
+</p></td></tr></tbody></table>
+</p><hr>
+
+Return home to <a target="_top" href="http://smlweb.cpsc.ucalgary.ca/start.html">enter a new grammar</a>.
+
+
+
+</body></html>
