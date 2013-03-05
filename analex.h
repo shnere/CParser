@@ -564,7 +564,7 @@ int automataPuntuacion(automata *a , char c){
             }else{
                 if (isSemiColon == 1) {
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"semi_colon");
-                    lexema((*a).buffer, "semi_colon");
+                    //lexema((*a).buffer, "semi_colon");
                     
                     strcpy(inputLex[inputSizeLex],"semi_colon");
                     strcpy(inputRealLex[inputSizeLex],(*a).buffer);
@@ -697,42 +697,42 @@ int automataOperadoresAgrupacion(automata *a , char c) {
                 
                 if (eq((*a).buffer, "(")) {
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"left_parenthesis");
-                    lexema((*a).buffer, "left_parenthesis");
+                    //lexema((*a).buffer, "left_parenthesis");
                     
                     strcpy(inputLex[inputSizeLex],"left_parenthesis");
                     strcpy(inputRealLex[inputSizeLex], (*a).buffer);
                     
                 } else if (eq((*a).buffer, ")")){
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"right_parenthesis");
-                    lexema((*a).buffer, "right_parenthesis");
+                    //lexema((*a).buffer, "right_parenthesis");
                     
                     strcpy(inputLex[inputSizeLex],"right_parenthesis");
                     strcpy(inputRealLex[inputSizeLex], (*a).buffer);
                     
                 } else if (eq((*a).buffer, "{")){
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"left_curly_bracket");
-                    lexema((*a).buffer, "left_curly_bracket");
+                    //lexema((*a).buffer, "left_curly_bracket");
                     
                     strcpy(inputLex[inputSizeLex],"left_curly_bracket");
                     strcpy(inputRealLex[inputSizeLex], (*a).buffer);
                     
                 } else if (eq((*a).buffer, "}")){
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"right_curly_bracket");
-                    lexema((*a).buffer, "right_curly_bracket");
+                    //lexema((*a).buffer, "right_curly_bracket");
                     
                     strcpy(inputLex[inputSizeLex],"right_curly_bracket");
                     strcpy(inputRealLex[inputSizeLex], (*a).buffer);
                     
                 } else if (eq((*a).buffer, "[")){
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"left_bracket");
-                    lexema((*a).buffer, "left_bracket");
+                    //lexema((*a).buffer, "left_bracket");
                     
                     strcpy(inputLex[inputSizeLex],"left_bracket");
                     strcpy(inputRealLex[inputSizeLex], (*a).buffer);
                     
                 } else if (eq((*a).buffer, "]")){
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"right_bracket");
-                    lexema((*a).buffer, "right_bracket");
+                    //lexema((*a).buffer, "right_bracket");
                     
                     strcpy(inputLex[inputSizeLex],"right_bracket");
                     strcpy(inputRealLex[inputSizeLex], (*a).buffer);
@@ -740,7 +740,7 @@ int automataOperadoresAgrupacion(automata *a , char c) {
                 }
                 else{
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"Operador de Agrupacion");
-                    lexema((*a).buffer, "Operador de Agrupacion");
+                    //lexema((*a).buffer, "Operador de Agrupacion");
                     strcpy(inputLex[inputSizeLex],(*a).buffer);
                     strcpy(inputRealLex[inputSizeLex],(*a).buffer);
                 }

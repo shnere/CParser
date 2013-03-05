@@ -1,0 +1,63 @@
+"Start Symbol" = <PROGRAM>
+!var_type = 'void'|'int'|'float'|'char'
+!semi_colon = ';'
+!comma = ','
+{Id Head} = {Letter} + [_]
+{Id Tail} = {Id Head} + {Digit}
+var_name = {Id Head}{Id Tail}*
+!main = 'main'
+!left_parenthesis = '('
+!right_parenthesis = ')'
+!left_curly_bracket = '{'
+!right_curly_bracket = '}'
+!if = 'if'
+!else = 'else'
+!while =  'while'
+!return = 'return'
+!equal = '='
+boolean_op = '&&' | '||' 
+rel_op = '==' | '!=' | '<' | '>' | '<=' | '>='
+arith_op = '+' | '-' | '*' | '/' | '%'
+
+! Definicion de constantes
+DecLiteral = [123456789]{digit}*
+FloatLiteral = {Digit}*'.'{Digit}+
+{Char Ch}        = {Printable} - ['']
+CharLiteral = '' ( {Char Ch} | '\'{Printable} )''
+
+
+<PROGRAM> ::= <GLOBAL_DECLARATIONS>
+<GLOBAL_DECLARATIONS> ::= <MAIN_DEF>
+<DECLARATION> ::= <VAR_TYPE> <VAR_LIST> ';'
+<VAR_TYPE> ::= 'void'|'int'|'float'|'char'
+<VAR_LIST> ::= <VAR_LIST> ',' <VAR_ITEM>
+<VAR_LIST> ::= <VAR_ITEM>
+<VAR_ITEM> ::= var_name
+<MAIN_DEF> ::= 'int' 'main' '(' ')' '{' <FUNCTION_BODY> '}'
+<FUNCTION_BODY> ::= <INTERNAL_DECLARATIONS> <STATEMENT_LIST>
+<INTERNAL_DECLARATIONS> ::= <DECLARATION> <INTERNAL_DECLARATIONS>
+<INTERNAL_DECLARATIONS> ::= <>
+<STATEMENT_LIST> ::= <STATEMENT> <STATEMENT_LIST>
+<STATEMENT_LIST> ::= <>
+<STATEMENT> ::= <IF_STATEMENT>
+<STATEMENT> ::= <EXPRESSION> ';'
+<STATEMENT> ::= <WHILE_STATEMENT>
+<STATEMENT> ::= <RETURN_STATEMENT>
+<STATEMENT> ::= ';'
+<WHILE_STATEMENT> ::= 'while' '(' <EXPRESSION> ')' '{' <STATEMENT> '}'
+<IF_STATEMENT> ::= 'if' '(' <EXPRESSION> ')' '{' <STATEMENT> '}'
+<IF_STATEMENT> ::= 'if' '(' <EXPRESSION> ')' '{' <STATEMENT> '}' else '{' <STATEMENT> '}'
+<RETURN_STATEMENT> ::= return <EXPRESSION> ';'
+<RETURN_STATEMENT> ::= return ';'
+<EXPRESSION> ::= <ASSIGN_EXP>
+<ASSIGN_EXP> ::= var_name '=' <BINARY_EXP>
+<ASSIGN_EXP> ::= <BINARY_EXP>
+<BINARY_EXP> ::= <BINARY_EXP> <BINARY_OP> <PRIMARY_EXPR>
+<BINARY_EXP> ::= <PRIMARY_EXPR>
+<BINARY_OP> ::= boolean_op
+<BINARY_OP> ::= rel_op
+<BINARY_OP> ::= arith_op
+<PRIMARY_EXPR> ::= var_name
+<PRIMARY_EXPR> ::= <CONSTANT>
+<PRIMARY_EXPR> ::= '(' <PRIMARY_EXPR> ')'
+<CONSTANT> ::= DecLiteral | FloatLiteral | CharLiteral
