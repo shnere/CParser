@@ -1,10 +1,13 @@
-PROGRAM -> GLOBAL_DECLARATIONS.
-GLOBAL_DECLARATIONS -> MAIN_DEF.
-DECLARATION -> var_type VAR_LIST semi_colon.
+PROGRAM -> MAIN_DEF.
+DECLARATION -> VAR_TYPE VAR_LIST semi_colon.
+VAR_TYPE -> void.
+VAR_TYPE -> int.
+VAR_TYPE -> float.
+VAR_TYPE -> char.
 VAR_LIST -> VAR_LIST comma VAR_ITEM.
 VAR_LIST -> VAR_ITEM.
 VAR_ITEM -> var_name.
-MAIN_DEF -> var_type main left_parenthesis right_parenthesis left_curly_bracket FUNCTION_BODY right_curly_bracket.
+MAIN_DEF -> int main left_parenthesis right_parenthesis left_curly_bracket FUNCTION_BODY right_curly_bracket.
 FUNCTION_BODY -> INTERNAL_DECLARATIONS STATEMENT_LIST.
 INTERNAL_DECLARATIONS -> DECLARATION INTERNAL_DECLARATIONS.
 INTERNAL_DECLARATIONS -> .
@@ -29,5 +32,8 @@ BINARY_OP -> boolean_op.
 BINARY_OP -> rel_op.
 BINARY_OP -> arith_op.
 PRIMARY_EXPR -> var_name.
-PRIMARY_EXPR -> constant.
-PRIMARY_EXPR -> left_parenthesis PRIMARY_EXPR right_parenthesis.
+PRIMARY_EXPR -> CONSTANT.
+PRIMARY_EXPR -> left_parenthesis EXPRESSION right_parenthesis.
+CONSTANT -> DecLiteral.
+CONSTANT -> FloatLiteral.
+CONSTANT -> CharLiteral.
