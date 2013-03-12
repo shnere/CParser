@@ -351,7 +351,7 @@ int anasin(){
     
 	push(&pila, convierteAInt("$"));
 	push(&pila, convierteAInt("0"));
-	int i = 0, t, yapaso = 0;
+	int i = 0, t;
 	char *aux, *uno, *cero, *dos, *p;
 	// Para escribir menos
 	regla actual;
@@ -388,13 +388,13 @@ int anasin(){
 			if(gramatica[actual.valor ].derivaciones > 2){
                 dos		= gramatica[actual.valor - 1].cadenaDerivacion[2];
             }
-			fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
+			//fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
 			
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
 				
 				while ((p = convierteAString(pop(&pila))),uno) {
-					fprintf(stdout, "Pop:%s\n",p);
+					//fprintf(stdout, "Pop:%s\n",p);
 					if (eq(p,"$")) {
 						imprimeFormato(4, i, -1);
 						fprintf(stdout, "No encontre %s, salir.\n",uno);
