@@ -34,6 +34,6 @@ BINARY_OP -> arith_op.
 PRIMARY_EXPR -> var_name.
 PRIMARY_EXPR -> CONSTANT.
 PRIMARY_EXPR -> left_parenthesis EXPRESSION right_parenthesis.
-CONSTANT -> DecLiteral.
-CONSTANT -> FloatLiteral.
-CONSTANT -> CharLiteral.
+CONSTANT -> int_literal.
+CONSTANT -> float_literal.
+CONSTANT -> char_literal.
