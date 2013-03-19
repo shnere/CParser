@@ -11,7 +11,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define INT_DIGITS 19
+#define INT_DIGITS 40
 
 typedef struct node {
     int value;
@@ -25,7 +25,7 @@ typedef struct stack {
 
 
 
-void init(Stack *s) {
+void initStack(Stack *s) {
     s->first = 0;
 	s->size = 0;
 }
@@ -54,6 +54,9 @@ int push(Stack *s, int ele) {
 		s->first = nuevo;
 	}
 	s->size++;
+    if (s->size > 19) {
+        //fprintf(stdout, "VALGO MADRE: %d ",s->size);
+    }
 	return TRUE;
 }
 

@@ -30,11 +30,11 @@ char **inputLex;
 char **inputRealLex;
 
 // Arreglo de palabras reservadas (keywords)
-const char *keywords[6] = {"else","return","void","if","while","main"};
+const char *keywords[5] = {"else","return","if","while","main"};
 
 // Arreglo de tipos de datos
-const char *dataType[10] = {"char","int","float","double","short","long","unsigned",
-    "signed","enum","const"};
+const char *dataType[7] = {"int","float","double","short","long","unsigned",
+    "signed"};
 
 int isComment,isString,isComma,isSemiColon;
 
@@ -248,11 +248,11 @@ int automataNumerosReales(automata *a , char c) {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				return 0;
 			} else {
-                // Numero Real se convierte a "constant" (junto con numeros naturales y char)
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"constant");
-				lexema((*a).buffer, "constant");
+                // Numero Real se convierte a "float_literal"
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"float_literal");
+				lexema((*a).buffer, "float_literal");
                 
-                strcpy(inputLex[inputSizeLex],"constant");
+                strcpy(inputLex[inputSizeLex],"float_literal");
 				strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
@@ -308,11 +308,11 @@ int automataNumeros(automata *a , char c) {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				return 0;
 			} else if (c != '.'){
-                // Numero Natural se convierte a "constant" (junto con numeros reales y char)
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"constant");
-				lexema((*a).buffer, "constant");
+                // Numero Natural se convierte a "int_literal"
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"int_literal");
+				lexema((*a).buffer, "int_literal");
                 
-                strcpy(inputLex[inputSizeLex],"constant");
+                strcpy(inputLex[inputSizeLex],"int_literal");
 				strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
@@ -406,11 +406,28 @@ int automataIdentificadores(automata *a , char c) {
                 
 				} else if (isDataType((*a).buffer)) {
                     // Checa palabras especiales
-                    fprintf(stdout, "%s\t%s\n",(*a).buffer,"var_type");
-                    lexema((*a).buffer, "var_type");
                     
-                    strcpy(inputLex[inputSizeLex],"var_type");
-                    strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    if (eq((*a).buffer, "int")) {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"int");
+                        lexema((*a).buffer, "int");
+                        
+                        strcpy(inputLex[inputSizeLex],(*a).buffer);
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    }else if (eq((*a).buffer, "float")) {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"float");
+                        lexema((*a).buffer, "float");
+                        
+                        strcpy(inputLex[inputSizeLex],(*a).buffer);
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                        
+                    } else {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"var_type");
+                        lexema((*a).buffer, "var_type");
+                        
+                        strcpy(inputLex[inputSizeLex],"var_type");
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    }
+                    
 				} else {
                     // No es ni tipo de dato ni palabra reservada, entonces es un identificador
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"var_name");
@@ -915,6 +932,12 @@ int automataOperadoresComparacion(automata *a , char c) {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				fprintf(stdout, "%s\t%s\n",(*a).buffer,"rel_op");
 				lexema((*a).buffer, "rel_op");
+                
+                strcpy(inputLex[inputSizeLex],"rel_op");
+                strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+				
+				inputSizeLex++;
+                
 				return 1;
 			}
 			(*a).estado = -1;

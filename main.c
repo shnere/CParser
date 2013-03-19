@@ -31,6 +31,32 @@ void runAndClean(){
 
 int main (int argc, const char * argv[]) {
 	
+    Stack hola;
+    initStack(&hola);
+    int i;
+    for (i=0; i<53; i++) {
+        push(&hola, i);
+        
+        if(i%3 == 0){
+            pop(&hola);
+        }
+        
+        char ret[BUFSIZ];
+        
+        memset(ret, '\0', BUFSIZ);
+        int pilaprint[BUFSIZ];
+        int k;
+
+        despliega(&hola, pilaprint);
+        
+        for (k=0; k<hola.size; k++) {
+            strcat(ret,itoa(pilaprint[k]));
+            strcat(ret," ");
+        } 
+        fprintf(stdout,"Pila: %s\n", ret);
+        fprintf(stdout,"Size: %d\n\n", hola.size);
+    }
+    
     if (argc != 2) {
 		fprintf(stderr, "Forma de uso: %s origen\n",argv[0]);
 		return -1;
@@ -85,6 +111,7 @@ int main (int argc, const char * argv[]) {
 	fprintf(stdout, "\n\n-----Ejectuando Analizador Lexico-----\n\n");
 	
     inicializaTemp();
+    initStack(&pila);
     
 	char c;
     

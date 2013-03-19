@@ -1,9 +1,7 @@
 PROGRAM -> MAIN_DEF.
 DECLARATION -> VAR_TYPE VAR_LIST semi_colon.
-VAR_TYPE -> void.
 VAR_TYPE -> int.
 VAR_TYPE -> float.
-VAR_TYPE -> char.
 VAR_LIST -> VAR_LIST comma VAR_ITEM.
 VAR_LIST -> VAR_ITEM.
 VAR_ITEM -> var_name.
@@ -34,6 +32,5 @@ BINARY_OP -> arith_op.
 PRIMARY_EXPR -> var_name.
 PRIMARY_EXPR -> CONSTANT.
 PRIMARY_EXPR -> left_parenthesis EXPRESSION right_parenthesis.
-CONSTANT -> DecLiteral.
-CONSTANT -> FloatLiteral.
-CONSTANT -> CharLiteral.
+CONSTANT -> int_literal.
+CONSTANT -> float_literal.

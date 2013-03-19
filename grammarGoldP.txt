@@ -20,15 +20,15 @@ rel_op = '==' | '!=' | '<' | '>' | '<=' | '>='
 arith_op = '+' | '-' | '*' | '/' | '%'
 
 ! Definicion de constantes
-DecLiteral = [0123456789]{digit}*
-FloatLiteral = {Digit}*'.'{Digit}+
-{Char Ch}        = {Printable} - ['']
-CharLiteral = '' ( {Char Ch} | '\'{Printable} )''
+int_literal = [0123456789]{digit}*
+float_literal = {Digit}*'.'{Digit}+
+!{Char Ch}        = {Printable} - ['']
+!CharLiteral = '' ( {Char Ch} | '\'{Printable} )''
 
 
 <PROGRAM> ::= <MAIN_DEF>
 <DECLARATION> ::= <VAR_TYPE> <VAR_LIST> ';'
-<VAR_TYPE> ::= 'void'|'int'|'float'|'char'
+<VAR_TYPE> ::= 'int'|'float'
 <VAR_LIST> ::= <VAR_LIST> ',' <VAR_ITEM>
 <VAR_LIST> ::= <VAR_ITEM>
 <VAR_ITEM> ::= var_name
@@ -59,4 +59,4 @@ CharLiteral = '' ( {Char Ch} | '\'{Printable} )''
 <PRIMARY_EXPR> ::= var_name
 <PRIMARY_EXPR> ::= <CONSTANT>
 <PRIMARY_EXPR> ::= '(' <EXPRESSION> ')'
-<CONSTANT> ::= DecLiteral | FloatLiteral | CharLiteral
+<CONSTANT> ::= int_literal | float_literal

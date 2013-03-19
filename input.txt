@@ -1,6 +1,9 @@
-int main () { float a; if(a = 1){a=2;}}
+int main(){ int hola,adios; float mi_fl; if(2.1 > 1 && 3 == 3){mi_fl = mi_fl + 1;}}
 
-int main(){ int hola,adios; float mi_fl = 3.2; char mi_char = 'c'; if(2.1 > 1 && 3 == 3){mi_fl = mi_fl + 1;}}
+int main () { float a;}
+int main () { float a; if(a == 1){a=2;}}
+
+
 
 
 int main(){
