@@ -99,9 +99,8 @@ void despliega(Stack *s, int *pila) {
 	}
 }
 
-/*int i;
 char *itoa(i)
-
+int i;
 {
 	// Room for INT_DIGITS digits, - and '\0' //
 	static char buf[INT_DIGITS + 2];
@@ -121,4 +120,4 @@ char *itoa(i)
 		*--p = '-';
 	}
 	return p;
-}*/
+}

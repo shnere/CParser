@@ -30,10 +30,9 @@ void runAndClean(){
 }
 
 int main (int argc, const char * argv[]) {
-	
-    Stack hola;
+	int i;
+    /*Stack hola;
     initStack(&hola);
-    int i;
     for (i=0; i<53; i++) {
         push(&hola, i);
         
@@ -55,7 +54,7 @@ int main (int argc, const char * argv[]) {
         } 
         fprintf(stdout,"Pila: %s\n", ret);
         fprintf(stdout,"Size: %d\n\n", hola.size);
-    }
+    }*/
     
     if (argc != 2) {
 		fprintf(stderr, "Forma de uso: %s origen\n",argv[0]);
@@ -64,11 +63,6 @@ int main (int argc, const char * argv[]) {
 	
 	if((fuente=fopen(argv[1],"r")) == NULL){
 		fprintf(stderr, "Error al abrir el archivo: %s",argv[1]);
-		return -1;
-	}
-	
-	if((tablaReglasFuente=fopen("TABLA_SLR.txt","r")) == NULL){
-		fprintf(stderr, "Error al abrir el archivo TABLA_SLR.txt");
 		return -1;
 	}
 	
@@ -109,13 +103,19 @@ int main (int argc, const char * argv[]) {
 	//scanf("%d",&eleccion);
     
 	fprintf(stdout, "\n\n-----Ejectuando Analizador Lexico-----\n\n");
-	
-    inicializaTemp();
+	// Inicializa Valores
+    inicializaGramatica();
+    // Inicializa Pila
     initStack(&pila);
     
 	char c;
     
 	while ((c = getc(fuente)) != EOF) {
+        
+        if (c == '\n' || c == '\t') {
+            continue;
+        }
+        
 		// Si el automata regresa 1 es que llega a estado terminal
 		
 		if (automatas[0].funcion(&automatas[0],c) == 1) {
@@ -166,38 +166,36 @@ int main (int argc, const char * argv[]) {
 			reset(automatas);
 			continue;
 		}
-		
-		if (c == '\n') {
-			strcpy(inputLex[inputSizeLex],"$");
-			strcpy(inputRealLex[inputSizeLex],"$");
-			inputSizeLex++;
-			// Igualas los datos del analex con los del anasin
-			inputSize = inputSizeLex;
-			int i;
-			for (i=0; i<inputSizeLex; i++) {
-				input[i] = inputLex[i];
-				inputReal[i] = inputRealLex[i];
-			}
-            
-			// Correr anasin
-			//runAndClean();
-			fprintf(stdout, "\n-----Ejectuando Analizador Sintactico-----\n\n");
-			anasin();
-			fprintf(stdout, "\n");
-			reset(automatas);
-			clearInput();
-			clear(&pila);
-			inputSize = inputSizeLex = 0;
-			// Si hay error salir
-			if (errorSintactico == 1) {
-                clear(&pila);
-				return EXIT_SUCCESS;
-			}
-		}
+			
 	}
+    
+    strcpy(inputLex[inputSizeLex],"$");
+    strcpy(inputRealLex[inputSizeLex],"$");
+    inputSizeLex++;
+    // Igualas los datos del analex con los del anasin
+    inputSize = inputSizeLex;
+    
+    for (i=0; i<inputSizeLex; i++) {
+        input[i] = inputLex[i];
+        inputReal[i] = inputRealLex[i];
+    }
+    
+    // Correr anasin
+    fprintf(stdout, "\n-----Ejectuando Analizador Sintactico-----\n\n");
+    anasin();
+    fprintf(stdout, "\n");
+    reset(automatas);
+    clearInput();
+    clear(&pila);
+    inputSize = inputSizeLex = 0;
+    // Si hay error salir
+    if (errorSintactico == 1) {
+        clear(&pila);
+        return EXIT_SUCCESS;
+    }
+
 	
 	fclose(fuente);
-	fclose(tablaReglasFuente);
 	
     return 0;
 }

@@ -41,7 +41,7 @@ typedef struct regla {
 typedef struct derivacion {
 	// Contiene la cadena de derivacion (arreglo de strings)
 	char *cadenaDerivacion[20];
-	//cantidad de derivaciones
+	//cantidad de derivacionesº
 	int derivaciones;
 }derivacion;
 
@@ -56,14 +56,14 @@ typedef struct siguiente {
 	int cuantos;
 }siguiente;
 
-char* itoa(int i){
+/*char* itoa(int i){
     int n = snprintf(NULL, 0, "%d", i) + 1;
     char *s = (char *)malloc(n);
     
     if (s != NULL)
         snprintf(s, n, "%d", i);
     return s;
-}
+}*/
 
 FILE * tablaReglasFuente;
 // Globales de cantidades
@@ -72,9 +72,8 @@ int terminales;
 int estados;
 int derivacionesGramatica; // Cuantas derivaciones en la gramatica
 // Arreglo con valores de terminales y no terminales en string
-char *arregloTerminales[34];
-char *arregloNoTerminales[27];
-int arregloEstados[30];
+char *arregloTerminales[20];
+char *arregloNoTerminales[19];
 char buf[BUFSIZ];
 extern char escritura[BUFSIZ];
 char *input[BUFSIZ]; // La traduccion, si es un no terminal o un terminal, por ejemplo VAR_TYPE
@@ -161,7 +160,7 @@ int convierteAInt(char *str){
 			return 300 + i;
 		}
 	}
-	
+    
 	return 100 + atoi(str);
 }
 
@@ -469,7 +468,7 @@ void clearInput(){
  * @param void
  * @return void
  **/
-void inicializaTemp(){
+void inicializaGramatica(){
 	// Inicializa cantidades
 	noTerminales = 19;
 	terminales	 = 21;
