@@ -11,7 +11,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define INT_DIGITS 40
+#define INT_DIGITS 600
 
 typedef struct node {
     int value;

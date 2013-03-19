@@ -1010,7 +1010,7 @@ int automataOperadoresLogicos(automata *a , char c) {
 				fprintf(stdout, "%s\t%s\n",(*a).buffer,"boolean_op");
 				lexema((*a).buffer, "boolean_op");
                 
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
+                strcpy(inputLex[inputSizeLex],"boolean_op");
                 strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
@@ -1026,7 +1026,7 @@ int automataOperadoresLogicos(automata *a , char c) {
 				fprintf(stdout, "%s\t%s\n",(*a).buffer,"boolean_op");
 				lexema((*a).buffer, "boolean_op");
 
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
+                strcpy(inputLex[inputSizeLex],"boolean_op");
                 strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
