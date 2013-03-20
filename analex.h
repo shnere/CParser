@@ -18,7 +18,7 @@
 #define cuantosAutomatas 11
 #define eq(str1, str2) (strcmp(str1, str2) == 0)
 
-int inputSizeLex = 0;
+int inputSizeLex = 0, cuantosTokensLex = 0;
 
 // Declaracion de variables globales
 int fdLexemas;
@@ -28,6 +28,8 @@ char escritura[BUFSIZ];
 
 char **inputLex;
 char **inputRealLex;
+// Arreglo temporal de tokens
+char **tokenTempLex;
 
 // Arreglo de palabras reservadas (keywords)
 const char *keywords[5] = {"else","return","if","while","main"};
@@ -73,9 +75,11 @@ void resetInp(){
 	int i;
 	inputRealLex = (char **)malloc(sizeof(char)*1024);
 	inputLex = (char **)malloc(sizeof(char)*1024);
+    tokenTempLex = (char **)malloc(sizeof(char)*1024);
     for(i = 0; i < 1024; i++){
         inputRealLex[i] = (char *)malloc(BUFSIZ);
 		inputLex[i] = (char *)malloc(BUFSIZ);
+        tokenTempLex[i] = (char *)malloc(BUFSIZ);
     }
 }
 
@@ -175,6 +179,21 @@ void tabla(char *l){
     write(fdTabla, escritura, BUFSIZ);
 }
 
+/**
+ * Revisa si el nombre de token dado existe: 1 si, 0 no
+ *
+ * @param char*
+ * @return int
+ **/
+int existeToken(char *token){
+    int i;
+    for (i = 0; i < cuantosTokensLex; i++) {
+        if (eq(token,tokenTempLex[i])) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 /****************************************************
  *													*
@@ -426,6 +445,7 @@ int automataIdentificadores(automata *a , char c) {
                         
                         strcpy(inputLex[inputSizeLex],"var_type");
                         strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                        
                     }
                     
 				} else {
@@ -435,6 +455,14 @@ int automataIdentificadores(automata *a , char c) {
                 
                     strcpy(inputLex[inputSizeLex],"var_name");
                     strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    
+                    // Agregar a tokens
+                    if (!existeToken((*a).buffer)) {
+                        // Agrega
+                        strcpy(tokenTempLex[cuantosTokensLex],(*a).buffer);
+                        cuantosTokensLex++;
+                    }
+                    
 				}
 				tabla((*a).buffer);
                 

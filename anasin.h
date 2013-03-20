@@ -56,14 +56,17 @@ typedef struct siguiente {
 	int cuantos;
 }siguiente;
 
-/*char* itoa(int i){
-    int n = snprintf(NULL, 0, "%d", i) + 1;
-    char *s = (char *)malloc(n);
-    
-    if (s != NULL)
-        snprintf(s, n, "%d", i);
-    return s;
-}*/
+/* Estructura token del MC, contiene un token de la tabla
+ * nombre = nombre del token (variable)
+ * tipo   = tipo de variable (float o int)
+ * valor  = contenido de la variable
+ **/
+typedef struct token {
+	char *nombre[20];
+    char *tipo[20];
+    char *valor[20];
+}token;
+
 
 FILE * tablaReglasFuente;
 // Globales de cantidades
@@ -78,15 +81,21 @@ char buf[BUFSIZ];
 extern char escritura[BUFSIZ];
 char *input[BUFSIZ]; // La traduccion, si es un no terminal o un terminal, por ejemplo VAR_TYPE
 char *inputReal[BUFSIZ]; // El buffer tal cual (los valores)
+// Arreglo temporal de tokens
+char *tokenTemp[BUFSIZ];
+// Variables inputSize y cuantosTokens compartidas con anasin
 int inputSize;
+int cuantosTokens; // Cantidad de tokens para la tabla de simbolos (float e int) en este caso
+
 int errorSintactico = 0;
 // Tabla de analisis SLR1
 regla **tablaR;
 derivacion *gramatica;
 siguiente *siguientes;
+token *tokens;
 Stack pila;
-int fdOutput,eleccion;
 
+int fdOutput,eleccion;
 
 /**
  * Checa si el terminal dado existe.
@@ -309,37 +318,37 @@ void imprimeFormato(int tipo,int i,int valor){
 	switch (tipo) {
 			// Header
 		case 0:
-			fprintf(stdout, "%s\t%-45s\tACCION\n","PILA","ENTRADA");
+			fprintf(stdout, "\t%s\t%-60s\n","","PASOS DE LA PILA");
 			break;
 			// Derivacion normal D#
 		case 1:
-			fprintf(stdout,"%s\t%-45s\t", imprimePila(ret), imprimeInputReal(ret1,i));
+			fprintf(stdout,"PILA:\t%s\nENTRADA:%s\n", imprimePila(ret), imprimeInputReal(ret1,i));
 			// Tipo de accion
-			fprintf(stdout, "D%d",valor);
+			fprintf(stdout, "ACCION:\tD%d",valor);
 			fprintf(stdout, "\n");
 			break;
 			// Reduccion R#
 		case 2:
-			fprintf(stdout,"%s\t%-45s\t", imprimePila(ret), imprimeInputReal(ret1,i));
+			fprintf(stdout,"PILA:\t%s\nENTRADA:%s\n", imprimePila(ret), imprimeInputReal(ret1,i));
 			// Tipo de accion
-			fprintf(stdout, "R%d: ",valor+1);
+			fprintf(stdout, "ACCION: R%d: ",valor+1);
 			imprimeGramatica(valor);
 			fprintf(stdout, "\n");
 			break;
 			// Acepta
 		case 3:
-			fprintf(stdout, "%s\t%-45s\tCadena Aceptada\n", imprimePila(ret), imprimeInput(ret1,i));
+			fprintf(stdout, "PILA:\t%s\nENTRADA:%s\nCadena Aceptada\n", imprimePila(ret), imprimeInput(ret1,i));
 			break;
 			// Error Sintactico
 		case 4:
-			fprintf(stdout, "%s\t%-45s\tError Sintactico.", imprimePila(ret), imprimeInputReal(ret1,i));
+			fprintf(stdout, "PILA:\t%s\nENTRADA:%s\nError Sintactico.", imprimePila(ret), imprimeInputReal(ret1,i));
 			fprintf(stdout, "\n");
 			errorSintactico = 1;
 			break;
 		default:
 			break;
 	}
-    fprintf(stdout,"Size: %d\n\n", pila.size);
+    fprintf(stdout,"\n\n");
 	
 }
 
@@ -354,7 +363,7 @@ int anasin(){
 	push(&pila, convierteAInt("$"));
 	push(&pila, convierteAInt("0"));
 	int i = 0, t;
-	char *aux, *uno, *cero, *dos, *tres, *p;
+	char *aux, *uno, *cero, *dos, *p;
 	// Para escribir menos
 	regla actual;
 	
@@ -364,11 +373,11 @@ int anasin(){
 	while (1) {
 		// Toma primer elemento
 		aux = convierteAString(top(&pila));
-        fprintf(stdout, "(%d,%s) Tabla: %d", atoi(aux),input[i],tablaR[atoi(aux)][convierteAMat(input[i])].tipo);
+        //fprintf(stdout, "(%d,%s) Tabla: %d", atoi(aux),input[i],tablaR[atoi(aux)][convierteAMat(input[i])].tipo);
 		// Guardas lo que hay en la tabla en una variable
 		actual = tablaR[atoi(aux)][convierteAMat(input[i])];
-        fprintf(stdout, "\ninput[i]:%s   Mat:%i",input[i],convierteAMat(input[i]));
-		fprintf(stdout, "\nactual valor:%i\n\n",actual.valor);
+        //fprintf(stdout, "\ninput[i]:%s   Mat:%i",input[i],convierteAMat(input[i]));
+		//fprintf(stdout, "\nactual valor:%i\n\n",actual.valor);
 		// Si es D#
 		if (actual.tipo == ACEPTA) {
 			imprimeFormato(3, i, -1);
@@ -382,11 +391,12 @@ int anasin(){
 			// Mete el valor de D
 			push(&pila, convierteAInt(itoa(actual.valor)));
 			//fprintf(stdout, "\nAcastoy, Meto %s %d\n",input[i],actual.valor);
-			// Incrementa Valor
-            char ret[BUFSIZ];
-            fprintf(stdout, "DESPLAZA\n");
-            fprintf(stdout,"%s\t\n\n", imprimePila(ret));
-			i++;
+            //char ret[BUFSIZ];
+            //fprintf(stdout, "DESPLAZA\n");
+            //fprintf(stdout,"%s\t\n\n", imprimePila(ret));
+			
+            // Incrementa Valor
+            i++;
 		} else if (actual.tipo == R) {
 			// Pop hasta encontrar en pila el primer valor de derivacion
 			cero	= gramatica[actual.valor].cadenaDerivacion[0];
@@ -394,7 +404,7 @@ int anasin(){
 			if(gramatica[actual.valor ].derivaciones > 2){
                 dos		= gramatica[actual.valor].cadenaDerivacion[2];
             }
-			fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
+			//fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
 			
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
@@ -427,9 +437,10 @@ int anasin(){
 			// Agrega el derivado a la pila
 			push(&pila,		convierteAInt(cero));
 			push(&pila,		convierteAInt(itoa(tablaR[atoi(convierteAString(t))][convierteAMat(cero)].valor)));
-            char ret[BUFSIZ];
+            
+            /*char ret[BUFSIZ];
             fprintf(stdout, "METELO\n");
-            fprintf(stdout,"%s\t\n\n", imprimePila(ret));
+            fprintf(stdout,"%s\t\n\n", imprimePila(ret));*/
 
 		} else if (actual.tipo == ERR) {
 			imprimeFormato(4, i, -1);
@@ -542,6 +553,11 @@ void inicializaGramatica(){
 	// Arreglo gramatica
 	gramatica = (derivacion *)malloc(sizeof(derivacion)*derivacionesGramatica);
 	
+    // Arreglo tokens de 100 (default)
+    tokens = (token *)malloc(sizeof(token)*cuantosTokens);
+    
+    fprintf(stdout, "CuantosTokens: %i",cuantosTokens);
+    
     // PROGRAM -> MAIN_DEF
     gramatica[0].cadenaDerivacion[0] = "PROGRAM";
     gramatica[0].cadenaDerivacion[1] = "MAIN_DEF";

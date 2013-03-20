@@ -54,9 +54,6 @@ int push(Stack *s, int ele) {
 		s->first = nuevo;
 	}
 	s->size++;
-    if (s->size > 19) {
-        //fprintf(stdout, "VALGO MADRE: %d ",s->size);
-    }
 	return TRUE;
 }
 

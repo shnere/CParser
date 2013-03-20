@@ -103,10 +103,6 @@ int main (int argc, const char * argv[]) {
 	//scanf("%d",&eleccion);
     
 	fprintf(stdout, "\n\n-----Ejectuando Analizador Lexico-----\n\n");
-	// Inicializa Valores
-    inicializaGramatica();
-    // Inicializa Pila
-    initStack(&pila);
     
 	char c;
     
@@ -174,11 +170,23 @@ int main (int argc, const char * argv[]) {
     inputSizeLex++;
     // Igualas los datos del analex con los del anasin
     inputSize = inputSizeLex;
+    cuantosTokens = cuantosTokensLex;
     
     for (i=0; i<inputSizeLex; i++) {
         input[i] = inputLex[i];
         inputReal[i] = inputRealLex[i];
     }
+    
+    fprintf(stdout, "ARRE con los TOKENS:\n");
+    for (i=0; i<cuantosTokensLex; i++) {
+        tokenTemp[i] = tokenTempLex[i];
+        fprintf(stdout, "%i:%s\n",i,tokenTemp[i]);
+    }
+    
+    // Inicializa Valores
+    inicializaGramatica();
+    // Inicializa Pila
+    initStack(&pila);
     
     // Correr anasin
     fprintf(stdout, "\n-----Ejectuando Analizador Sintactico-----\n\n");
