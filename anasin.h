@@ -41,7 +41,7 @@ typedef struct regla {
 typedef struct derivacion {
 	// Contiene la cadena de derivacion (arreglo de strings)
 	char *cadenaDerivacion[20];
-	//cantidad de derivacionesº
+	//cantidad de derivaciones
 	int derivaciones;
 }derivacion;
 
@@ -543,7 +543,7 @@ void inicializaGramatica(){
 	
 	// Definir el tamaño de la matriz (tabla)
 	tablaR = (regla**)malloc(sizeof(regla)*estados);
-	int row;
+	int row,i;
 	for (row=0; row<estados; row++) {
 		tablaR[row] = (regla*)malloc(sizeof(regla) * (terminales + noTerminales + 1));
 	}
@@ -556,7 +556,12 @@ void inicializaGramatica(){
     // Arreglo tokens de 100 (default)
     tokens = (token *)malloc(sizeof(token)*cuantosTokens);
     
-    fprintf(stdout, "CuantosTokens: %i",cuantosTokens);
+    // Pasa los valores del token temporal a la estructura
+    for (i = 0; i<cuantosTokens; i++) {
+        strcpy((char *) tokens[i].nombre, tokenTemp[i]);
+    }
+    
+    fprintf(stdout, "CuantosTokens: %i\n",cuantosTokens);
     
     // PROGRAM -> MAIN_DEF
     gramatica[0].cadenaDerivacion[0] = "PROGRAM";
