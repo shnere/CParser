@@ -36,3 +36,20 @@ public:
   std::string name;
   NodeIdentifier(const std::string& name) : name(name) {}
 };
+
+// Binarios chiquito
+class NodeBinaryOperator : public NodeExpression {
+public:
+  int binary_operator;
+  NodeExpression& left_binary_expresion;
+  NodeExpression& right_primary_expression;
+
+  NodeBinaryOperator(
+    NodeExpression& left_binary_expresion,
+    int binary_operator,
+    NodeExpression& right_primary_expression
+  ) : 
+  left_binary_expresion(left_binary_expresion), 
+  right_primary_expression(right_primary_expression),
+  binary_operator(binary_operator) {}
+};
