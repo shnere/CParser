@@ -381,7 +381,7 @@ void imprimeFormato(int tipo,int i,int valor){
 		default:
 			break;
 	}
-    fprintf(stdout,"\n\n");
+    fprintf(stdout,"\n");
 	
 }
 
@@ -395,7 +395,7 @@ int anasin(){
     initStack(&pila);
 	push(&pila, convierteAInt("$"));
 	push(&pila, convierteAInt("0"));
-	int i = 0, t;
+	int i = 0, t, localidad;
 	char *aux, *uno, *cero, *dos, *p, *auxVarType;
 	// Para escribir menos
 	regla actual;
@@ -419,6 +419,7 @@ int anasin(){
 		} else if (actual.tipo == D) {
 			// Imprime
 			imprimeFormato(1, i, actual.valor);
+			
 			// Mete el de accion
 			push(&pila, convierteAInt(input[i]));
 			// Mete el valor de D
@@ -446,16 +447,28 @@ int anasin(){
 			}else if(actual.valor == 6){
 				// Reducciones a el nombre de la variable
 				fprintf(stdout, "%s\n", "\nHago reduccion a VAR_ITEM\n\n ");
+				
 				if(!eq(auxVarType,"")){
 					// El valor top de la pila checarlo con inputReal
-					int localidad = getTokenIndex(inputReal[i-1]);
+					localidad = getTokenIndex(inputReal[i-1]);
 					
 					// Guardar valor 
 					strcpy((char *) tokens[localidad].tipo, auxVarType);
 					
+				} else if(actual.valor == 1){
 					// Poner vartype en 0
 					auxVarType = "";
 				}
+			}
+			
+			// Reducciones a int_literal y float_literal para sacar los respectivos valores
+			// i = ; i-1 = valor i-2 = '=' i-3 = tipo
+			if(actual.valor == 34 || actual.valor == 35){
+				//fprintf(stdout, "%s\n", "\nHago reduccion a LITERAL\n\n ");
+				localidad = getTokenIndex(inputReal[i-3]);
+				
+				// Guardar valor 
+				strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
 			}
             
 			// Si la derivacion no es a epsilon se hace pop

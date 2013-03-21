@@ -1,7 +1,12 @@
 int main(){
-	int a;
-	float b;
+	int a,lol;
+	float b,bz;
 	a = 20;
 	b = 2.1;
+	lol = 500;
+	bz = 2.32111231233;
+	if(a==2){
+		a = b;
+	}
     return;
 }
