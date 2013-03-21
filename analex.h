@@ -18,7 +18,7 @@
 #define cuantosAutomatas 11
 #define eq(str1, str2) (strcmp(str1, str2) == 0)
 
-int inputSizeLex = 0;
+int inputSizeLex = 0, cuantosTokensLex = 0;
 
 // Declaracion de variables globales
 int fdLexemas;
@@ -28,13 +28,15 @@ char escritura[BUFSIZ];
 
 char **inputLex;
 char **inputRealLex;
+// Arreglo temporal de tokens
+char **tokenTempLex;
 
 // Arreglo de palabras reservadas (keywords)
-const char *keywords[6] = {"else","return","void","if","while","main"};
+const char *keywords[5] = {"else","return","if","while","main"};
 
 // Arreglo de tipos de datos
-const char *dataType[10] = {"char","int","float","double","short","long","unsigned",
-    "signed","enum","const"};
+const char *dataType[7] = {"int","float","double","short","long","unsigned",
+    "signed"};
 
 int isComment,isString,isComma,isSemiColon;
 
@@ -73,9 +75,11 @@ void resetInp(){
 	int i;
 	inputRealLex = (char **)malloc(sizeof(char)*1024);
 	inputLex = (char **)malloc(sizeof(char)*1024);
+    tokenTempLex = (char **)malloc(sizeof(char)*1024);
     for(i = 0; i < 1024; i++){
         inputRealLex[i] = (char *)malloc(BUFSIZ);
 		inputLex[i] = (char *)malloc(BUFSIZ);
+        tokenTempLex[i] = (char *)malloc(BUFSIZ);
     }
 }
 
@@ -175,6 +179,21 @@ void tabla(char *l){
     write(fdTabla, escritura, BUFSIZ);
 }
 
+/**
+ * Revisa si el nombre de token dado existe: 1 si, 0 no
+ *
+ * @param char*
+ * @return int
+ **/
+int existeToken(char *token){
+    int i;
+    for (i = 0; i < cuantosTokensLex; i++) {
+        if (eq(token,tokenTempLex[i])) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 /****************************************************
  *													*
@@ -248,11 +267,11 @@ int automataNumerosReales(automata *a , char c) {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				return 0;
 			} else {
-                // Numero Real se convierte a "constant" (junto con numeros naturales y char)
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"constant");
-				lexema((*a).buffer, "constant");
+                // Numero Real se convierte a "float_literal"
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"float_literal");
+				lexema((*a).buffer, "float_literal");
                 
-                strcpy(inputLex[inputSizeLex],"constant");
+                strcpy(inputLex[inputSizeLex],"float_literal");
 				strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
@@ -308,11 +327,11 @@ int automataNumeros(automata *a , char c) {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				return 0;
 			} else if (c != '.'){
-                // Numero Natural se convierte a "constant" (junto con numeros reales y char)
-				fprintf(stdout, "%s\t%s\n",(*a).buffer,"constant");
-				lexema((*a).buffer, "constant");
+                // Numero Natural se convierte a "int_literal"
+				fprintf(stdout, "%s\t%s\n",(*a).buffer,"int_literal");
+				lexema((*a).buffer, "int_literal");
                 
-                strcpy(inputLex[inputSizeLex],"constant");
+                strcpy(inputLex[inputSizeLex],"int_literal");
 				strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
@@ -406,11 +425,29 @@ int automataIdentificadores(automata *a , char c) {
                 
 				} else if (isDataType((*a).buffer)) {
                     // Checa palabras especiales
-                    fprintf(stdout, "%s\t%s\n",(*a).buffer,"var_type");
-                    lexema((*a).buffer, "var_type");
                     
-                    strcpy(inputLex[inputSizeLex],"var_type");
-                    strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    if (eq((*a).buffer, "int")) {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"int");
+                        lexema((*a).buffer, "int");
+                        
+                        strcpy(inputLex[inputSizeLex],(*a).buffer);
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    }else if (eq((*a).buffer, "float")) {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"float");
+                        lexema((*a).buffer, "float");
+                        
+                        strcpy(inputLex[inputSizeLex],(*a).buffer);
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                        
+                    } else {
+                        fprintf(stdout, "%s\t%s\n",(*a).buffer,"var_type");
+                        lexema((*a).buffer, "var_type");
+                        
+                        strcpy(inputLex[inputSizeLex],"var_type");
+                        strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                        
+                    }
+                    
 				} else {
                     // No es ni tipo de dato ni palabra reservada, entonces es un identificador
                     fprintf(stdout, "%s\t%s\n",(*a).buffer,"var_name");
@@ -418,6 +455,14 @@ int automataIdentificadores(automata *a , char c) {
                 
                     strcpy(inputLex[inputSizeLex],"var_name");
                     strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+                    
+                    // Agregar a tokens
+                    if (!existeToken((*a).buffer)) {
+                        // Agrega
+                        strcpy(tokenTempLex[cuantosTokensLex],(*a).buffer);
+                        cuantosTokensLex++;
+                    }
+                    
 				}
 				tabla((*a).buffer);
                 
@@ -915,6 +960,12 @@ int automataOperadoresComparacion(automata *a , char c) {
 				sprintf((*a).buffer+getLastIndex((*a).buffer), "%c", c);
 				fprintf(stdout, "%s\t%s\n",(*a).buffer,"rel_op");
 				lexema((*a).buffer, "rel_op");
+                
+                strcpy(inputLex[inputSizeLex],"rel_op");
+                strcpy(inputRealLex[inputSizeLex],(*a).buffer);
+				
+				inputSizeLex++;
+                
 				return 1;
 			}
 			(*a).estado = -1;
@@ -987,7 +1038,7 @@ int automataOperadoresLogicos(automata *a , char c) {
 				fprintf(stdout, "%s\t%s\n",(*a).buffer,"boolean_op");
 				lexema((*a).buffer, "boolean_op");
                 
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
+                strcpy(inputLex[inputSizeLex],"boolean_op");
                 strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;
@@ -1003,7 +1054,7 @@ int automataOperadoresLogicos(automata *a , char c) {
 				fprintf(stdout, "%s\t%s\n",(*a).buffer,"boolean_op");
 				lexema((*a).buffer, "boolean_op");
 
-                strcpy(inputLex[inputSizeLex],(*a).buffer);
+                strcpy(inputLex[inputSizeLex],"boolean_op");
                 strcpy(inputRealLex[inputSizeLex],(*a).buffer);
 				
 				inputSizeLex++;

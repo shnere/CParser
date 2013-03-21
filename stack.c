@@ -11,7 +11,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define INT_DIGITS 19
+#define INT_DIGITS 600
 
 typedef struct node {
     int value;
@@ -25,7 +25,7 @@ typedef struct stack {
 
 
 
-void init(Stack *s) {
+void initStack(Stack *s) {
     s->first = 0;
 	s->size = 0;
 }
@@ -96,9 +96,8 @@ void despliega(Stack *s, int *pila) {
 	}
 }
 
-/*int i;
 char *itoa(i)
-
+int i;
 {
 	// Room for INT_DIGITS digits, - and '\0' //
 	static char buf[INT_DIGITS + 2];
@@ -118,4 +117,4 @@ char *itoa(i)
 		*--p = '-';
 	}
 	return p;
-}*/
+}

@@ -30,7 +30,32 @@ void runAndClean(){
 }
 
 int main (int argc, const char * argv[]) {
-	
+	int i;
+    /*Stack hola;
+    initStack(&hola);
+    for (i=0; i<53; i++) {
+        push(&hola, i);
+        
+        if(i%3 == 0){
+            pop(&hola);
+        }
+        
+        char ret[BUFSIZ];
+        
+        memset(ret, '\0', BUFSIZ);
+        int pilaprint[BUFSIZ];
+        int k;
+
+        despliega(&hola, pilaprint);
+        
+        for (k=0; k<hola.size; k++) {
+            strcat(ret,itoa(pilaprint[k]));
+            strcat(ret," ");
+        } 
+        fprintf(stdout,"Pila: %s\n", ret);
+        fprintf(stdout,"Size: %d\n\n", hola.size);
+    }*/
+    
     if (argc != 2) {
 		fprintf(stderr, "Forma de uso: %s origen\n",argv[0]);
 		return -1;
@@ -38,11 +63,6 @@ int main (int argc, const char * argv[]) {
 	
 	if((fuente=fopen(argv[1],"r")) == NULL){
 		fprintf(stderr, "Error al abrir el archivo: %s",argv[1]);
-		return -1;
-	}
-	
-	if((tablaReglasFuente=fopen("TABLA_SLR.txt","r")) == NULL){
-		fprintf(stderr, "Error al abrir el archivo TABLA_SLR.txt");
 		return -1;
 	}
 	
@@ -83,12 +103,15 @@ int main (int argc, const char * argv[]) {
 	//scanf("%d",&eleccion);
     
 	fprintf(stdout, "\n\n-----Ejectuando Analizador Lexico-----\n\n");
-	
-    inicializaTemp();
     
 	char c;
     
 	while ((c = getc(fuente)) != EOF) {
+        
+        if (c == '\n' || c == '\t') {
+            continue;
+        }
+        
 		// Si el automata regresa 1 es que llega a estado terminal
 		
 		if (automatas[0].funcion(&automatas[0],c) == 1) {
@@ -139,38 +162,48 @@ int main (int argc, const char * argv[]) {
 			reset(automatas);
 			continue;
 		}
-		
-		if (c == '\n') {
-			strcpy(inputLex[inputSizeLex],"$");
-			strcpy(inputRealLex[inputSizeLex],"$");
-			inputSizeLex++;
-			// Igualas los datos del analex con los del anasin
-			inputSize = inputSizeLex;
-			int i;
-			for (i=0; i<inputSizeLex; i++) {
-				input[i] = inputLex[i];
-				inputReal[i] = inputRealLex[i];
-			}
-            
-			// Correr anasin
-			//runAndClean();
-			fprintf(stdout, "\n-----Ejectuando Analizador Sintactico-----\n\n");
-			anasin();
-			fprintf(stdout, "\n");
-			reset(automatas);
-			clearInput();
-			clear(&pila);
-			inputSize = inputSizeLex = 0;
-			// Si hay error salir
-			if (errorSintactico == 1) {
-                clear(&pila);
-				return EXIT_SUCCESS;
-			}
-		}
+			
 	}
+    
+    strcpy(inputLex[inputSizeLex],"$");
+    strcpy(inputRealLex[inputSizeLex],"$");
+    inputSizeLex++;
+    // Igualas los datos del analex con los del anasin
+    inputSize = inputSizeLex;
+    cuantosTokens = cuantosTokensLex;
+    
+    for (i=0; i<inputSizeLex; i++) {
+        input[i] = inputLex[i];
+        inputReal[i] = inputRealLex[i];
+    }
+    
+    fprintf(stdout, "ARRE con los TOKENS:\n");
+    for (i=0; i<cuantosTokensLex; i++) {
+        tokenTemp[i] = tokenTempLex[i];
+        fprintf(stdout, "%i:%s\n",i,tokenTemp[i]);
+    }
+    
+    // Inicializa Valores
+    inicializaGramatica();
+    // Inicializa Pila
+    initStack(&pila);
+    
+    // Correr anasin
+    fprintf(stdout, "\n-----Ejectuando Analizador Sintactico-----\n\n");
+    anasin();
+    fprintf(stdout, "\n");
+    reset(automatas);
+    clearInput();
+    clear(&pila);
+    inputSize = inputSizeLex = 0;
+    // Si hay error salir
+    if (errorSintactico == 1) {
+        clear(&pila);
+        return EXIT_SUCCESS;
+    }
+
 	
 	fclose(fuente);
-	fclose(tablaReglasFuente);
 	
     return 0;
 }
