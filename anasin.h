@@ -200,6 +200,24 @@ int convierteAMat(char *str){
 	return atoi(str);
 }
 
+
+/**
+ * Convierte el string dado a su localidad en la cadena de tokens
+ *
+ * @param *char
+ * @return int
+ **/
+int getTokenIndex(char *str){
+	int i;
+	for (i=0; i<cuantosTokens; i++) {
+		if (eq((char *) tokens[i].nombre, str)) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+
 /**
  * Imprime la pila
  *
@@ -265,6 +283,21 @@ void imprimeTerNoTer(){
 	for (i = 0; i<noTerminales; i++) {
 		fprintf(stdout, "%i:%s ",i,arregloNoTerminales[i]);
 	}
+}
+
+/**
+ * Imprime los tokens
+ *
+ * @param void
+ * @return void
+ **/
+void imprimeTokens(){
+	int i;
+	fprintf(stdout, "\n*******TOKENS*******\nExisten %d tokens:\n",cuantosTokens);
+	for (i = 0; i<cuantosTokens; i++) {
+		fprintf(stdout, "%i\t Nombre: %s \t Tipo: %s \t Valor: %s",i,(char *) tokens[i].nombre,(char *) tokens[i].tipo,(char *) tokens[i].valor);
+	}
+    fprintf(stdout, "\n");
 }
 
 /**
@@ -363,7 +396,7 @@ int anasin(){
 	push(&pila, convierteAInt("$"));
 	push(&pila, convierteAInt("0"));
 	int i = 0, t;
-	char *aux, *uno, *cero, *dos, *p;
+	char *aux, *uno, *cero, *dos, *p, *auxVarType;
 	// Para escribir menos
 	regla actual;
 	
@@ -391,9 +424,9 @@ int anasin(){
 			// Mete el valor de D
 			push(&pila, convierteAInt(itoa(actual.valor)));
 			//fprintf(stdout, "\nAcastoy, Meto %s %d\n",input[i],actual.valor);
-            //char ret[BUFSIZ];
-            //fprintf(stdout, "DESPLAZA\n");
-            //fprintf(stdout,"%s\t\n\n", imprimePila(ret));
+			//char ret[BUFSIZ];
+			//fprintf(stdout, "DESPLAZA\n");
+			//fprintf(stdout,"%s\t\n\n", imprimePila(ret));
 			
             // Incrementa Valor
             i++;
@@ -402,10 +435,29 @@ int anasin(){
 			cero	= gramatica[actual.valor].cadenaDerivacion[0];
 			uno		= gramatica[actual.valor].cadenaDerivacion[1];
 			if(gramatica[actual.valor ].derivaciones > 2){
-                dos		= gramatica[actual.valor].cadenaDerivacion[2];
-            }
+				dos		= gramatica[actual.valor].cadenaDerivacion[2];
+			}
 			//fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
-			
+            
+			// Reducciones a int o float
+			if(actual.valor == 2 || actual.valor == 3){
+				fprintf(stdout, "%s\n", "\nHago reduccion a VAR_TYPE\n\n ");
+				auxVarType = uno;
+			}else if(actual.valor == 6){
+				// Reducciones a el nombre de la variable
+				fprintf(stdout, "%s\n", "\nHago reduccion a VAR_ITEM\n\n ");
+				if(!eq(auxVarType,"")){
+					// El valor top de la pila checarlo con inputReal
+					int localidad = getTokenIndex(inputReal[i-1]);
+					
+					// Guardar valor 
+					strcpy((char *) tokens[localidad].tipo, auxVarType);
+					
+					// Poner vartype en 0
+					auxVarType = "";
+				}
+			}
+            
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
 				
@@ -431,13 +483,14 @@ int anasin(){
 					}
 				}
 			}
-			imprimeFormato(2, i, actual.valor);
+			
 			// t siempre va a ser un numero (el renglon de la tabla)
 			t = top(&pila);
 			// Agrega el derivado a la pila
 			push(&pila,		convierteAInt(cero));
 			push(&pila,		convierteAInt(itoa(tablaR[atoi(convierteAString(t))][convierteAMat(cero)].valor)));
             
+			imprimeFormato(2, i, actual.valor);
             /*char ret[BUFSIZ];
             fprintf(stdout, "METELO\n");
             fprintf(stdout,"%s\t\n\n", imprimePila(ret));*/
@@ -559,9 +612,11 @@ void inicializaGramatica(){
     // Pasa los valores del token temporal a la estructura
     for (i = 0; i<cuantosTokens; i++) {
         strcpy((char *) tokens[i].nombre, tokenTemp[i]);
+        strcpy((char *) tokens[i].tipo, "");
+        strcpy((char *) tokens[i].valor, "");
     }
     
-    fprintf(stdout, "CuantosTokens: %i\n",cuantosTokens);
+    imprimeTokens();
     
     // PROGRAM -> MAIN_DEF
     gramatica[0].cadenaDerivacion[0] = "PROGRAM";
