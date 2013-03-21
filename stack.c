@@ -96,6 +96,7 @@ void despliega(Stack *s, int *pila) {
 	}
 }
 
+/*
 char *itoa(i)
 int i;
 {
@@ -117,4 +118,4 @@ int i;
 		*--p = '-';
 	}
 	return p;
-}
+}*/
