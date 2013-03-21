@@ -295,7 +295,7 @@ void imprimeTokens(){
 	int i;
 	fprintf(stdout, "\n*******TOKENS*******\nExisten %d tokens:\n",cuantosTokens);
 	for (i = 0; i<cuantosTokens; i++) {
-		fprintf(stdout, "%i\t Nombre: %s \t Tipo: %s \t Valor: %s",i,(char *) tokens[i].nombre,(char *) tokens[i].tipo,(char *) tokens[i].valor);
+		fprintf(stdout, "%i:\t Nombre: %s \t Tipo: %s \t Valor: %s\n",i,(char *) tokens[i].nombre,(char *) tokens[i].tipo,(char *) tokens[i].valor);
 	}
     fprintf(stdout, "\n");
 }
