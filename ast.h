@@ -15,3 +15,10 @@ public:
 
 class NodeExpression : public Node {};
 class NodeStatement : public Node {};
+
+// Enteros papayol
+class NodeInteger : public NodeExpression {
+public:
+  int val;
+  NodeInteger(int value) : val(value) {} // Sintaxis de campeones. Getters/Setters gtfo
+};
