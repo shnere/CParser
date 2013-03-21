@@ -2,7 +2,7 @@
 #define _H_ast_decl
 
 #include "ast.h"
-//#include "ast_stmt.h"
+#include "ast_stmt.h"
 #include "ast_type.h"
 
 class Type;
