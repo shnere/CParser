@@ -1,0 +1,17 @@
+#include <iostream>
+#include <vector>
+
+class NodeStatement; // Statements son estructuras de control, whiles y asignaciones de variables
+class NodeExpression; // Expresiones sno todos aquellos nodos que se pueden reducir a un valor
+
+// Lista Ligada para Statements y Expresiones
+typedef std::vector<NodeStatement*> StatementList;
+typedef std::vector<NodeExpression*> ExpressionList;
+
+class Node {
+public:
+  virtual ~Node() {};
+};
+
+class NodeExpression : public Node {};
+class NodeStatement : public Node {};
