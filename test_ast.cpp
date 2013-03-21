@@ -2,7 +2,7 @@
 #include "ast.h"
 
 int main() {
-  NodeInteger a(5);
-  printf("%d\n", a.val);
+  NodeInteger i(5);
+  NodeFloat f(5.0);
   return 0;
 }
