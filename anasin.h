@@ -60,11 +60,13 @@ typedef struct siguiente {
  * nombre = nombre del token (variable)
  * tipo   = tipo de variable (float o int)
  * valor  = contenido de la variable
+ * valorInicial = define si el token contiene un valor inicial o un valor actualizado por el anasem
  **/
 typedef struct token {
 	char *nombre[20];
     char *tipo[20];
     char *valor[20];
+	int valorInicial;
 }token;
 
 
@@ -139,7 +141,7 @@ int existeNoTerminal(char *noterm){
  **/
 char* convierteAString(int num){
 	if (num < 200) {
-		return itoa(num - 100);
+		return itoaC(num - 100);
 	} else if (num  < 300) {
 		return arregloNoTerminales[num - 200];
 	} else if (num < 400) {
@@ -423,7 +425,7 @@ int anasin(){
 			// Mete el de accion
 			push(&pila, convierteAInt(input[i]));
 			// Mete el valor de D
-			push(&pila, convierteAInt(itoa(actual.valor)));
+			push(&pila, convierteAInt(itoaC(actual.valor)));
 			//fprintf(stdout, "\nAcastoy, Meto %s %d\n",input[i],actual.valor);
 			//char ret[BUFSIZ];
 			//fprintf(stdout, "DESPLAZA\n");
@@ -468,7 +470,10 @@ int anasin(){
 				localidad = getTokenIndex(inputReal[i-3]);
 				
 				// Guardar valor 
-				strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
+				if(tokens[localidad].valorInicial == 1){
+					strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
+					tokens[localidad].valorInicial = 0;
+				}
 			}
             
 			// Si la derivacion no es a epsilon se hace pop
@@ -501,7 +506,7 @@ int anasin(){
 			t = top(&pila);
 			// Agrega el derivado a la pila
 			push(&pila,		convierteAInt(cero));
-			push(&pila,		convierteAInt(itoa(tablaR[atoi(convierteAString(t))][convierteAMat(cero)].valor)));
+			push(&pila,		convierteAInt(itoaC(tablaR[atoi(convierteAString(t))][convierteAMat(cero)].valor)));
             
 			imprimeFormato(2, i, actual.valor);
             /*char ret[BUFSIZ];
@@ -627,6 +632,7 @@ void inicializaGramatica(){
         strcpy((char *) tokens[i].nombre, tokenTemp[i]);
         strcpy((char *) tokens[i].tipo, "");
         strcpy((char *) tokens[i].valor, "");
+		tokens[i].valorInicial = 1;
     }
     
     imprimeTokens();

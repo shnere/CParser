@@ -49,7 +49,7 @@ int main (int argc, const char * argv[]) {
         despliega(&hola, pilaprint);
         
         for (k=0; k<hola.size; k++) {
-            strcat(ret,itoa(pilaprint[k]));
+            strcat(ret,itoaC(pilaprint[k]));
             strcat(ret," ");
         } 
         fprintf(stdout,"Pila: %s\n", ret);
