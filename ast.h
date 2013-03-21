@@ -41,15 +41,32 @@ public:
 class NodeBinaryOperator : public NodeExpression {
 public:
   int binary_operator;
-  NodeExpression& left_binary_expresion;
-  NodeExpression& right_primary_expression;
+  NodeExpression& left_expression;
+  NodeExpression& right_expression;
 
   NodeBinaryOperator(
-    NodeExpression& left_binary_expresion,
+    NodeExpression& left_expression,
     int binary_operator,
-    NodeExpression& right_primary_expression
+    NodeExpression& right_expression
   ) : 
-  left_binary_expresion(left_binary_expresion), 
-  right_primary_expression(right_primary_expression),
+  left_expression(left_expression), 
+  right_expression(right_expression),
   binary_operator(binary_operator) {}
 };
+
+// asignaciones bebe
+class NodeAssignment : public NodeExpression {
+public:
+  NodeIdentifier left_expression;
+  NodeExpression right_expression;
+  NodeAssignment(
+    NodeIdentifier& left_expression,
+    NodeExpression& right_expression
+  ) :
+  left_expression(left_expression),
+  right_expression(right_expression) {}
+};
+
+
+
+
