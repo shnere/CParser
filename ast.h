@@ -25,11 +25,11 @@ class Node  {
 };
 
 // Identificadores
-class NodeIdentifier : public Node {
+class Identifier : public Node {
   protected:
     char *name;
   public:
-    NodeIdentifier(const char *name);
+    Identifier(const char *name);
     const char* Name() { return name; }
 };
 

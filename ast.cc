@@ -10,6 +10,6 @@ Node::Node() {
     parent = NULL;
 }
 
-NodeIdentifier::NodeIdentifier(const char *n) : Node() {
+Identifier::Identifier(const char *n) : Node() {
     name = strdup(n);
 }
