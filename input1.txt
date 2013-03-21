@@ -1,4 +1,18 @@
 int main(){
-    int a;
-    return;
+	int mi_var_int1,mi_var_int2;
+	float mi_var_float1,mi_var_float2;
+	mi_var_int1 = 20;
+	mi_var_float1 = 2.1;
+	mi_var_int2 = 500;
+	mi_var_float2 = 2.32111231233;
+	
+	if(mi_var_float1==2.1){
+		mi_var_float1 = mi_var_float2;
+	}
+	
+	while(mi_var_int1 < 100){
+		mi_var_int1 = mi_var_int1 + 1;
+	}
+	
+    return mi_var_int1;
 }

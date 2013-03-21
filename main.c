@@ -49,7 +49,7 @@ int main (int argc, const char * argv[]) {
         despliega(&hola, pilaprint);
         
         for (k=0; k<hola.size; k++) {
-            strcat(ret,itoa(pilaprint[k]));
+            strcat(ret,itoaC(pilaprint[k]));
             strcat(ret," ");
         } 
         fprintf(stdout,"Pila: %s\n", ret);
@@ -177,10 +177,9 @@ int main (int argc, const char * argv[]) {
         inputReal[i] = inputRealLex[i];
     }
     
-    fprintf(stdout, "ARRE con los TOKENS:\n");
+    // Transferir arreglo de tokens para que el anasin lo use
     for (i=0; i<cuantosTokensLex; i++) {
         tokenTemp[i] = tokenTempLex[i];
-        fprintf(stdout, "%i:%s\n",i,tokenTemp[i]);
     }
     
     // Inicializa Valores
@@ -192,6 +191,7 @@ int main (int argc, const char * argv[]) {
     fprintf(stdout, "\n-----Ejectuando Analizador Sintactico-----\n\n");
     anasin();
     fprintf(stdout, "\n");
+	imprimeTokens();
     reset(automatas);
     clearInput();
     clear(&pila);
