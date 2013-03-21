@@ -57,8 +57,8 @@ public:
 // asignaciones bebe
 class NodeAssignment : public NodeExpression {
 public:
-  NodeIdentifier left_expression;
-  NodeExpression right_expression;
+  NodeIdentifier& left_expression;
+  NodeExpression& right_expression;
   NodeAssignment(
     NodeIdentifier& left_expression,
     NodeExpression& right_expression
@@ -67,6 +67,36 @@ public:
   right_expression(right_expression) {}
 };
 
+// expresiones precioso (stmt -> expression)
+class NodeExpressionStatement : public NodeStatement {
+public:
+  NodeExpression& expression;
+  NodeExpressionStatement(
+    NodeExpression& expression
+  ) :
+  expression(expression) {}
+};
 
+// declaraciones de variable amor
+class NodeVariableDeclaration : public NodeStatement {
+public:
+  const NodeIdentifier& type;
+  NodeIdentifier& id;
+  NodeExpression *assignmentExpression;
+  NodeVariableDeclaration(
+    const NodeIdentifier& type,
+    NodeIdentifier& id
+  ) :
+  type(type),
+  id(id) {}
 
+  NodeVariableDeclaration(
+    const NodeIdentifier& type,
+    NodeIdentifier& id,
+    NodeExpression *assignmentExpression
+  ) :
+  type(type),
+  id(id),
+  assignmentExpression(assignmentExpression) {}
+};
 
