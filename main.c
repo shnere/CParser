@@ -191,7 +191,7 @@ int main (int argc, const char * argv[]) {
     fprintf(stdout, "\n-----Ejectuando Analizador Sintactico-----\n\n");
     anasin();
     fprintf(stdout, "\n");
-	imprimeTokens();
+	//imprimeTokens();
     reset(automatas);
     clearInput();
     clear(&pila);

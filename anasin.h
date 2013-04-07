@@ -15,6 +15,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "stack.c"
+#include "ctree.c"
+
 #define eq(str1, str2) (strcmp(str1, str2) == 0)
 #define ERR -1
 #define D 0
@@ -202,6 +204,37 @@ int convierteAMat(char *str){
 	return atoi(str);
 }
 
+/**
+ * Regresa 1 si el string dado es un terminal
+ *
+ * @param *char
+ * @return int
+ **/
+int esTerminal(char *str){
+	int i;
+	for (i=0; i<terminales; i++) {
+		if (eq(arregloTerminales[i], str)) {
+			return 1;
+		}
+	}
+    return 0;
+}
+
+/**
+ * Regresa 1 si el string dado es un terminal
+ *
+ * @param *char
+ * @return int
+ **/
+int esNoTerminal(char *str){
+	int i;
+	for (i=0; i<noTerminales; i++) {
+		if (eq(arregloNoTerminales[i], str)) {
+			return 1;
+		}
+	}
+    return 0;
+}
 
 /**
  * Convierte el string dado a su localidad en la cadena de tokens
@@ -218,7 +251,6 @@ int getTokenIndex(char *str){
 	}
 	return -1;
 }
-
 
 /**
  * Imprime la pila
@@ -300,6 +332,33 @@ void imprimeTokens(){
 		fprintf(stdout, "%i:\t Nombre: %s \t Tipo: %s \t Valor: %s\n",i,(char *) tokens[i].nombre,(char *) tokens[i].tipo,(char *) tokens[i].valor);
 	}
     fprintf(stdout, "\n");
+}
+
+/**
+ * Estilo de impresion para el arbol
+ *
+ * @param void
+ * @return void
+ **/
+void print_string(void* data, int indent, int islastchild, unsigned int* bitmask) {
+    int i;
+    
+    /* print the current node's data with appropriate indentation */
+    for (i = 1; i < indent; ++i) {
+        /* use bitmasks to suppress printing unnecessary branches */
+        if (!((*bitmask) & (1 << i))) {
+            printf ("|   ");
+        }
+        else
+            printf ("    ");
+    }
+    if (indent) {
+        if (islastchild)
+            printf ("`-- ");
+        else
+            printf ("|-- ");
+    }
+    printf ("%s\n", (char *)data);
 }
 
 /**
@@ -397,13 +456,16 @@ int anasin(){
     initStack(&pila);
 	push(&pila, convierteAInt("$"));
 	push(&pila, convierteAInt("0"));
-	int i = 0, t, localidad;
-	char *aux, *uno, *cero, *dos, *p, *auxVarType;
+	int i = 0, t; //localidad;
+	char *aux, *uno, *cero, *dos, *p;// *auxVarType;
 	// Para escribir menos
 	regla actual;
 	
 	// Imprime Header
 	imprimeFormato(0,-1,-1);
+    
+    // Inicializar el arbol
+    struct Node* root = create_tree("/");
     
 	while (1) {
 		// Toma primer elemento
@@ -440,8 +502,15 @@ int anasin(){
 			if(gramatica[actual.valor ].derivaciones > 2){
 				dos		= gramatica[actual.valor].cadenaDerivacion[2];
 			}
-			//fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
+			fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
+            int cuentaHijo = 0;
+            int hijosDerivaciones = gramatica[actual.valor].derivaciones;
+            struct Node* hijos = (struct Node *)malloc(sizeof(struct Node)*hijosDerivaciones);
             
+            struct Node* izq;
+            
+            /* CODIGO DE TABLA DE SIMBOLOS
+             
 			// Reducciones a int o float
 			if(actual.valor == 2 || actual.valor == 3){
 				fprintf(stdout, "%s\n", "\nHago reduccion a VAR_TYPE\n\n ");
@@ -475,33 +544,75 @@ int anasin(){
 					tokens[localidad].valorInicial = 0;
 				}
 			}
+             
+            */
             
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
 				
 				while ((p = convierteAString(pop(&pila))),uno) {
-					//fprintf(stdout, "Pop:%s\n",p);
+					fprintf(stdout, "Pop:%s\n",p);
 					if (eq(p,"$")) {
 						imprimeFormato(4, i, -1);
 						fprintf(stdout, "No encontre %s, salir.\n",uno);
 						return -1;
 					}
-					if (eq(p,uno)) {
+                    
+                    // Chequeo para el arbol
+                    if(esTerminal(p)){
+                        fprintf(stdout, "\nEs Terminal\n");
+                        // Lo metes directo como hijo de slash
+                        struct Node* temp = create_node_under(root, p);
+                        hijos[cuentaHijo] = *temp;
+                        cuentaHijo++;
+                        
+                    } else if(esNoTerminal(p)){
+                        fprintf(stdout, "\nEs No Terminal\n");
+                        // Lo buscas en el arbol entre los hijos del guitarrista de guns n roses
+                        // Al encontrarlo marcas el nodo como hijo
+                        
+                        struct Node* temp1 = searchFirstLevel(root, p , 1, strcmp);
+                        if(temp1 == NULL){
+                            fprintf(stdout, "No estaaa!\n");
+                        }
+                        hijos[cuentaHijo] = *temp1;
+                        cuentaHijo++;
+                    }
+                    
+                    if (eq(p,uno)) {
+                        
+                        fprintf(stdout, "\nIF RARO\n");
+                        
+                        // Agregas el lado izquierdo (cero) al arbol
+                        fprintf(stdout, "\nIZQ\n");
+                        izq = create_node_under(root, cero);
+                        traverse_node(root, print_string);
+                        int i_hijo = 0;
+                        for (i_hijo; i_hijo < cuentaHijo; i_hijo++) {
+                            fprintf(stdout, "i_hijo:%d cuentaHijo:%d\n",i_hijo,cuentaHijo);
+                            move_node_under(&hijos[i_hijo], izq);
+                        }
+                        
+                        traverse_node(root, print_string);
+                        
+                        
 						// Checa con el siguiente valor para el caso S->CC
 						/*if(gramatica[actual.valor - 1].derivaciones > 2) {
-                            fprintf(stdout, "Dos:%s\n",dos);
-                            if (eq(uno,dos) && yapaso == 0) {
-                                fprintf(stdout, "Uno igual a dos:%s\n",dos);
-                                yapaso = 1;
-                                continue;
-                            }
-                            break;
-                        }*/
+                         fprintf(stdout, "Dos:%s\n",dos);
+                         if (eq(uno,dos) && yapaso == 0) {
+                         fprintf(stdout, "Uno igual a dos:%s\n",dos);
+                         yapaso = 1;
+                         continue;
+                         }
+                         break;
+                         }*/
                         break;
 					}
+                    
 				}
 			}
-			
+            
+            
 			// t siempre va a ser un numero (el renglon de la tabla)
 			t = top(&pila);
 			// Agrega el derivado a la pila
@@ -512,6 +623,8 @@ int anasin(){
             /*char ret[BUFSIZ];
             fprintf(stdout, "METELO\n");
             fprintf(stdout,"%s\t\n\n", imprimePila(ret));*/
+            
+            free(hijos);
 
 		} else if (actual.tipo == ERR) {
 			imprimeFormato(4, i, -1);
