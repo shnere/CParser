@@ -4,6 +4,7 @@ Analizador Sintactico.xcodeproj
 lexemas.txt
 tabla_simbolos.txt
 anasin
+cparser
 .DS_Store
 build
 a.out
