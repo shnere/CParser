@@ -1,5 +1,5 @@
-CFLAGS=-c -Wall
+CFLAGS=-Wall
 
 # chmod a+x MAKEFILE
-cparser: analex.h anasin.h main.c
-	gcc main.c -o cparser $(CFLAGS)
+cparser: main.c
+	gcc analex.h anasin.h main.c -o cparser $(CFLAGS)
