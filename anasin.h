@@ -479,14 +479,11 @@ int anasin(){
 	while (1) {
         // Arbol
         fprintf(stdout, "\n--<Arbol Sintactico>--\n");
-<<<<<<< HEAD
+
         traverse_node(root, print_string);
         fprintf(stdout, "\n--<Preorder>--\n");
         pre_order(root);
         fprintf(stdout, "\n");
-=======
-        //traverse_node(root, print_string);
->>>>>>> dfaa264034d718fc43e83a81adfb33f4385435af
         
 		// Toma primer elemento
 		aux = convierteAString(top(&pila));
@@ -546,15 +543,9 @@ int anasin(){
 					// El valor top de la pila checarlo con inputReal
 					localidad = getTokenIndex(inputReal[i-1]);
 					
-<<<<<<< HEAD
 					// Guardar valor 
 					strcpy((char *) tokens[localidad].tipo, auxVarType);
-          //printf("TIPO DE VALIABLE: %s\n", auxVarType);
-=======
-					// Guardar valor
-					strcpy((char *) tokens[localidad].tipo, auxVarType);
-                    printf("TIPO DE VALIABLE: %s\n", auxVarType);
->>>>>>> dfaa264034d718fc43e83a81adfb33f4385435af
+                    //printf("TIPO DE VALIABLE: %s\n", auxVarType);
 					
 				} else if(actual.valor == 1){
 					// Poner vartype en 0
