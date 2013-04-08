@@ -456,8 +456,8 @@ int anasin(){
     initStack(&pila);
 	push(&pila, convierteAInt("$"));
 	push(&pila, convierteAInt("0"));
-	int i = 0, t; //localidad;
-	char *aux, *uno, *cero, *dos, *p;// *auxVarType;
+	int i = 0, t, localidad;
+	char *aux, *uno, *cero, *dos, *p, *auxVarType;
 	// Para escribir menos
 	regla actual;
 	
@@ -478,7 +478,7 @@ int anasin(){
     
 	while (1) {
         // Arbol
-        fprintf(stdout, "\n--Arbol--\n");
+        fprintf(stdout, "\n--<Arbol Sintactico>--\n");
         traverse_node(root, print_string);
         
 		// Toma primer elemento
@@ -515,35 +515,33 @@ int anasin(){
 			if(gramatica[actual.valor ].derivaciones > 2){
 				dos		= gramatica[actual.valor].cadenaDerivacion[2];
 			}
-			fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
+			//fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
 
             hijosDerivaciones = gramatica[actual.valor].derivaciones - 1;
             cuentaHijo = 0;
             
-            fprintf(stdout, "hijosDerivaciones: %d\n", hijosDerivaciones);
+            //fprintf(stdout, "hijosDerivaciones: %d\n", hijosDerivaciones);
             
             // Inicializa el arreglo con la cantidad de derivaciones que se necesitan
             for(cuentaCreaHijo = 0; cuentaCreaHijo < hijosDerivaciones; cuentaCreaHijo++){
                 hijos[cuentaCreaHijo] = (struct Node *) malloc(sizeof(struct Node));
             }
             
-            
-            /* CODIGO DE TABLA DE SIMBOLOS
-             
 			// Reducciones a int o float
 			if(actual.valor == 2 || actual.valor == 3){
-				fprintf(stdout, "%s\n", "\nHago reduccion a VAR_TYPE\n\n ");
+				//fprintf(stdout, "%s\n", "\nHago reduccion a VAR_TYPE\n\n ");
 				auxVarType = uno;
 			}else if(actual.valor == 6){
 				// Reducciones a el nombre de la variable
-				fprintf(stdout, "%s\n", "\nHago reduccion a VAR_ITEM\n\n ");
+				//fprintf(stdout, "%s\n", "\nHago reduccion a VAR_ITEM\n\n ");
 				
 				if(!eq(auxVarType,"")){
 					// El valor top de la pila checarlo con inputReal
 					localidad = getTokenIndex(inputReal[i-1]);
 					
 					// Guardar valor 
-					strcpy((char *) tokens[localidad].tipo, auxVarType);
+					//strcpy((char *) tokens[localidad].tipo, auxVarType);
+          //printf("TIPO DE VALIABLE: %s\n", auxVarType);
 					
 				} else if(actual.valor == 1){
 					// Poner vartype en 0
@@ -559,12 +557,12 @@ int anasin(){
 				
 				// Guardar valor 
 				if(tokens[localidad].valorInicial == 1){
-					strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
-					tokens[localidad].valorInicial = 0;
+					//strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
+          //printf("VALOR DE VARIABLE: %s\n", inputReal[i-1]);
+					//tokens[localidad].valorInicial = 0;
 				}
 			}
              
-            */
             
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
@@ -578,28 +576,28 @@ int anasin(){
 					}
                     // Chequeo para el arbol
                     if(esTerminal(p)){
-                        fprintf(stdout, "\nValor: %s - Terminal", p);
+                        //fprintf(stdout, "\nValor: %s - Terminal", p);
                         // Lo metes directo como hijo de slash
                         
                         /*
                             TODO: en vez de agregar p se agrega el valor de p
                          */
                         
-                        fprintf(stdout, "\nAGREGA:%s\n",p);
+                        //fprintf(stdout, "\nAGREGA:%s\n",p);
                         nodeTerminal = create_node_under(root, p);
                         hijos[cuentaHijo] = nodeTerminal;
                         cuentaHijo++;
                         
                     } else if(esNoTerminal(p)){
-                        fprintf(stdout, "\nValor: %s - No Terminal", p);
+                        //fprintf(stdout, "\nValor: %s - No Terminal", p);
                         // Lo buscas en el arbol entre los hijos del guitarrista de guns n roses
                         // Al encontrarlo marcas el nodo como hijo
-                        fprintf(stdout, "\nBusco %s...", p);
+                        //fprintf(stdout, "\nBusco %s...", p);
                         nodeNoTerminal = searchFirstLevel(root, p, strcmp);
                         if(nodeNoTerminal == NULL){
-                            fprintf(stdout, "No se encuentra.\n");
+                            //fprintf(stdout, "No se encuentra.\n");
                         } else {
-                            fprintf(stdout, "Agregado a hijos[].\n");
+                            //fprintf(stdout, "Agregado a hijos[].\n");
                         }
                         hijos[cuentaHijo] = nodeNoTerminal;
                         cuentaHijo++;
@@ -607,16 +605,16 @@ int anasin(){
                     
                     if (eq(p,uno)) {
                         // Agregas el lado izquierdo (cero) al arbol
-                        fprintf(stdout, "\nAgrega lado izquierdo...\n");
+                        //fprintf(stdout, "\nAgrega lado izquierdo...\n");
                         izq = create_node_under(root, cero);
-                        traverse_node(root, print_string);
-                        printf ("\nMueves los hijos abajo\n");
+                        //traverse_node(root, print_string);
+                        //printf ("\nMueves los hijos abajo\n");
                         for (i_hijo = 0; i_hijo < cuentaHijo; i_hijo++) {
-                            fprintf(stdout, "i_hijo:%d cuentaHijo:%d\n",i_hijo,cuentaHijo);
+                            //fprintf(stdout, "i_hijo:%d cuentaHijo:%d\n",i_hijo,cuentaHijo);
                             move_node_under(hijos[i_hijo], izq);
                         }
                         
-                        traverse_node(root, print_string);
+                        //traverse_node(root, print_string);
                         
 						// Checa con el siguiente valor para el caso S->CC
 						/*if(gramatica[actual.valor - 1].derivaciones > 2) {
@@ -636,7 +634,7 @@ int anasin(){
                 // Deriva a epsilon: agregas el no terminal como hijo de /
                 fprintf(stdout, "\nDeriva a epsilon, agrega el terminal como hijo de /...\n");
                 izq = create_node_under(root, cero);
-                traverse_node(root, print_string);
+                //traverse_node(root, print_string);
             }
             
 			// t siempre va a ser un numero (el renglon de la tabla)
@@ -655,7 +653,9 @@ int anasin(){
 			return -1;
 		}
 		//fprintf(stdout, "pila:%s\n",imprimePila(ret));
+    fprintf(stdout, "\n-------------------------------------------\n");
 	}
+
 }
 
 /**
