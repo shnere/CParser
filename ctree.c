@@ -154,7 +154,6 @@ _traverse_node (struct Node* node, int depth,
 void
 traverse_node (struct Node* node,
                void (*print_data)(void*, int, int, unsigned int*)) {
-    printf("primerito\n");
     _traverse_node(node, 0, print_data);
 }
 

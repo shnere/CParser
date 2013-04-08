@@ -1,8 +1,7 @@
 int main(){
-    int a, b;
-    float c;
-    a = 1;
-    b = 2.0;
-    c = 3;
-    a = a + b;
+	float a;
+	a = 2.2;
+	if(a == 2.3){
+		a = 2.1 + .1;
+	}
 }
