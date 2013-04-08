@@ -114,7 +114,6 @@ _traverse_node (struct Node* node, int depth,
     start = next = node->firstchild;
     static unsigned int bitmask = 0;
     int islastchild = node->nextsibling == ((node->parent) ? node->parent->firstchild : NULL);
-    
     /* If a new traversal reset bitmask */
     if (!depth)
         bitmask = 0;
@@ -155,6 +154,7 @@ _traverse_node (struct Node* node, int depth,
 void
 traverse_node (struct Node* node,
                void (*print_data)(void*, int, int, unsigned int*)) {
+    printf("primerito\n");
     _traverse_node(node, 0, print_data);
 }
 
@@ -344,26 +344,25 @@ search (struct Node* node, void* a, int (*compare)(void* a, void* b)) {
  * which the compare function returns 0; otherwise, return NULL
  */
 struct Node*
-searchFirstLevel (struct Node* node, void* a, int first, int (*compare)(void* a, void* b)) {
-	struct Node *start, *next, *temp;
+searchFirstLevel (struct Node* node, void* a, int (*compare)(void* a, void * b)) {
+	struct Node *start, *next;
 	start = next = node->firstchild;
 	
-	if(!first)
+	if (start == NULL) {
 		return NULL;
-	
-	if (!node->data)
-		return NULL;
-    
-    if (compare(a, node->data) == 0)
-        return node;
-    
-    if (start) {
-		if ((temp = searchFirstLevel (start, a, 0, compare)))
-		    return temp;
-		while ((next = next->nextsibling) != start)
-		    if ((temp = searchFirstLevel (next, a, 1, compare)))
-		        return temp;
     }
+	
+    if (!next->data)
+        return NULL;
+    
+    if (compare(a, next->data) == 0)
+        return next;
+	
+	do{
+		if (compare(a, next->data) == 0)
+	        return next;
+		next = next->nextsibling;
+	}while (next != start);
     
     return NULL;
 }

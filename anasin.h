@@ -576,7 +576,6 @@ int anasin(){
 						fprintf(stdout, "No encontre %s, salir.\n",uno);
 						return -1;
 					}
-                    
                     // Chequeo para el arbol
                     if(esTerminal(p)){
                         fprintf(stdout, "\nValor: %s - Terminal", p);
@@ -586,6 +585,7 @@ int anasin(){
                             TODO: en vez de agregar p se agrega el valor de p
                          */
                         
+                        fprintf(stdout, "\nAGREGA:%s\n",p);
                         nodeTerminal = create_node_under(root, p);
                         hijos[cuentaHijo] = nodeTerminal;
                         cuentaHijo++;
@@ -595,7 +595,7 @@ int anasin(){
                         // Lo buscas en el arbol entre los hijos del guitarrista de guns n roses
                         // Al encontrarlo marcas el nodo como hijo
                         fprintf(stdout, "\nBusco %s...", p);
-                        nodeNoTerminal = searchFirstLevel(root, p , 1, strcmp);
+                        nodeNoTerminal = searchFirstLevel(root, p, strcmp);
                         if(nodeNoTerminal == NULL){
                             fprintf(stdout, "No se encuentra.\n");
                         } else {
@@ -650,11 +650,6 @@ int anasin(){
             fprintf(stdout, "METELO\n");
             fprintf(stdout,"%s\t\n\n", imprimePila(ret));*/
             
-            // Libera la memoria
-            for(cuentaCreaHijo = 0; cuentaCreaHijo < hijosDerivaciones; cuentaCreaHijo++){
-                free(hijos[cuentaCreaHijo]);
-            }
-
 		} else if (actual.tipo == ERR) {
 			imprimeFormato(4, i, -1);
 			return -1;

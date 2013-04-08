@@ -47,6 +47,6 @@ struct Node* deep_copy (struct Node* node, void* (*copyfunc)(void*));
 
 /* search tree */
 struct Node* search (struct Node* node, void* a, int (*compare)(void* a, void* b));
-struct Node* searchFirstLevel (struct Node* node, void* a, int first, int (*compare)(void* a, void* b));
+struct Node* searchFirstLevel (struct Node* node, void* a, int (*compare)(void * a, void * b));;
 
 #endif /* __CTREE_H__ */
