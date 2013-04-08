@@ -8,7 +8,7 @@ int main(){
     }else{
         b = 3;
     }
-    a = 9+(9*2);
+    a = 9+9*2;
     
     while(b > 1){ 
         while(b<2){
