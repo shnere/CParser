@@ -456,8 +456,8 @@ int anasin(){
     initStack(&pila);
 	push(&pila, convierteAInt("$"));
 	push(&pila, convierteAInt("0"));
-	int i = 0, t; //localidad;
-	char *aux, *uno, *cero, *dos, *p;// *auxVarType;
+	int i = 0, t, localidad;
+	char *aux, *uno, *cero, *dos, *p, *auxVarType;
 	// Para escribir menos
 	regla actual;
 	
@@ -527,9 +527,6 @@ int anasin(){
                 hijos[cuentaCreaHijo] = (struct Node *) malloc(sizeof(struct Node));
             }
             
-            
-            /* CODIGO DE TABLA DE SIMBOLOS
-             
 			// Reducciones a int o float
 			if(actual.valor == 2 || actual.valor == 3){
 				fprintf(stdout, "%s\n", "\nHago reduccion a VAR_TYPE\n\n ");
@@ -543,7 +540,8 @@ int anasin(){
 					localidad = getTokenIndex(inputReal[i-1]);
 					
 					// Guardar valor 
-					strcpy((char *) tokens[localidad].tipo, auxVarType);
+					//strcpy((char *) tokens[localidad].tipo, auxVarType);
+          printf("TIPO DE VALIABLE: %s\n", auxVarType);
 					
 				} else if(actual.valor == 1){
 					// Poner vartype en 0
@@ -559,12 +557,12 @@ int anasin(){
 				
 				// Guardar valor 
 				if(tokens[localidad].valorInicial == 1){
-					strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
-					tokens[localidad].valorInicial = 0;
+					//strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
+          printf("VALOR DE VARIABLE: %s\n", inputReal[i-1]);
+					//tokens[localidad].valorInicial = 0;
 				}
 			}
              
-            */
             
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
