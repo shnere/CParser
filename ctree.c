@@ -20,7 +20,7 @@ struct Node*
 create_tree (void* data) {
 	struct Node* root = (struct Node *) malloc(sizeof(struct Node));
 	root->data = data;
-	root->dataType = -1;
+	root->dataType = (void*) -1;
 	root->parent = root->firstchild = (struct Node *) NULL;
 	root->prevsibling = root->nextsibling = (struct Node *) NULL;
 	return root;
@@ -59,11 +59,11 @@ insert_node_under (struct Node* node, struct Node* targetparent) {
  * creates and returns poiner to a child under a given node
  */
 struct Node*
-create_node_under (struct Node* node, void* data) {
+create_node_under (struct Node* node, void* data, void* dataType) {
     
     struct Node* newchild = (struct Node *) malloc(sizeof(struct Node));
 	newchild->data = data;
-	newchild->dataType = -1;
+	newchild->dataType = dataType;
 	
 	newchild->firstchild = (struct Node *) NULL;
 	insert_node_under (newchild, node);
@@ -99,7 +99,7 @@ create_node_next_to (struct Node* node, void* data) {
     
 	struct Node* newsibling = (struct Node *) malloc(sizeof(struct Node));
 	newsibling->data = data;
-	newsibling->dataType = -1;
+	newsibling->dataType = (void *) -1;
 	
 	newsibling->firstchild = (struct Node *) NULL;
 	insert_node_next_to (newsibling, node);
@@ -156,6 +156,31 @@ traverse_node (struct Node* node,
                void (*print_data)(void*, int, int, unsigned int*)) {
     printf("primerito\n");
     _traverse_node(node, 0, print_data);
+}
+
+struct Node*
+pre_order (struct Node* node) {
+    struct Node *start, *next, *temp;
+    start = next = node->firstchild;
+
+    if (!node->data ) {
+        return NULL;
+    } else if((int) node->dataType > 0) {
+        printf ("Dato del Nodo:%s, Valor de Dato:%s\n", (char *)node->data, (char *)node->dataType);
+    } else {
+        printf ("Dato del Nodo:%s\n", (char *)node->data);
+    }
+        
+
+    if (start) {
+        if ( (temp = pre_order (start)) )
+            return temp;
+        while ( (next = next->nextsibling) != start)
+            if ( (temp = pre_order (next)) )
+                return temp;
+    }
+    
+    return NULL;
 }
 
 /*

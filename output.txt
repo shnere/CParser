@@ -9,14 +9,37 @@ main	main
 {	left_curly_bracket
 int	int
 a	var_name
+,	comma
+b	var_name
+;	semi_colon
+float	float
+c	var_name
+;	semi_colon
+a	var_name
 =	equal
 1	int_literal
+;	semi_colon
+b	var_name
+=	equal
+2.0	float_literal
+;	semi_colon
+c	var_name
+=	equal
+3	int_literal
+;	semi_colon
+a	var_name
+=	equal
+a	var_name
++	arith_op
+b	var_name
 ;	semi_colon
 }	right_curly_bracket
 
 *******TOKENS*******
-Existen 1 tokens:
+Existen 3 tokens:
 0:	 Nombre: a 	 Tipo:  	 Valor: 
+1:	 Nombre: b 	 Tipo:  	 Valor: 
+2:	 Nombre: c 	 Tipo:  	 Valor: 
 
 
 -----Ejectuando Analizador Sintactico-----
@@ -27,8 +50,12 @@ Existen 1 tokens:
 --<Arbol Sintactico>--
 primerito
 /
+
+--<Preorder>--
+Dato del Nodo:/
+
 PILA:	$ 0 
-ENTRADA:int main ( ) { int a = 1 ; } $ 
+ENTRADA:int main ( ) { int a , b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
 ACCION:	D1
 
 
@@ -37,8 +64,12 @@ ACCION:	D1
 --<Arbol Sintactico>--
 primerito
 /
+
+--<Preorder>--
+Dato del Nodo:/
+
 PILA:	$ 0 int 1 
-ENTRADA:main ( ) { int a = 1 ; } $ 
+ENTRADA:main ( ) { int a , b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
 ACCION:	D4
 
 
@@ -47,8 +78,12 @@ ACCION:	D4
 --<Arbol Sintactico>--
 primerito
 /
+
+--<Preorder>--
+Dato del Nodo:/
+
 PILA:	$ 0 int 1 main 4 
-ENTRADA:( ) { int a = 1 ; } $ 
+ENTRADA:( ) { int a , b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
 ACCION:	D5
 
 
@@ -57,8 +92,12 @@ ACCION:	D5
 --<Arbol Sintactico>--
 primerito
 /
+
+--<Preorder>--
+Dato del Nodo:/
+
 PILA:	$ 0 int 1 main 4 left_parenthesis 5 
-ENTRADA:) { int a = 1 ; } $ 
+ENTRADA:) { int a , b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
 ACCION:	D6
 
 
@@ -67,8 +106,12 @@ ACCION:	D6
 --<Arbol Sintactico>--
 primerito
 /
+
+--<Preorder>--
+Dato del Nodo:/
+
 PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 
-ENTRADA:{ int a = 1 ; } $ 
+ENTRADA:{ int a , b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
 ACCION:	D7
 
 
@@ -77,8 +120,12 @@ ACCION:	D7
 --<Arbol Sintactico>--
 primerito
 /
+
+--<Preorder>--
+Dato del Nodo:/
+
 PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 
-ENTRADA:int a = 1 ; } $ 
+ENTRADA:int a , b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
 ACCION:	D9
 
 
@@ -87,10 +134,16 @@ ACCION:	D9
 --<Arbol Sintactico>--
 primerito
 /
+
+--<Preorder>--
+Dato del Nodo:/
+
 Pop:9
 Pop:int
+
+AGREGA:int
 PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 
-ENTRADA:a = 1 ; } $ 
+ENTRADA:a , b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
 ACCION: R3: VAR_TYPE->int
 
 
@@ -100,9 +153,15 @@ ACCION: R3: VAR_TYPE->int
 primerito
 /
 `-- VAR_TYPE
-    `-- int
+    `-- 
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:, Valor de Dato:
+
 PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 
-ENTRADA:a = 1 ; } $ 
+ENTRADA:a , b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
 ACCION:	D34
 
 
@@ -112,9 +171,6645 @@ ACCION:	D34
 primerito
 /
 `-- VAR_TYPE
+    `-- 
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:, Valor de Dato:
+
+Pop:34
+Pop:var_name
+
+AGREGA:var_name
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 VAR_ITEM 35 
+ENTRADA:, b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R7: VAR_ITEM->var_name
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- VAR_TYPE
+|   `-- int
+`-- VAR_ITEM
     `-- int
-PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 var_name 34 
-ENTRADA:= 1 ; } $ 
-Error Sintactico.
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+
+Pop:35
+Pop:VAR_ITEM
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 VAR_LIST 36 
+ENTRADA:, b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R6: VAR_LIST->VAR_ITEM
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- VAR_TYPE
+|   `-- int
+`-- VAR_LIST
+    `-- VAR_ITEM
+    |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 VAR_LIST 36 
+ENTRADA:, b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D49
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- VAR_TYPE
+|   `-- int
+`-- VAR_LIST
+    `-- VAR_ITEM
+    |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 VAR_LIST 36 comma 49 
+ENTRADA:b ; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D34
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- VAR_TYPE
+|   `-- int
+`-- VAR_LIST
+    `-- VAR_ITEM
+    |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+
+Pop:34
+Pop:var_name
+
+AGREGA:var_name
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 VAR_LIST 36 comma 49 VAR_ITEM 58 
+ENTRADA:; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R7: VAR_ITEM->var_name
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- VAR_TYPE
+|   `-- int
+|-- VAR_LIST
+|   `-- VAR_ITEM
+|   |   `-- int
+`-- VAR_ITEM
+    `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+
+Pop:58
+Pop:VAR_ITEM
+Pop:49
+Pop:comma
+
+AGREGA:comma
+Pop:36
+Pop:VAR_LIST
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 VAR_LIST 36 
+ENTRADA:; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R5: VAR_LIST->VAR_LISTcommaVAR_ITEM
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- VAR_TYPE
+|   `-- int
+`-- VAR_LIST
+    |-- VAR_ITEM
+        `-- int
+    |-- int
+    `-- VAR_LIST
+    |   `-- VAR_ITEM
+    |   |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 VAR_LIST 36 
+ENTRADA:; float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D50
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- VAR_TYPE
+|   `-- int
+`-- VAR_LIST
+    |-- VAR_ITEM
+        `-- int
+    |-- int
+    `-- VAR_LIST
+    |   `-- VAR_ITEM
+    |   |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+
+Pop:50
+Pop:semi_colon
+
+AGREGA:semi_colon
+Pop:36
+Pop:VAR_LIST
+Pop:13
+Pop:VAR_TYPE
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 
+ENTRADA:float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R2: DECLARATION->VAR_TYPEVAR_LISTsemi_colon
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- DECLARATION
+    |-- int
+    |-- VAR_LIST
+    |   |-- VAR_ITEM
+    |   |   `-- int
+    |   |-- int
+    |   `-- VAR_LIST
+    |       `-- VAR_ITEM
+    |       |   `-- int
+    `-- VAR_TYPE
+        `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 
+ENTRADA:float c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D8
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- DECLARATION
+    |-- int
+    |-- VAR_LIST
+    |   |-- VAR_ITEM
+    |   |   `-- int
+    |   |-- int
+    |   `-- VAR_LIST
+    |       `-- VAR_ITEM
+    |       |   `-- int
+    `-- VAR_TYPE
+        `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+Pop:8
+Pop:float
+
+AGREGA:float
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 VAR_TYPE 13 
+ENTRADA:c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R4: VAR_TYPE->float
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- DECLARATION
+|   |-- int
+|   |-- VAR_LIST
+|   |   |-- VAR_ITEM
+|   |   |   `-- int
+|   |   |-- int
+|   |   `-- VAR_LIST
+|   |       `-- VAR_ITEM
+|   |       |   `-- int
+|   `-- VAR_TYPE
+|       `-- int
+`-- VAR_TYPE
+    `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 VAR_TYPE 13 
+ENTRADA:c ; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D34
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- DECLARATION
+|   |-- int
+|   |-- VAR_LIST
+|   |   |-- VAR_ITEM
+|   |   |   `-- int
+|   |   |-- int
+|   |   `-- VAR_LIST
+|   |       `-- VAR_ITEM
+|   |       |   `-- int
+|   `-- VAR_TYPE
+|       `-- int
+`-- VAR_TYPE
+    `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+Pop:34
+Pop:var_name
+
+AGREGA:var_name
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 VAR_TYPE 13 VAR_ITEM 35 
+ENTRADA:; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R7: VAR_ITEM->var_name
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- DECLARATION
+|   |-- int
+|   |-- VAR_LIST
+|   |   |-- VAR_ITEM
+|   |   |   `-- int
+|   |   |-- int
+|   |   `-- VAR_LIST
+|   |       `-- VAR_ITEM
+|   |       |   `-- int
+|   `-- VAR_TYPE
+|       `-- int
+|-- VAR_TYPE
+|   `-- int
+`-- VAR_ITEM
+    `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+
+Pop:35
+Pop:VAR_ITEM
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 VAR_TYPE 13 VAR_LIST 36 
+ENTRADA:; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R6: VAR_LIST->VAR_ITEM
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- DECLARATION
+|   |-- int
+|   |-- VAR_LIST
+|   |   |-- VAR_ITEM
+|   |   |   `-- int
+|   |   |-- int
+|   |   `-- VAR_LIST
+|   |       `-- VAR_ITEM
+|   |       |   `-- int
+|   `-- VAR_TYPE
+|       `-- int
+|-- VAR_TYPE
+|   `-- int
+`-- VAR_LIST
+    `-- VAR_ITEM
+        `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 VAR_TYPE 13 VAR_LIST 36 
+ENTRADA:; a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D50
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- DECLARATION
+|   |-- int
+|   |-- VAR_LIST
+|   |   |-- VAR_ITEM
+|   |   |   `-- int
+|   |   |-- int
+|   |   `-- VAR_LIST
+|   |       `-- VAR_ITEM
+|   |       |   `-- int
+|   `-- VAR_TYPE
+|       `-- int
+|-- VAR_TYPE
+|   `-- int
+`-- VAR_LIST
+    `-- VAR_ITEM
+        `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+
+Pop:50
+Pop:semi_colon
+
+AGREGA:semi_colon
+Pop:36
+Pop:VAR_LIST
+Pop:13
+Pop:VAR_TYPE
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 DECLARATION 10 
+ENTRADA:a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R2: DECLARATION->VAR_TYPEVAR_LISTsemi_colon
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- DECLARATION
+|   |-- int
+|   |-- VAR_LIST
+|   |   |-- VAR_ITEM
+|   |   |   `-- int
+|   |   |-- int
+|   |   `-- VAR_LIST
+|   |       `-- VAR_ITEM
+|   |       |   `-- int
+|   `-- VAR_TYPE
+|       `-- int
+`-- DECLARATION
+    |-- float
+    |-- VAR_LIST
+        `-- VAR_ITEM
+            `-- float
+    `-- VAR_TYPE
+    |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+
+Deriva a epsilon, agrega el terminal como hijo de /...
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 DECLARATION 10 INTERNAL_DECLARATIONS 14 
+ENTRADA:a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R11: INTERNAL_DECLARATIONS->epsilon
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- DECLARATION
+|   |-- int
+|   |-- VAR_LIST
+|   |   |-- VAR_ITEM
+|   |   |   `-- int
+|   |   |-- int
+|   |   `-- VAR_LIST
+|   |       `-- VAR_ITEM
+|   |       |   `-- int
+|   `-- VAR_TYPE
+|       `-- int
+|-- DECLARATION
+|   |-- float
+|   |-- VAR_LIST
+|       `-- VAR_ITEM
+|           `-- float
+|   `-- VAR_TYPE
+|   |   `-- int
+`-- INTERNAL_DECLARATIONS
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:INTERNAL_DECLARATIONS
+
+Pop:14
+Pop:INTERNAL_DECLARATIONS
+Pop:10
+Pop:DECLARATION
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 DECLARATION 10 INTERNAL_DECLARATIONS 14 
+ENTRADA:a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R10: INTERNAL_DECLARATIONS->DECLARATIONINTERNAL_DECLARATIONS
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- DECLARATION
+|   |-- float
+|   |-- VAR_LIST
+|   |   `-- VAR_ITEM
+|   |       `-- float
+|   `-- VAR_TYPE
+|       `-- int
+`-- INTERNAL_DECLARATIONS
+    |-- INTERNAL_DECLARATIONS
+    `-- DECLARATION
+    |   |-- int
+    |   |-- VAR_LIST
+    |   |   |-- VAR_ITEM
+    |   |       `-- int
+    |   |   |-- int
+    |   |   `-- VAR_LIST
+    |   |   |   `-- VAR_ITEM
+    |   |   |   |   `-- int
+    |   `-- VAR_TYPE
+    |       `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+Pop:14
+Pop:INTERNAL_DECLARATIONS
+Pop:10
+Pop:DECLARATION
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 
+ENTRADA:a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R10: INTERNAL_DECLARATIONS->DECLARATIONINTERNAL_DECLARATIONS
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- INTERNAL_DECLARATIONS
+    |-- INTERNAL_DECLARATIONS
+    |   |-- INTERNAL_DECLARATIONS
+    |   `-- DECLARATION
+    |       |-- int
+    |       |-- VAR_LIST
+    |       |   |-- VAR_ITEM
+    |       |   |   `-- int
+    |       |   |-- int
+    |       |   `-- VAR_LIST
+    |       |       `-- VAR_ITEM
+    |       |       |   `-- int
+    |       `-- VAR_TYPE
+    |           `-- int
+    `-- DECLARATION
+        |-- float
+        |-- VAR_LIST
+            `-- VAR_ITEM
+            |   `-- float
+        `-- VAR_TYPE
+        |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 
+ENTRADA:a = 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D22
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- INTERNAL_DECLARATIONS
+    |-- INTERNAL_DECLARATIONS
+    |   |-- INTERNAL_DECLARATIONS
+    |   `-- DECLARATION
+    |       |-- int
+    |       |-- VAR_LIST
+    |       |   |-- VAR_ITEM
+    |       |   |   `-- int
+    |       |   |-- int
+    |       |   `-- VAR_LIST
+    |       |       `-- VAR_ITEM
+    |       |       |   `-- int
+    |       `-- VAR_TYPE
+    |           `-- int
+    `-- DECLARATION
+        |-- float
+        |-- VAR_LIST
+            `-- VAR_ITEM
+            |   `-- float
+        `-- VAR_TYPE
+        |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 var_name 22 
+ENTRADA:= 1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D41
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- INTERNAL_DECLARATIONS
+    |-- INTERNAL_DECLARATIONS
+    |   |-- INTERNAL_DECLARATIONS
+    |   `-- DECLARATION
+    |       |-- int
+    |       |-- VAR_LIST
+    |       |   |-- VAR_ITEM
+    |       |   |   `-- int
+    |       |   |-- int
+    |       |   `-- VAR_LIST
+    |       |       `-- VAR_ITEM
+    |       |       |   `-- int
+    |       `-- VAR_TYPE
+    |           `-- int
+    `-- DECLARATION
+        |-- float
+        |-- VAR_LIST
+            `-- VAR_ITEM
+            |   `-- float
+        `-- VAR_TYPE
+        |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 var_name 22 equal 41 
+ENTRADA:1 ; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D20
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- INTERNAL_DECLARATIONS
+    |-- INTERNAL_DECLARATIONS
+    |   |-- INTERNAL_DECLARATIONS
+    |   `-- DECLARATION
+    |       |-- int
+    |       |-- VAR_LIST
+    |       |   |-- VAR_ITEM
+    |       |   |   `-- int
+    |       |   |-- int
+    |       |   `-- VAR_LIST
+    |       |       `-- VAR_ITEM
+    |       |       |   `-- int
+    |       `-- VAR_TYPE
+    |           `-- int
+    `-- DECLARATION
+        |-- float
+        |-- VAR_LIST
+            `-- VAR_ITEM
+            |   `-- float
+        `-- VAR_TYPE
+        |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+
+Pop:20
+Pop:int_literal
+
+AGREGA:int_literal
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 var_name 22 equal 41 CONSTANT 26 
+ENTRADA:; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R35: CONSTANT->int_literal
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- CONSTANT
+    `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+
+Pop:26
+Pop:CONSTANT
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 var_name 22 equal 41 PRIMARY_EXPR 29 
+ENTRADA:; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R33: PRIMARY_EXPR->CONSTANT
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- PRIMARY_EXPR
+    `-- CONSTANT
+    |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+
+Pop:29
+Pop:PRIMARY_EXPR
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 var_name 22 equal 41 BINARY_EXP 55 
+ENTRADA:; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R28: BINARY_EXP->PRIMARY_EXPR
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- BINARY_EXP
+    `-- PRIMARY_EXPR
+    |   `-- CONSTANT
+    |       `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+
+Pop:55
+Pop:BINARY_EXP
+Pop:41
+Pop:equal
+
+AGREGA:equal
+Pop:22
+Pop:var_name
+
+AGREGA:var_name
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 ASSIGN_EXP 24 
+ENTRADA:; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R25: ASSIGN_EXP->var_nameequalBINARY_EXP
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- ASSIGN_EXP
+    |-- BINARY_EXP
+        `-- PRIMARY_EXPR
+            `-- CONSTANT
+            |   `-- int
+    |-- int
+    `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+
+Pop:24
+Pop:ASSIGN_EXP
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 EXPRESSION 27 
+ENTRADA:; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R24: EXPRESSION->ASSIGN_EXP
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- EXPRESSION
+    `-- ASSIGN_EXP
+    |   |-- BINARY_EXP
+    |   |   `-- PRIMARY_EXPR
+    |   |   |   `-- CONSTANT
+    |   |   |   |   `-- int
+    |   |-- int
+    |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 EXPRESSION 27 
+ENTRADA:; b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D47
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- EXPRESSION
+    `-- ASSIGN_EXP
+    |   |-- BINARY_EXP
+    |   |   `-- PRIMARY_EXPR
+    |   |   |   `-- CONSTANT
+    |   |   |   |   `-- int
+    |   |-- int
+    |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+
+Pop:47
+Pop:semi_colon
+
+AGREGA:semi_colon
+Pop:27
+Pop:EXPRESSION
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 
+ENTRADA:b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION: R15: STATEMENT->EXPRESSIONsemi_colon
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- STATEMENT
+    |-- int
+    `-- EXPRESSION
+    |   `-- ASSIGN_EXP
+    |       |-- BINARY_EXP
+    |           `-- PRIMARY_EXPR
+    |           |   `-- CONSTANT
+    |           |       `-- int
+    |       |-- int
+    |       `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 
+ENTRADA:b = 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D22
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- STATEMENT
+    |-- int
+    `-- EXPRESSION
+    |   `-- ASSIGN_EXP
+    |       |-- BINARY_EXP
+    |           `-- PRIMARY_EXPR
+    |           |   `-- CONSTANT
+    |           |       `-- int
+    |       |-- int
+    |       `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 var_name 22 
+ENTRADA:= 2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D41
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- STATEMENT
+    |-- int
+    `-- EXPRESSION
+    |   `-- ASSIGN_EXP
+    |       |-- BINARY_EXP
+    |           `-- PRIMARY_EXPR
+    |           |   `-- CONSTANT
+    |           |       `-- int
+    |       |-- int
+    |       `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 var_name 22 equal 41 
+ENTRADA:2.0 ; c = 3 ; a = a + b ; } $ 
+ACCION:	D18
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- STATEMENT
+    |-- int
+    `-- EXPRESSION
+    |   `-- ASSIGN_EXP
+    |       |-- BINARY_EXP
+    |           `-- PRIMARY_EXPR
+    |           |   `-- CONSTANT
+    |           |       `-- int
+    |       |-- int
+    |       `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+
+Pop:18
+Pop:float_literal
+
+AGREGA:float_literal
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 var_name 22 equal 41 CONSTANT 26 
+ENTRADA:; c = 3 ; a = a + b ; } $ 
+ACCION: R36: CONSTANT->float_literal
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- CONSTANT
+    `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+
+Pop:26
+Pop:CONSTANT
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 var_name 22 equal 41 PRIMARY_EXPR 29 
+ENTRADA:; c = 3 ; a = a + b ; } $ 
+ACCION: R33: PRIMARY_EXPR->CONSTANT
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- PRIMARY_EXPR
+    `-- CONSTANT
+        `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+
+Pop:29
+Pop:PRIMARY_EXPR
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 var_name 22 equal 41 BINARY_EXP 55 
+ENTRADA:; c = 3 ; a = a + b ; } $ 
+ACCION: R28: BINARY_EXP->PRIMARY_EXPR
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- BINARY_EXP
+    `-- PRIMARY_EXPR
+        `-- CONSTANT
+        |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+
+Pop:55
+Pop:BINARY_EXP
+Pop:41
+Pop:equal
+
+AGREGA:equal
+Pop:22
+Pop:var_name
+
+AGREGA:var_name
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 ASSIGN_EXP 24 
+ENTRADA:; c = 3 ; a = a + b ; } $ 
+ACCION: R25: ASSIGN_EXP->var_nameequalBINARY_EXP
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- ASSIGN_EXP
+    |-- BINARY_EXP
+    |   `-- PRIMARY_EXPR
+    |   |   `-- CONSTANT
+    |   |       `-- int
+    |-- int
+    `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+
+Pop:24
+Pop:ASSIGN_EXP
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 EXPRESSION 27 
+ENTRADA:; c = 3 ; a = a + b ; } $ 
+ACCION: R24: EXPRESSION->ASSIGN_EXP
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- EXPRESSION
+    `-- ASSIGN_EXP
+        |-- BINARY_EXP
+            `-- PRIMARY_EXPR
+                `-- CONSTANT
+                    `-- int
+        |-- int
+        `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 EXPRESSION 27 
+ENTRADA:; c = 3 ; a = a + b ; } $ 
+ACCION:	D47
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- EXPRESSION
+    `-- ASSIGN_EXP
+        |-- BINARY_EXP
+            `-- PRIMARY_EXPR
+                `-- CONSTANT
+                    `-- int
+        |-- int
+        `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+
+Pop:47
+Pop:semi_colon
+
+AGREGA:semi_colon
+Pop:27
+Pop:EXPRESSION
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 
+ENTRADA:c = 3 ; a = a + b ; } $ 
+ACCION: R15: STATEMENT->EXPRESSIONsemi_colon
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- STATEMENT
+    |-- int
+    `-- EXPRESSION
+        `-- ASSIGN_EXP
+        |   |-- BINARY_EXP
+        |   |   `-- PRIMARY_EXPR
+        |   |       `-- CONSTANT
+        |   |       |   `-- int
+        |   |-- int
+        |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 
+ENTRADA:c = 3 ; a = a + b ; } $ 
+ACCION:	D22
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- STATEMENT
+    |-- int
+    `-- EXPRESSION
+        `-- ASSIGN_EXP
+        |   |-- BINARY_EXP
+        |   |   `-- PRIMARY_EXPR
+        |   |       `-- CONSTANT
+        |   |       |   `-- int
+        |   |-- int
+        |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 var_name 22 
+ENTRADA:= 3 ; a = a + b ; } $ 
+ACCION:	D41
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- STATEMENT
+    |-- int
+    `-- EXPRESSION
+        `-- ASSIGN_EXP
+        |   |-- BINARY_EXP
+        |   |   `-- PRIMARY_EXPR
+        |   |       `-- CONSTANT
+        |   |       |   `-- int
+        |   |-- int
+        |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 
+ENTRADA:3 ; a = a + b ; } $ 
+ACCION:	D20
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+`-- STATEMENT
+    |-- int
+    `-- EXPRESSION
+        `-- ASSIGN_EXP
+        |   |-- BINARY_EXP
+        |   |   `-- PRIMARY_EXPR
+        |   |       `-- CONSTANT
+        |   |       |   `-- int
+        |   |-- int
+        |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+
+Pop:20
+Pop:int_literal
+
+AGREGA:int_literal
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 CONSTANT 26 
+ENTRADA:; a = a + b ; } $ 
+ACCION: R35: CONSTANT->int_literal
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- CONSTANT
+    `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:26
+Pop:CONSTANT
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 PRIMARY_EXPR 29 
+ENTRADA:; a = a + b ; } $ 
+ACCION: R33: PRIMARY_EXPR->CONSTANT
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- PRIMARY_EXPR
+    `-- CONSTANT
+    |   `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:29
+Pop:PRIMARY_EXPR
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 BINARY_EXP 55 
+ENTRADA:; a = a + b ; } $ 
+ACCION: R28: BINARY_EXP->PRIMARY_EXPR
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- BINARY_EXP
+    `-- PRIMARY_EXPR
+    |   `-- CONSTANT
+    |       `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:55
+Pop:BINARY_EXP
+Pop:41
+Pop:equal
+
+AGREGA:equal
+Pop:22
+Pop:var_name
+
+AGREGA:var_name
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 ASSIGN_EXP 24 
+ENTRADA:; a = a + b ; } $ 
+ACCION: R25: ASSIGN_EXP->var_nameequalBINARY_EXP
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- ASSIGN_EXP
+    |-- BINARY_EXP
+        `-- PRIMARY_EXPR
+            `-- CONSTANT
+            |   `-- float
+    |-- float
+    `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:24
+Pop:ASSIGN_EXP
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 EXPRESSION 27 
+ENTRADA:; a = a + b ; } $ 
+ACCION: R24: EXPRESSION->ASSIGN_EXP
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- EXPRESSION
+    `-- ASSIGN_EXP
+    |   |-- BINARY_EXP
+    |   |   `-- PRIMARY_EXPR
+    |   |   |   `-- CONSTANT
+    |   |   |   |   `-- float
+    |   |-- float
+    |   `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 EXPRESSION 27 
+ENTRADA:; a = a + b ; } $ 
+ACCION:	D47
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- EXPRESSION
+    `-- ASSIGN_EXP
+    |   |-- BINARY_EXP
+    |   |   `-- PRIMARY_EXPR
+    |   |   |   `-- CONSTANT
+    |   |   |   |   `-- float
+    |   |-- float
+    |   `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:47
+Pop:semi_colon
+
+AGREGA:semi_colon
+Pop:27
+Pop:EXPRESSION
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 
+ENTRADA:a = a + b ; } $ 
+ACCION: R15: STATEMENT->EXPRESSIONsemi_colon
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- STATEMENT
+    |-- float
+    `-- EXPRESSION
+    |   `-- ASSIGN_EXP
+    |       |-- BINARY_EXP
+    |           `-- PRIMARY_EXPR
+    |           |   `-- CONSTANT
+    |           |       `-- float
+    |       |-- float
+    |       `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 
+ENTRADA:a = a + b ; } $ 
+ACCION:	D22
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- STATEMENT
+    |-- float
+    `-- EXPRESSION
+    |   `-- ASSIGN_EXP
+    |       |-- BINARY_EXP
+    |           `-- PRIMARY_EXPR
+    |           |   `-- CONSTANT
+    |           |       `-- float
+    |       |-- float
+    |       `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 var_name 22 
+ENTRADA:= a + b ; } $ 
+ACCION:	D41
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- STATEMENT
+    |-- float
+    `-- EXPRESSION
+    |   `-- ASSIGN_EXP
+    |       |-- BINARY_EXP
+    |           `-- PRIMARY_EXPR
+    |           |   `-- CONSTANT
+    |           |       `-- float
+    |       |-- float
+    |       `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 
+ENTRADA:a + b ; } $ 
+ACCION:	D54
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+`-- STATEMENT
+    |-- float
+    `-- EXPRESSION
+    |   `-- ASSIGN_EXP
+    |       |-- BINARY_EXP
+    |           `-- PRIMARY_EXPR
+    |           |   `-- CONSTANT
+    |           |       `-- float
+    |       |-- float
+    |       `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:54
+Pop:var_name
+
+AGREGA:var_name
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 PRIMARY_EXPR 29 
+ENTRADA:+ b ; } $ 
+ACCION: R32: PRIMARY_EXPR->var_name
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- PRIMARY_EXPR
+    `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:29
+Pop:PRIMARY_EXPR
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 BINARY_EXP 55 
+ENTRADA:+ b ; } $ 
+ACCION: R28: BINARY_EXP->PRIMARY_EXPR
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- BINARY_EXP
+    `-- PRIMARY_EXPR
+        `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 BINARY_EXP 55 
+ENTRADA:+ b ; } $ 
+ACCION:	D43
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- BINARY_EXP
+    `-- PRIMARY_EXPR
+        `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:43
+Pop:arith_op
+
+AGREGA:arith_op
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 BINARY_EXP 55 BINARY_OP 46 
+ENTRADA:b ; } $ 
+ACCION: R31: BINARY_OP->arith_op
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+|-- BINARY_EXP
+|   `-- PRIMARY_EXPR
+|       `-- float
+`-- BINARY_OP
+    `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 BINARY_EXP 55 BINARY_OP 46 
+ENTRADA:b ; } $ 
+ACCION:	D54
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+|-- BINARY_EXP
+|   `-- PRIMARY_EXPR
+|       `-- float
+`-- BINARY_OP
+    `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:54
+Pop:var_name
+
+AGREGA:var_name
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 BINARY_EXP 55 BINARY_OP 46 PRIMARY_EXPR 57 
+ENTRADA:; } $ 
+ACCION: R32: PRIMARY_EXPR->var_name
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+|-- BINARY_EXP
+|   `-- PRIMARY_EXPR
+|       `-- float
+|-- BINARY_OP
+|   `-- float
+`-- PRIMARY_EXPR
+    `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:57
+Pop:PRIMARY_EXPR
+Pop:46
+Pop:BINARY_OP
+Pop:55
+Pop:BINARY_EXP
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 var_name 22 equal 41 BINARY_EXP 55 
+ENTRADA:; } $ 
+ACCION: R27: BINARY_EXP->BINARY_EXPBINARY_OPPRIMARY_EXPR
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- BINARY_EXP
+    |-- PRIMARY_EXPR
+    |   `-- float
+    |-- BINARY_OP
+    |   `-- float
+    `-- BINARY_EXP
+        `-- PRIMARY_EXPR
+        |   `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:55
+Pop:BINARY_EXP
+Pop:41
+Pop:equal
+
+AGREGA:equal
+Pop:22
+Pop:var_name
+
+AGREGA:var_name
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 ASSIGN_EXP 24 
+ENTRADA:; } $ 
+ACCION: R25: ASSIGN_EXP->var_nameequalBINARY_EXP
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- ASSIGN_EXP
+    |-- BINARY_EXP
+    |   |-- PRIMARY_EXPR
+    |       `-- float
+    |   |-- BINARY_OP
+    |       `-- float
+    |   `-- BINARY_EXP
+    |   |   `-- PRIMARY_EXPR
+    |   |       `-- float
+    |-- float
+    `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:24
+Pop:ASSIGN_EXP
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 EXPRESSION 27 
+ENTRADA:; } $ 
+ACCION: R24: EXPRESSION->ASSIGN_EXP
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- EXPRESSION
+    `-- ASSIGN_EXP
+        |-- BINARY_EXP
+            |-- PRIMARY_EXPR
+            |   `-- float
+            |-- BINARY_OP
+            |   `-- float
+            `-- BINARY_EXP
+                `-- PRIMARY_EXPR
+                    `-- float
+        |-- float
+        `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 EXPRESSION 27 
+ENTRADA:; } $ 
+ACCION:	D47
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- EXPRESSION
+    `-- ASSIGN_EXP
+        |-- BINARY_EXP
+            |-- PRIMARY_EXPR
+            |   `-- float
+            |-- BINARY_OP
+            |   `-- float
+            `-- BINARY_EXP
+                `-- PRIMARY_EXPR
+                    `-- float
+        |-- float
+        `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:47
+Pop:semi_colon
+
+AGREGA:semi_colon
+Pop:27
+Pop:EXPRESSION
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 STATEMENT 31 
+ENTRADA:} $ 
+ACCION: R15: STATEMENT->EXPRESSIONsemi_colon
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- STATEMENT
+    |-- float
+    `-- EXPRESSION
+        `-- ASSIGN_EXP
+        |   |-- BINARY_EXP
+        |   |   |-- PRIMARY_EXPR
+        |   |   |   `-- float
+        |   |   |-- BINARY_OP
+        |   |   |   `-- float
+        |   |   `-- BINARY_EXP
+        |   |       `-- PRIMARY_EXPR
+        |   |       |   `-- float
+        |   |-- float
+        |   `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+
+Deriva a epsilon, agrega el terminal como hijo de /...
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 STATEMENT 31 STATEMENT_LIST 48 
+ENTRADA:} $ 
+ACCION: R13: STATEMENT_LIST->epsilon
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- int
+|       |   |-- int
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   |-- PRIMARY_EXPR
+|       |   |   |   `-- float
+|       |   |   |-- BINARY_OP
+|       |   |   |   `-- float
+|       |   |   `-- BINARY_EXP
+|       |   |       `-- PRIMARY_EXPR
+|       |   |       |   `-- float
+|       |   |-- float
+|       |   `-- float
+`-- STATEMENT_LIST
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT_LIST
+
+Pop:48
+Pop:STATEMENT_LIST
+Pop:31
+Pop:STATEMENT
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT 31 STATEMENT_LIST 48 
+ENTRADA:} $ 
+ACCION: R12: STATEMENT_LIST->STATEMENTSTATEMENT_LIST
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- int
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- int
+|   |       |-- int
+|   |       `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   `-- PRIMARY_EXPR
+|       |   |       `-- CONSTANT
+|       |   |       |   `-- float
+|       |   |-- float
+|       |   `-- float
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           |-- PRIMARY_EXPR
+|   |               `-- float
+|   |           |-- BINARY_OP
+|   |               `-- float
+|   |           `-- BINARY_EXP
+|   |           |   `-- PRIMARY_EXPR
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- STATEMENT_LIST
+    |-- STATEMENT_LIST
+    `-- STATEMENT
+        |-- int
+        `-- EXPRESSION
+        |   `-- ASSIGN_EXP
+        |       |-- BINARY_EXP
+        |       |   `-- PRIMARY_EXPR
+        |       |   |   `-- CONSTANT
+        |       |   |       `-- int
+        |       |-- int
+        |       `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+
+Pop:48
+Pop:STATEMENT_LIST
+Pop:31
+Pop:STATEMENT
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT 31 STATEMENT_LIST 48 
+ENTRADA:} $ 
+ACCION: R12: STATEMENT_LIST->STATEMENTSTATEMENT_LIST
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           `-- PRIMARY_EXPR
+|   |           |   `-- CONSTANT
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|       `-- ASSIGN_EXP
+|       |   |-- BINARY_EXP
+|       |   |   |-- PRIMARY_EXPR
+|       |   |   |   `-- float
+|       |   |   |-- BINARY_OP
+|       |   |   |   `-- float
+|       |   |   `-- BINARY_EXP
+|       |   |       `-- PRIMARY_EXPR
+|       |   |       |   `-- float
+|       |   |-- float
+|       |   `-- float
+`-- STATEMENT_LIST
+    |-- STATEMENT_LIST
+        |-- STATEMENT_LIST
+        `-- STATEMENT
+            |-- int
+            `-- EXPRESSION
+            |   `-- ASSIGN_EXP
+            |   |   |-- BINARY_EXP
+            |   |   |   `-- PRIMARY_EXPR
+            |   |   |   |   `-- CONSTANT
+            |   |   |   |       `-- int
+            |   |   |-- int
+            |   |   `-- int
+    `-- STATEMENT
+    |   |-- int
+    |   `-- EXPRESSION
+    |   |   `-- ASSIGN_EXP
+    |   |       |-- BINARY_EXP
+    |   |       |   `-- PRIMARY_EXPR
+    |   |       |   |   `-- CONSTANT
+    |   |       |   |       `-- int
+    |   |       |-- int
+    |   |       `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+
+Pop:48
+Pop:STATEMENT_LIST
+Pop:31
+Pop:STATEMENT
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT 31 STATEMENT_LIST 48 
+ENTRADA:} $ 
+ACCION: R12: STATEMENT_LIST->STATEMENTSTATEMENT_LIST
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+|-- STATEMENT
+|   |-- float
+|   `-- EXPRESSION
+|   |   `-- ASSIGN_EXP
+|   |       |-- BINARY_EXP
+|   |           |-- PRIMARY_EXPR
+|   |               `-- float
+|   |           |-- BINARY_OP
+|   |               `-- float
+|   |           `-- BINARY_EXP
+|   |           |   `-- PRIMARY_EXPR
+|   |           |       `-- float
+|   |       |-- float
+|   |       `-- float
+`-- STATEMENT_LIST
+    |-- STATEMENT_LIST
+    |   |-- STATEMENT_LIST
+    |       |-- STATEMENT_LIST
+    |       `-- STATEMENT
+    |           |-- int
+    |           `-- EXPRESSION
+    |               `-- ASSIGN_EXP
+    |               |   |-- BINARY_EXP
+    |               |   |   `-- PRIMARY_EXPR
+    |               |   |       `-- CONSTANT
+    |               |   |           `-- int
+    |               |   |-- int
+    |               |   `-- int
+    |   `-- STATEMENT
+    |   |   |-- int
+    |   |   `-- EXPRESSION
+    |   |   |   `-- ASSIGN_EXP
+    |   |   |   |   |-- BINARY_EXP
+    |   |   |   |   |   `-- PRIMARY_EXPR
+    |   |   |   |   |   |   `-- CONSTANT
+    |   |   |   |   |   |   |   `-- int
+    |   |   |   |   |-- int
+    |   |   |   |   `-- int
+    `-- STATEMENT
+        |-- float
+        `-- EXPRESSION
+            `-- ASSIGN_EXP
+                |-- BINARY_EXP
+                |   `-- PRIMARY_EXPR
+                |   |   `-- CONSTANT
+                |   |       `-- float
+                |-- float
+                `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:48
+Pop:STATEMENT_LIST
+Pop:31
+Pop:STATEMENT
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 INTERNAL_DECLARATIONS 12 STATEMENT_LIST 32 
+ENTRADA:} $ 
+ACCION: R12: STATEMENT_LIST->STATEMENTSTATEMENT_LIST
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+|-- INTERNAL_DECLARATIONS
+|   |-- INTERNAL_DECLARATIONS
+|   |   |-- INTERNAL_DECLARATIONS
+|   |   `-- DECLARATION
+|   |       |-- int
+|   |       |-- VAR_LIST
+|   |       |   |-- VAR_ITEM
+|   |       |   |   `-- int
+|   |       |   |-- int
+|   |       |   `-- VAR_LIST
+|   |       |       `-- VAR_ITEM
+|   |       |       |   `-- int
+|   |       `-- VAR_TYPE
+|   |           `-- int
+|   `-- DECLARATION
+|       |-- float
+|       |-- VAR_LIST
+|           `-- VAR_ITEM
+|           |   `-- float
+|       `-- VAR_TYPE
+|       |   `-- int
+`-- STATEMENT_LIST
+    |-- STATEMENT_LIST
+        |-- STATEMENT_LIST
+        |   |-- STATEMENT_LIST
+        |       |-- STATEMENT_LIST
+        |       `-- STATEMENT
+        |       |   |-- int
+        |       |   `-- EXPRESSION
+        |       |       `-- ASSIGN_EXP
+        |       |       |   |-- BINARY_EXP
+        |       |       |   |   `-- PRIMARY_EXPR
+        |       |       |   |       `-- CONSTANT
+        |       |       |   |           `-- int
+        |       |       |   |-- int
+        |       |       |   `-- int
+        |   `-- STATEMENT
+        |   |   |-- int
+        |   |   `-- EXPRESSION
+        |   |       `-- ASSIGN_EXP
+        |   |       |   |-- BINARY_EXP
+        |   |       |   |   `-- PRIMARY_EXPR
+        |   |       |   |   |   `-- CONSTANT
+        |   |       |   |   |   |   `-- int
+        |   |       |   |-- int
+        |   |       |   `-- int
+        `-- STATEMENT
+            |-- float
+            `-- EXPRESSION
+                `-- ASSIGN_EXP
+                |   |-- BINARY_EXP
+                |   |   `-- PRIMARY_EXPR
+                |   |   |   `-- CONSTANT
+                |   |   |       `-- float
+                |   |-- float
+                |   `-- float
+    `-- STATEMENT
+    |   |-- float
+    |   `-- EXPRESSION
+    |   |   `-- ASSIGN_EXP
+    |   |   |   |-- BINARY_EXP
+    |   |   |   |   |-- PRIMARY_EXPR
+    |   |   |   |       `-- float
+    |   |   |   |   |-- BINARY_OP
+    |   |   |   |       `-- float
+    |   |   |   |   `-- BINARY_EXP
+    |   |   |   |   |   `-- PRIMARY_EXPR
+    |   |   |   |   |       `-- float
+    |   |   |   |-- float
+    |   |   |   `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:32
+Pop:STATEMENT_LIST
+Pop:12
+Pop:INTERNAL_DECLARATIONS
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 FUNCTION_BODY 11 
+ENTRADA:} $ 
+ACCION: R9: FUNCTION_BODY->INTERNAL_DECLARATIONSSTATEMENT_LIST
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- FUNCTION_BODY
+    |-- STATEMENT_LIST
+    |   |-- STATEMENT_LIST
+    |   |   |-- STATEMENT_LIST
+    |   |   |   |-- STATEMENT_LIST
+    |   |   |   |   |-- STATEMENT_LIST
+    |   |   |   |   `-- STATEMENT
+    |   |   |   |       |-- int
+    |   |   |   |       `-- EXPRESSION
+    |   |   |   |           `-- ASSIGN_EXP
+    |   |   |   |               |-- BINARY_EXP
+    |   |   |   |               |   `-- PRIMARY_EXPR
+    |   |   |   |               |       `-- CONSTANT
+    |   |   |   |               |           `-- int
+    |   |   |   |               |-- int
+    |   |   |   |               `-- int
+    |   |   |   `-- STATEMENT
+    |   |   |       |-- int
+    |   |   |       `-- EXPRESSION
+    |   |   |       |   `-- ASSIGN_EXP
+    |   |   |       |   |   |-- BINARY_EXP
+    |   |   |       |   |       `-- PRIMARY_EXPR
+    |   |   |       |   |       |   `-- CONSTANT
+    |   |   |       |   |       |   |   `-- int
+    |   |   |       |   |   |-- int
+    |   |   |       |   |   `-- int
+    |   |   `-- STATEMENT
+    |   |       |-- float
+    |   |       `-- EXPRESSION
+    |   |       |   `-- ASSIGN_EXP
+    |   |       |       |-- BINARY_EXP
+    |   |       |       |   `-- PRIMARY_EXPR
+    |   |       |       |       `-- CONSTANT
+    |   |       |       |           `-- float
+    |   |       |       |-- float
+    |   |       |       `-- float
+    |   `-- STATEMENT
+    |       |-- float
+    |       `-- EXPRESSION
+    |       |   `-- ASSIGN_EXP
+    |       |       |-- BINARY_EXP
+    |       |           |-- PRIMARY_EXPR
+    |       |               `-- float
+    |       |           |-- BINARY_OP
+    |       |               `-- float
+    |       |           `-- BINARY_EXP
+    |       |           |   `-- PRIMARY_EXPR
+    |       |           |   |   `-- float
+    |       |       |-- float
+    |       |       `-- float
+    `-- INTERNAL_DECLARATIONS
+        |-- INTERNAL_DECLARATIONS
+            |-- INTERNAL_DECLARATIONS
+            `-- DECLARATION
+                |-- int
+                |-- VAR_LIST
+                    |-- VAR_ITEM
+                    |   `-- int
+                    |-- int
+                    `-- VAR_LIST
+                        `-- VAR_ITEM
+                        |   `-- int
+                `-- VAR_TYPE
+                |   `-- int
+        `-- DECLARATION
+        |   |-- float
+        |   |-- VAR_LIST
+        |       `-- VAR_ITEM
+        |           `-- float
+        |   `-- VAR_TYPE
+        |   |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:FUNCTION_BODY
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 FUNCTION_BODY 11 
+ENTRADA:} $ 
+ACCION:	D15
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- FUNCTION_BODY
+    |-- STATEMENT_LIST
+    |   |-- STATEMENT_LIST
+    |   |   |-- STATEMENT_LIST
+    |   |   |   |-- STATEMENT_LIST
+    |   |   |   |   |-- STATEMENT_LIST
+    |   |   |   |   `-- STATEMENT
+    |   |   |   |       |-- int
+    |   |   |   |       `-- EXPRESSION
+    |   |   |   |           `-- ASSIGN_EXP
+    |   |   |   |               |-- BINARY_EXP
+    |   |   |   |               |   `-- PRIMARY_EXPR
+    |   |   |   |               |       `-- CONSTANT
+    |   |   |   |               |           `-- int
+    |   |   |   |               |-- int
+    |   |   |   |               `-- int
+    |   |   |   `-- STATEMENT
+    |   |   |       |-- int
+    |   |   |       `-- EXPRESSION
+    |   |   |       |   `-- ASSIGN_EXP
+    |   |   |       |   |   |-- BINARY_EXP
+    |   |   |       |   |       `-- PRIMARY_EXPR
+    |   |   |       |   |       |   `-- CONSTANT
+    |   |   |       |   |       |   |   `-- int
+    |   |   |       |   |   |-- int
+    |   |   |       |   |   `-- int
+    |   |   `-- STATEMENT
+    |   |       |-- float
+    |   |       `-- EXPRESSION
+    |   |       |   `-- ASSIGN_EXP
+    |   |       |       |-- BINARY_EXP
+    |   |       |       |   `-- PRIMARY_EXPR
+    |   |       |       |       `-- CONSTANT
+    |   |       |       |           `-- float
+    |   |       |       |-- float
+    |   |       |       `-- float
+    |   `-- STATEMENT
+    |       |-- float
+    |       `-- EXPRESSION
+    |       |   `-- ASSIGN_EXP
+    |       |       |-- BINARY_EXP
+    |       |           |-- PRIMARY_EXPR
+    |       |               `-- float
+    |       |           |-- BINARY_OP
+    |       |               `-- float
+    |       |           `-- BINARY_EXP
+    |       |           |   `-- PRIMARY_EXPR
+    |       |           |   |   `-- float
+    |       |       |-- float
+    |       |       `-- float
+    `-- INTERNAL_DECLARATIONS
+        |-- INTERNAL_DECLARATIONS
+            |-- INTERNAL_DECLARATIONS
+            `-- DECLARATION
+                |-- int
+                |-- VAR_LIST
+                    |-- VAR_ITEM
+                    |   `-- int
+                    |-- int
+                    `-- VAR_LIST
+                        `-- VAR_ITEM
+                        |   `-- int
+                `-- VAR_TYPE
+                |   `-- int
+        `-- DECLARATION
+        |   |-- float
+        |   |-- VAR_LIST
+        |       `-- VAR_ITEM
+        |           `-- float
+        |   `-- VAR_TYPE
+        |   |   `-- int
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:FUNCTION_BODY
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+
+Pop:15
+Pop:right_curly_bracket
+
+AGREGA:right_curly_bracket
+Pop:11
+Pop:FUNCTION_BODY
+Pop:7
+Pop:left_curly_bracket
+
+AGREGA:left_curly_bracket
+Pop:6
+Pop:right_parenthesis
+
+AGREGA:right_parenthesis
+Pop:5
+Pop:left_parenthesis
+
+AGREGA:left_parenthesis
+Pop:4
+Pop:main
+
+AGREGA:main
+Pop:1
+Pop:int
+
+AGREGA:int
+PILA:	$ 0 MAIN_DEF 2 
+ENTRADA:$ 
+ACCION: R8: MAIN_DEF->intmainleft_parenthesisright_parenthesisleft_curly_bracketFUNCTION_BODYright_curly_bracket
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- MAIN_DEF
+    |-- float
+    |-- FUNCTION_BODY
+    |   |-- STATEMENT_LIST
+    |   |   |-- STATEMENT_LIST
+    |   |   |   |-- STATEMENT_LIST
+    |   |   |   |   |-- STATEMENT_LIST
+    |   |   |   |   |   |-- STATEMENT_LIST
+    |   |   |   |   |   `-- STATEMENT
+    |   |   |   |   |       |-- int
+    |   |   |   |   |       `-- EXPRESSION
+    |   |   |   |   |           `-- ASSIGN_EXP
+    |   |   |   |   |               |-- BINARY_EXP
+    |   |   |   |   |               |   `-- PRIMARY_EXPR
+    |   |   |   |   |               |       `-- CONSTANT
+    |   |   |   |   |               |           `-- int
+    |   |   |   |   |               |-- int
+    |   |   |   |   |               `-- int
+    |   |   |   |   `-- STATEMENT
+    |   |   |   |       |-- int
+    |   |   |   |       `-- EXPRESSION
+    |   |   |   |       |   `-- ASSIGN_EXP
+    |   |   |   |       |   |   |-- BINARY_EXP
+    |   |   |   |       |   |       `-- PRIMARY_EXPR
+    |   |   |   |       |   |       |   `-- CONSTANT
+    |   |   |   |       |   |       |   |   `-- int
+    |   |   |   |       |   |   |-- int
+    |   |   |   |       |   |   `-- int
+    |   |   |   `-- STATEMENT
+    |   |   |       |-- float
+    |   |   |       `-- EXPRESSION
+    |   |   |       |   `-- ASSIGN_EXP
+    |   |   |       |       |-- BINARY_EXP
+    |   |   |       |       |   `-- PRIMARY_EXPR
+    |   |   |       |       |       `-- CONSTANT
+    |   |   |       |       |           `-- float
+    |   |   |       |       |-- float
+    |   |   |       |       `-- float
+    |   |   `-- STATEMENT
+    |   |       |-- float
+    |   |       `-- EXPRESSION
+    |   |       |   `-- ASSIGN_EXP
+    |   |       |       |-- BINARY_EXP
+    |   |       |           |-- PRIMARY_EXPR
+    |   |       |               `-- float
+    |   |       |           |-- BINARY_OP
+    |   |       |               `-- float
+    |   |       |           `-- BINARY_EXP
+    |   |       |           |   `-- PRIMARY_EXPR
+    |   |       |           |   |   `-- float
+    |   |       |       |-- float
+    |   |       |       `-- float
+    |   `-- INTERNAL_DECLARATIONS
+    |       |-- INTERNAL_DECLARATIONS
+    |           |-- INTERNAL_DECLARATIONS
+    |           `-- DECLARATION
+    |               |-- int
+    |               |-- VAR_LIST
+    |                   |-- VAR_ITEM
+    |                   |   `-- int
+    |                   |-- int
+    |                   `-- VAR_LIST
+    |                       `-- VAR_ITEM
+    |                       |   `-- int
+    |               `-- VAR_TYPE
+    |               |   `-- int
+    |       `-- DECLARATION
+    |       |   |-- float
+    |       |   |-- VAR_LIST
+    |       |       `-- VAR_ITEM
+    |       |           `-- float
+    |       |   `-- VAR_TYPE
+    |       |   |   `-- int
+    |-- float
+    |-- float
+    |-- float
+    |-- float
+    `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:MAIN_DEF
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:FUNCTION_BODY
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+Pop:2
+Pop:MAIN_DEF
+PILA:	$ 0 PROGRAM 3 
+ENTRADA:$ 
+ACCION: R1: PROGRAM->MAIN_DEF
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- PROGRAM
+    `-- MAIN_DEF
+        |-- float
+        |-- FUNCTION_BODY
+        |   |-- STATEMENT_LIST
+        |   |   |-- STATEMENT_LIST
+        |   |   |   |-- STATEMENT_LIST
+        |   |   |   |   |-- STATEMENT_LIST
+        |   |   |   |   |   |-- STATEMENT_LIST
+        |   |   |   |   |   `-- STATEMENT
+        |   |   |   |   |       |-- int
+        |   |   |   |   |       `-- EXPRESSION
+        |   |   |   |   |           `-- ASSIGN_EXP
+        |   |   |   |   |               |-- BINARY_EXP
+        |   |   |   |   |               |   `-- PRIMARY_EXPR
+        |   |   |   |   |               |       `-- CONSTANT
+        |   |   |   |   |               |           `-- int
+        |   |   |   |   |               |-- int
+        |   |   |   |   |               `-- int
+        |   |   |   |   `-- STATEMENT
+        |   |   |   |       |-- int
+        |   |   |   |       `-- EXPRESSION
+        |   |   |   |       |   `-- ASSIGN_EXP
+        |   |   |   |       |   |   |-- BINARY_EXP
+        |   |   |   |       |   |       `-- PRIMARY_EXPR
+        |   |   |   |       |   |       |   `-- CONSTANT
+        |   |   |   |       |   |       |   |   `-- int
+        |   |   |   |       |   |   |-- int
+        |   |   |   |       |   |   `-- int
+        |   |   |   `-- STATEMENT
+        |   |   |       |-- float
+        |   |   |       `-- EXPRESSION
+        |   |   |       |   `-- ASSIGN_EXP
+        |   |   |       |       |-- BINARY_EXP
+        |   |   |       |       |   `-- PRIMARY_EXPR
+        |   |   |       |       |       `-- CONSTANT
+        |   |   |       |       |           `-- float
+        |   |   |       |       |-- float
+        |   |   |       |       `-- float
+        |   |   `-- STATEMENT
+        |   |       |-- float
+        |   |       `-- EXPRESSION
+        |   |       |   `-- ASSIGN_EXP
+        |   |       |       |-- BINARY_EXP
+        |   |       |           |-- PRIMARY_EXPR
+        |   |       |               `-- float
+        |   |       |           |-- BINARY_OP
+        |   |       |               `-- float
+        |   |       |           `-- BINARY_EXP
+        |   |       |           |   `-- PRIMARY_EXPR
+        |   |       |           |   |   `-- float
+        |   |       |       |-- float
+        |   |       |       `-- float
+        |   `-- INTERNAL_DECLARATIONS
+        |       |-- INTERNAL_DECLARATIONS
+        |           |-- INTERNAL_DECLARATIONS
+        |           `-- DECLARATION
+        |               |-- int
+        |               |-- VAR_LIST
+        |                   |-- VAR_ITEM
+        |                   |   `-- int
+        |                   |-- int
+        |                   `-- VAR_LIST
+        |                       `-- VAR_ITEM
+        |                       |   `-- int
+        |               `-- VAR_TYPE
+        |               |   `-- int
+        |       `-- DECLARATION
+        |       |   |-- float
+        |       |   |-- VAR_LIST
+        |       |       `-- VAR_ITEM
+        |       |           `-- float
+        |       |   `-- VAR_TYPE
+        |       |   |   `-- int
+        |-- float
+        |-- float
+        |-- float
+        |-- float
+        `-- float
+
+--<Preorder>--
+Dato del Nodo:/
+Dato del Nodo:PROGRAM
+Dato del Nodo:MAIN_DEF
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:FUNCTION_BODY
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT_LIST
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:STATEMENT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:CONSTANT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:STATEMENT
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:EXPRESSION
+Dato del Nodo:ASSIGN_EXP
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_OP
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:BINARY_EXP
+Dato del Nodo:PRIMARY_EXPR
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:INTERNAL_DECLARATIONS
+Dato del Nodo:DECLARATION
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:1
+Dato del Nodo:DECLARATION
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_LIST
+Dato del Nodo:VAR_ITEM
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:VAR_TYPE
+Dato del Nodo:int, Valor de Dato:2.0
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+Dato del Nodo:float, Valor de Dato:3
+
+PILA:	$ 0 PROGRAM 3 
+ENTRADA:$ 
+Cadena Aceptada
 
 
