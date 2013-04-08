@@ -447,7 +447,7 @@ void imprimeFormato(int tipo,int i,int valor){
 }
 
 /**
- * Metodo que hace las corridas del analizador lexico
+ * Metodo que hace las corridas del analizador sintactico
  *
  * @param void
  * @return void
@@ -468,6 +468,10 @@ int anasin(){
     struct Node* root = create_tree("/");
     
 	while (1) {
+        // Arbol
+        fprintf(stdout, "\n--Arbol--\n");
+        traverse_node(root, print_string);
+        
 		// Toma primer elemento
 		aux = convierteAString(top(&pila));
         //fprintf(stdout, "(%d,%s) Tabla: %d", atoi(aux),input[i],tablaR[atoi(aux)][convierteAMat(input[i])].tipo);
@@ -503,11 +507,17 @@ int anasin(){
 				dos		= gramatica[actual.valor].cadenaDerivacion[2];
 			}
 			fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
-            int cuentaHijo = 0;
-            int hijosDerivaciones = gramatica[actual.valor].derivaciones;
-            struct Node* hijos = (struct Node *)malloc(sizeof(struct Node)*hijosDerivaciones);
+            int cuentaHijo = 0,cuentaCreaHijo;
+            int hijosDerivaciones = gramatica[actual.valor].derivaciones - 1;
             
+            fprintf(stdout, "hijosDerivaciones: %d\n", hijosDerivaciones);
+            struct Node* hijos[hijosDerivaciones];
             struct Node* izq;
+            
+            for(cuentaCreaHijo = 0; cuentaCreaHijo < hijosDerivaciones; cuentaCreaHijo++){
+                hijos[cuentaCreaHijo] = (struct Node *) malloc(sizeof(struct Node));
+            }
+            
             
             /* CODIGO DE TABLA DE SIMBOLOS
              
@@ -562,39 +572,40 @@ int anasin(){
                     if(esTerminal(p)){
                         fprintf(stdout, "\nEs Terminal\n");
                         // Lo metes directo como hijo de slash
+                        
+                        /*
+                            TODO: en vez de agregar p se agrega el valor de p
+                         */
+                        
                         struct Node* temp = create_node_under(root, p);
-                        hijos[cuentaHijo] = *temp;
+                        hijos[cuentaHijo] = temp;
                         cuentaHijo++;
                         
                     } else if(esNoTerminal(p)){
                         fprintf(stdout, "\nEs No Terminal\n");
                         // Lo buscas en el arbol entre los hijos del guitarrista de guns n roses
                         // Al encontrarlo marcas el nodo como hijo
-                        
+                        fprintf(stdout, "\nBusco %s...",p);
                         struct Node* temp1 = searchFirstLevel(root, p , 1, strcmp);
                         if(temp1 == NULL){
-                            fprintf(stdout, "No estaaa!\n");
+                            fprintf(stdout, "No se encuentra.\n");
                         }
-                        hijos[cuentaHijo] = *temp1;
+                        hijos[cuentaHijo] = temp1;
                         cuentaHijo++;
                     }
                     
                     if (eq(p,uno)) {
-                        
-                        fprintf(stdout, "\nIF RARO\n");
-                        
                         // Agregas el lado izquierdo (cero) al arbol
-                        fprintf(stdout, "\nIZQ\n");
+                        fprintf(stdout, "\nAgrega lado izquierdo...\n");
                         izq = create_node_under(root, cero);
                         traverse_node(root, print_string);
-                        int i_hijo = 0;
-                        for (i_hijo; i_hijo < cuentaHijo; i_hijo++) {
+                        int i_hijo;
+                        for (i_hijo = 0; i_hijo < cuentaHijo; i_hijo++) {
                             fprintf(stdout, "i_hijo:%d cuentaHijo:%d\n",i_hijo,cuentaHijo);
-                            move_node_under(&hijos[i_hijo], izq);
+                            move_node_under(hijos[i_hijo], izq);
                         }
                         
                         traverse_node(root, print_string);
-                        
                         
 						// Checa con el siguiente valor para el caso S->CC
 						/*if(gramatica[actual.valor - 1].derivaciones > 2) {
@@ -624,7 +635,7 @@ int anasin(){
             fprintf(stdout, "METELO\n");
             fprintf(stdout,"%s\t\n\n", imprimePila(ret));*/
             
-            free(hijos);
+            //free(hijos);
 
 		} else if (actual.tipo == ERR) {
 			imprimeFormato(4, i, -1);
