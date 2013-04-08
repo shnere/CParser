@@ -1,0 +1,120 @@
+
+
+-----Ejectuando Analizador Lexico-----
+
+int	int
+main	main
+(	left_parenthesis
+)	right_parenthesis
+{	left_curly_bracket
+int	int
+a	var_name
+=	equal
+1	int_literal
+;	semi_colon
+}	right_curly_bracket
+
+*******TOKENS*******
+Existen 1 tokens:
+0:	 Nombre: a 	 Tipo:  	 Valor: 
+
+
+-----Ejectuando Analizador Sintactico-----
+
+		PASOS DE LA PILA                                            
+
+
+--<Arbol Sintactico>--
+primerito
+/
+PILA:	$ 0 
+ENTRADA:int main ( ) { int a = 1 ; } $ 
+ACCION:	D1
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+PILA:	$ 0 int 1 
+ENTRADA:main ( ) { int a = 1 ; } $ 
+ACCION:	D4
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+PILA:	$ 0 int 1 main 4 
+ENTRADA:( ) { int a = 1 ; } $ 
+ACCION:	D5
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 
+ENTRADA:) { int a = 1 ; } $ 
+ACCION:	D6
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 
+ENTRADA:{ int a = 1 ; } $ 
+ACCION:	D7
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 
+ENTRADA:int a = 1 ; } $ 
+ACCION:	D9
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+Pop:9
+Pop:int
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 
+ENTRADA:a = 1 ; } $ 
+ACCION: R3: VAR_TYPE->int
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- VAR_TYPE
+    `-- int
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 
+ENTRADA:a = 1 ; } $ 
+ACCION:	D34
+
+
+-------------------------------------------
+
+--<Arbol Sintactico>--
+primerito
+/
+`-- VAR_TYPE
+    `-- int
+PILA:	$ 0 int 1 main 4 left_parenthesis 5 right_parenthesis 6 left_curly_bracket 7 VAR_TYPE 13 var_name 34 
+ENTRADA:= 1 ; } $ 
+Error Sintactico.
+
+
