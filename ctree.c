@@ -345,24 +345,24 @@ search (struct Node* node, void* a, int (*compare)(void* a, void* b)) {
  */
 struct Node*
 searchFirstLevel (struct Node* node, void* a, int first, int (*compare)(void* a, void* b)) {
-    struct Node *start, *next, *temp;
-    start = next = node->firstchild;
-    
-    if(!first)
-        return NULL;
-    
-    if (!node->data)
-        return NULL;
+	struct Node *start, *next, *temp;
+	start = next = node->firstchild;
+	
+	if(!first)
+		return NULL;
+	
+	if (!node->data)
+		return NULL;
     
     if (compare(a, node->data) == 0)
         return node;
     
     if (start) {
-        if ((temp = searchFirstLevel (start, a, 0, compare)))
-            return temp;
-        while ((next = next->nextsibling) != start)
-            if ((temp = searchFirstLevel (next, a, 0, compare)))
-                return temp;
+		if ((temp = searchFirstLevel (start, a, 0, compare)))
+		    return temp;
+		while ((next = next->nextsibling) != start)
+		    if ((temp = searchFirstLevel (next, a, 1, compare)))
+		        return temp;
     }
     
     return NULL;
