@@ -465,7 +465,7 @@ int anasin(){
 	imprimeFormato(0,-1,-1);
     
     // Inicializar el arbol
-    struct Node* root = create_tree("/");
+    struct Node* root = create_tree("#");
     
     // Inicializar valores del arbol
     int hijosDerivaciones, i_hijo;
@@ -479,7 +479,7 @@ int anasin(){
 	while (1) {
         // Arbol
         fprintf(stdout, "\n--<Arbol Sintactico>--\n");
-        traverse_node(root, print_string);
+        //traverse_node(root, print_string);
         
 		// Toma primer elemento
 		aux = convierteAString(top(&pila));
@@ -512,7 +512,7 @@ int anasin(){
 			// Pop hasta encontrar en pila el primer valor de derivacion
 			cero	= gramatica[actual.valor].cadenaDerivacion[0];
 			uno		= gramatica[actual.valor].cadenaDerivacion[1];
-			if(gramatica[actual.valor ].derivaciones > 2){
+			if(gramatica[actual.valor].derivaciones > 2){
 				dos		= gramatica[actual.valor].cadenaDerivacion[2];
 			}
 			//fprintf(stdout, "cero:%s Uno:%s\n",cero,uno);
@@ -539,9 +539,9 @@ int anasin(){
 					// El valor top de la pila checarlo con inputReal
 					localidad = getTokenIndex(inputReal[i-1]);
 					
-					// Guardar valor 
-					//strcpy((char *) tokens[localidad].tipo, auxVarType);
-          //printf("TIPO DE VALIABLE: %s\n", auxVarType);
+					// Guardar valor
+					strcpy((char *) tokens[localidad].tipo, auxVarType);
+                    printf("TIPO DE VALIABLE: %s\n", auxVarType);
 					
 				} else if(actual.valor == 1){
 					// Poner vartype en 0
@@ -557,9 +557,9 @@ int anasin(){
 				
 				// Guardar valor 
 				if(tokens[localidad].valorInicial == 1){
-					//strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
-          //printf("VALOR DE VARIABLE: %s\n", inputReal[i-1]);
-					//tokens[localidad].valorInicial = 0;
+					strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
+                    printf("VALOR DE VARIABLE: %s\n", inputReal[i-1]);
+					tokens[localidad].valorInicial = 0;
 				}
 			}
              
@@ -568,7 +568,7 @@ int anasin(){
 			if (!eq(uno,"epsilon")) {
 				
 				while ((p = convierteAString(pop(&pila))),uno) {
-					fprintf(stdout, "Pop:%s\n",p);
+					//fprintf(stdout, "Pop:%s\n",p);
 					if (eq(p,"$")) {
 						imprimeFormato(4, i, -1);
 						fprintf(stdout, "No encontre %s, salir.\n",uno);
@@ -608,9 +608,8 @@ int anasin(){
                         //fprintf(stdout, "\nAgrega lado izquierdo...\n");
                         izq = create_node_under(root, cero);
                         //traverse_node(root, print_string);
-                        //printf ("\nMueves los hijos abajo\n");
+                        //printf("\nMueves los hijos abajo\n");
                         for (i_hijo = 0; i_hijo < cuentaHijo; i_hijo++) {
-                            //fprintf(stdout, "i_hijo:%d cuentaHijo:%d\n",i_hijo,cuentaHijo);
                             move_node_under(hijos[i_hijo], izq);
                         }
                         
@@ -653,7 +652,8 @@ int anasin(){
 			return -1;
 		}
 		//fprintf(stdout, "pila:%s\n",imprimePila(ret));
-    fprintf(stdout, "\n-------------------------------------------\n");
+        fprintf(stdout, "\n-------------------------------------------\n");
+        traverse_node(root, print_string);
 	}
 
 }
