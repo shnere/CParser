@@ -532,9 +532,11 @@ int anasin(){
             }
             
 			// Reducciones a int o float
+            int soyToken = 0;
 			if(actual.valor == 2 || actual.valor == 3){
 				//fprintf(stdout, "%s\n", "\nHago reduccion a VAR_TYPE\n\n ");
 				auxVarType = uno;
+                soyToken = 1;
 			}else if(actual.valor == 6){
 				// Reducciones a el nombre de la variable
 				//fprintf(stdout, "%s\n", "\nHago reduccion a VAR_ITEM\n\n ");
@@ -551,6 +553,7 @@ int anasin(){
 					// Poner vartype en 0
 					auxVarType = "";
 				}
+                soyToken = 1;
 			}
 			
 			// Reducciones a int_literal y float_literal para sacar los respectivos valores
@@ -562,9 +565,10 @@ int anasin(){
 				// Guardar valor 
 				if(tokens[localidad].valorInicial == 1){
 					strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
-          //printf("VALOR DE VARIABLE: %s\n", inputReal[i-1]);
+                    //printf("VALOR DE VARIABLE: %s\n", inputReal[i-1]);
 					//tokens[localidad].valorInicial = 0;
 				}
+                soyToken = 1;
 			}
              
             
@@ -588,8 +592,13 @@ int anasin(){
                          */
                         
                         fprintf(stdout, "\nAGREGA:%s\n",p);
-                        //nodeTerminal = create_node_under(root, p, 1);
-                        nodeTerminal = create_node_under(root, tokens[localidad].tipo, tokens[localidad].valor);
+                        
+                        if(soyToken == 1){
+                            nodeTerminal = create_node_under(root, tokens[localidad].tipo, tokens[localidad].valor);
+                        }else{
+                          nodeTerminal = create_node_under(root, p, -1);
+                        }
+                        
                         hijos[cuentaHijo] = nodeTerminal;
                         cuentaHijo++;
                         
