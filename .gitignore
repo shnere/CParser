@@ -7,4 +7,4 @@ anasin
 cparser
 .DS_Store
 build
-a.out
+a.out*

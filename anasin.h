@@ -479,7 +479,14 @@ int anasin(){
 	while (1) {
         // Arbol
         fprintf(stdout, "\n--<Arbol Sintactico>--\n");
+<<<<<<< HEAD
+        traverse_node(root, print_string);
+        fprintf(stdout, "\n--<Preorder>--\n");
+        pre_order(root);
+        fprintf(stdout, "\n");
+=======
         //traverse_node(root, print_string);
+>>>>>>> dfaa264034d718fc43e83a81adfb33f4385435af
         
 		// Toma primer elemento
 		aux = convierteAString(top(&pila));
@@ -539,9 +546,15 @@ int anasin(){
 					// El valor top de la pila checarlo con inputReal
 					localidad = getTokenIndex(inputReal[i-1]);
 					
+<<<<<<< HEAD
+					// Guardar valor 
+					strcpy((char *) tokens[localidad].tipo, auxVarType);
+          //printf("TIPO DE VALIABLE: %s\n", auxVarType);
+=======
 					// Guardar valor
 					strcpy((char *) tokens[localidad].tipo, auxVarType);
                     printf("TIPO DE VALIABLE: %s\n", auxVarType);
+>>>>>>> dfaa264034d718fc43e83a81adfb33f4385435af
 					
 				} else if(actual.valor == 1){
 					// Poner vartype en 0
@@ -558,8 +571,8 @@ int anasin(){
 				// Guardar valor 
 				if(tokens[localidad].valorInicial == 1){
 					strcpy((char *) tokens[localidad].valor, inputReal[i-1]);
-                    printf("VALOR DE VARIABLE: %s\n", inputReal[i-1]);
-					tokens[localidad].valorInicial = 0;
+          //printf("VALOR DE VARIABLE: %s\n", inputReal[i-1]);
+					//tokens[localidad].valorInicial = 0;
 				}
 			}
              
@@ -583,8 +596,9 @@ int anasin(){
                             TODO: en vez de agregar p se agrega el valor de p
                          */
                         
-                        //fprintf(stdout, "\nAGREGA:%s\n",p);
-                        nodeTerminal = create_node_under(root, p);
+                        fprintf(stdout, "\nAGREGA:%s\n",p);
+                        //nodeTerminal = create_node_under(root, p, 1);
+                        nodeTerminal = create_node_under(root, tokens[localidad].tipo, tokens[localidad].valor);
                         hijos[cuentaHijo] = nodeTerminal;
                         cuentaHijo++;
                         
@@ -606,7 +620,7 @@ int anasin(){
                     if (eq(p,uno)) {
                         // Agregas el lado izquierdo (cero) al arbol
                         //fprintf(stdout, "\nAgrega lado izquierdo...\n");
-                        izq = create_node_under(root, cero);
+                        izq = create_node_under(root, cero, 0);
                         //traverse_node(root, print_string);
                         //printf("\nMueves los hijos abajo\n");
                         for (i_hijo = 0; i_hijo < cuentaHijo; i_hijo++) {
@@ -632,7 +646,7 @@ int anasin(){
 			}else{
                 // Deriva a epsilon: agregas el no terminal como hijo de /
                 fprintf(stdout, "\nDeriva a epsilon, agrega el terminal como hijo de /...\n");
-                izq = create_node_under(root, cero);
+                izq = create_node_under(root, cero, 0);
                 //traverse_node(root, print_string);
             }
             

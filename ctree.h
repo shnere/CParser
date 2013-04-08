@@ -7,7 +7,7 @@
 /* struct Node structure */
 struct Node {
 	void* data;
-	int dataType;
+	void* dataType;
 	struct Node* parent;
 	struct Node* prevsibling;
 	struct Node* nextsibling;
@@ -22,12 +22,13 @@ int insert_node_under (struct Node* node, struct Node* targetparent);
 int insert_node_next_to (struct Node* node, struct Node* targetsibling);
 
 /* create node */
-struct Node* create_node_under (struct Node* node, void* data);
+struct Node* create_node_under (struct Node* node, void* data, void* dataType);
 struct Node* create_node_next_to (struct Node* node, void* data);
 
 /* traverse tree */
 void traverse_node (struct Node* node,
                     void (*print_data)(void*, int, int, unsigned int*));
+struct Node* pre_order(struct Node* node);
 
 /* detach node */
 int detach_node (struct Node* node);
