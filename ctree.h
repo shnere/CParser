@@ -6,7 +6,8 @@
 
 /* struct Node structure */
 struct Node {
-	void* data;
+	void* data; // int
+    void* dataReal; // el valor de los datos: 2
 	void* dataType;
 	struct Node* parent;
 	struct Node* prevsibling;
@@ -22,7 +23,7 @@ int insert_node_under (struct Node* node, struct Node* targetparent);
 int insert_node_next_to (struct Node* node, struct Node* targetsibling);
 
 /* create node */
-struct Node* create_node_under (struct Node* node, void* data, void* dataType);
+struct Node* create_node_under (struct Node* node, void* data, void* dataReal, void* dataType);
 struct Node* create_node_next_to (struct Node* node, void* data);
 
 /* traverse tree */
