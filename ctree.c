@@ -158,30 +158,6 @@ traverse_node (struct Node* node,
     _traverse_node(node, 0, print_data);
 }
 
-struct Node*
-pre_order (struct Node* node) {
-    struct Node *start, *next, *temp;
-    start = next = node->firstchild;
-
-    if (!node->data ) {
-        return NULL;
-    } else if((int) node->dataType > 0) {
-        printf ("Dato del Nodo:%s, Valor de Dato:%s\n", (char *)node->dataReal, (char *)node->dataType);
-    } else {
-        printf ("Dato del Nodo:%s\n", (char *)node->data);
-    }
-        
-
-    if (start) {
-        if ( (temp = pre_order (start)) )
-            return temp;
-        while ( (next = next->nextsibling) != start)
-            if ( (temp = pre_order (next)) )
-                return temp;
-    }
-    
-    return NULL;
-}
 
 struct Node*
 pre_order (struct Node* node) {
