@@ -158,42 +158,76 @@ traverse_node (struct Node* node,
     _traverse_node(node, 0, print_data);
 }
 
-struct Node*
-pre_order (struct Node* node) {
-    struct Node *start, *next, *temp;
-    start = next = node->firstchild;
-
-    if (!node->data ) {
-        return NULL;
-    } else if((int) node->dataType > 0) {
-        printf ("Dato del Nodo:%s, Valor de Dato:%s\n", (char *)node->dataReal, (char *)node->dataType);
-    } else {
-        printf ("Dato del Nodo:%s\n", (char *)node->data);
-    }
-        
-
-    if (start) {
-        if ( (temp = pre_order (start)) )
-            return temp;
-        while ( (next = next->nextsibling) != start)
-            if ( (temp = pre_order (next)) )
-                return temp;
-    }
-    
-    return NULL;
-}
 
 struct Node*
 pre_order (struct Node* node) {
     struct Node *start, *next, *temp;
     start = next = node->firstchild;
 
-    if (start) {
-        if ( (temp = pre_order (start)) )
-            return temp;
-        while ( (next = next->nextsibling) != start)
-            if ( (temp = pre_order (next)) )
-                return temp;
+    if( eq ( (char *)node->data, "PROGRAM" ) ) {
+        printf("--Todo, delete this node -- ");
+
+    } else if ( eq ( (char *)node->data, "#" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "MAIN_DEF" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "DECLARATION" ) ) {
+        printf("--Todo, delete this node -- ");        
+
+    } else if ( eq ( (char *)node->data, "VAR_TYPE" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "VAR_LIST" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "VAR_ITEM" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "FUNCTION_BODY" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "INTERNAL_DECLARATIONS" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "STATEMENT_LIST" ) ) {
+        printf("--Todo, delete this node -- ");        
+
+    } else if ( eq ( (char *)node->data, "STATEMENT" ) ) {
+        printf("--Todo, delete this node -- ");        
+
+    } else if ( eq ( (char *)node->data, "EXPRESSION" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "IF_STATEMENT" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "WHILE_STATEMENT" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "RETURN_STATEMENT" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "ASSIGN_EXP" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "BINARY_EXP" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "BINARY_OP" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "PRIMARY_EXPR" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    } else if ( eq ( (char *)node->data, "CONSTANT" ) ) {
+        printf("--Todo, delete this node -- ");    
+
+    }
+
+    if( eq ( (char *)node->data, "var_name" ) ) {
+        printf("--Todo, save from tokens[localidad].nombre and apply here -- ");
     }
 
     if (!node->data ) {
@@ -203,7 +237,17 @@ pre_order (struct Node* node) {
     } else {
         printf ("Dato del Nodo:%s\n", (char *)node->data);
     }
-            
+
+    
+
+    if (start) {
+        if ( (temp = pre_order (start)) )
+            return temp;
+        while ( (next = next->nextsibling) != start)
+            if ( (temp = pre_order (next)) )
+                return temp;
+    }
+
     return NULL;
 }
 
