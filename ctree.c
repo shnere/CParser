@@ -164,12 +164,70 @@ pre_order (struct Node* node) {
     struct Node *start, *next, *temp;
     start = next = node->firstchild;
 
-    if (start) {
-        if ( (temp = pre_order (start)) )
-            return temp;
-        while ( (next = next->nextsibling) != start)
-            if ( (temp = pre_order (next)) )
-                return temp;
+    if( eq ( (char *)node->data, "PROGRAM" ) ) {
+        printf("(x) ");
+
+    } else if ( eq ( (char *)node->data, "#" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "MAIN_DEF" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "DECLARATION" ) ) {
+        printf("(x) ");        
+
+    } else if ( eq ( (char *)node->data, "VAR_TYPE" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "VAR_LIST" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "VAR_ITEM" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "FUNCTION_BODY" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "INTERNAL_DECLARATIONS" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "STATEMENT_LIST" ) ) {
+        printf("(x) ");        
+
+    } else if ( eq ( (char *)node->data, "STATEMENT" ) ) {
+        printf("(x) ");        
+
+    } else if ( eq ( (char *)node->data, "EXPRESSION" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "IF_STATEMENT" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "WHILE_STATEMENT" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "RETURN_STATEMENT" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "ASSIGN_EXP" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "BINARY_EXP" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "BINARY_OP" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "PRIMARY_EXPR" ) ) {
+        printf("(x) ");    
+
+    } else if ( eq ( (char *)node->data, "CONSTANT" ) ) {
+        printf("(x) ");    
+
+    }
+
+    if( eq ( (char *)node->data, "var_name" ) ) {
+        printf("--Breakpoint-- ");
     }
 
     if (!node->data ) {
@@ -179,7 +237,17 @@ pre_order (struct Node* node) {
     } else {
         printf ("Dato del Nodo:%s\n", (char *)node->data);
     }
-            
+
+    
+
+    if (start) {
+        if ( (temp = pre_order (start)) )
+            return temp;
+        while ( (next = next->nextsibling) != start)
+            if ( (temp = pre_order (next)) )
+                return temp;
+    }
+
     return NULL;
 }
 
