@@ -59,10 +59,11 @@ insert_node_under (struct Node* node, struct Node* targetparent) {
  * creates and returns poiner to a child under a given node
  */
 struct Node*
-create_node_under (struct Node* node, void* data, void* dataType) {
+create_node_under (struct Node* node, void* data, void* dataReal, void* dataType) {
     
     struct Node* newchild = (struct Node *) malloc(sizeof(struct Node));
 	newchild->data = data;
+    newchild->dataReal = dataReal;
 	newchild->dataType = dataType;
 	
 	newchild->firstchild = (struct Node *) NULL;
@@ -165,7 +166,7 @@ pre_order (struct Node* node) {
     if (!node->data ) {
         return NULL;
     } else if((int) node->dataType > 0) {
-        printf ("Dato del Nodo:%s, Valor de Dato:%s\n", (char *)node->data, (char *)node->dataType);
+        printf ("Dato del Nodo:%s, Valor de Dato:%s\n", (char *)node->dataReal, (char *)node->dataType);
     } else {
         printf ("Dato del Nodo:%s\n", (char *)node->data);
     }
