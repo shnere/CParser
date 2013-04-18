@@ -165,69 +165,69 @@ pre_order (struct Node* node) {
     start = next = node->firstchild;
 
     if( eq ( (char *)node->data, "PROGRAM" ) ) {
-        printf("(x) ");
+        printf("--Todo, delete this node -- ");
 
     } else if ( eq ( (char *)node->data, "#" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "MAIN_DEF" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "DECLARATION" ) ) {
-        printf("(x) ");        
+        printf("--Todo, delete this node -- ");        
 
     } else if ( eq ( (char *)node->data, "VAR_TYPE" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "VAR_LIST" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "VAR_ITEM" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "FUNCTION_BODY" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "INTERNAL_DECLARATIONS" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "STATEMENT_LIST" ) ) {
-        printf("(x) ");        
+        printf("--Todo, delete this node -- ");        
 
     } else if ( eq ( (char *)node->data, "STATEMENT" ) ) {
-        printf("(x) ");        
+        printf("--Todo, delete this node -- ");        
 
     } else if ( eq ( (char *)node->data, "EXPRESSION" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "IF_STATEMENT" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "WHILE_STATEMENT" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "RETURN_STATEMENT" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "ASSIGN_EXP" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "BINARY_EXP" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "BINARY_OP" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "PRIMARY_EXPR" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     } else if ( eq ( (char *)node->data, "CONSTANT" ) ) {
-        printf("(x) ");    
+        printf("--Todo, delete this node -- ");    
 
     }
 
     if( eq ( (char *)node->data, "var_name" ) ) {
-        printf("--Breakpoint-- ");
+        printf("--Todo, save from tokens[localidad].nombre and apply here -- ");
     }
 
     if (!node->data ) {
