@@ -58,7 +58,7 @@ insert_node_under (struct Node* node, struct Node* targetparent) {
 /*
  * creates and returns poiner to a child under a given node
  */
-struct Node* create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal);
+//struct Node* create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal);
 struct Node*
 create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal) {
     
@@ -165,8 +165,22 @@ traverse_node (struct Node* node,
 
 struct Node*
 pre_order (struct Node* node, VoidNode ** ast) {
+
+    static int counter = 0;
+    static int rel_counter  = 0;
+    static int skip_constant = 0;
+    char Tn [3];
     struct Node *start, *next, *temp;
     start = next = node->firstchild;
+
+
+    // if(statement_list) {
+    //     printf("{sdasdsad]")
+    //     line_counter++;
+    //     statement_list = false;
+    // }
+
+    
 
     if( eq ( (char *)node->data, "PROGRAM" ) ) {
     } else if ( eq ( (char *)node->data, "#" ) ) {    
@@ -177,23 +191,43 @@ pre_order (struct Node* node, VoidNode ** ast) {
     } else if ( eq ( (char *)node->data, "VAR_ITEM" ) ) {    
     } else if ( eq ( (char *)node->data, "FUNCTION_BODY" ) ) {    
     } else if ( eq ( (char *)node->data, "INTERNAL_DECLARATIONS" ) ) {    
-    } else if ( eq ( (char *)node->data, "STATEMENT_LIST" ) ) {        
+    } else if ( eq ( (char *)node->data, "STATEMENT_LIST" ) ) {
+        //statement_list = true;
+        //pre_order(node);        
     } else if ( eq ( (char *)node->data, "STATEMENT" ) ) {        
     } else if ( eq ( (char *)node->data, "EXPRESSION" ) ) {    
-    } else if ( eq ( (char *)node->data, "IF_STATEMENT" ) ) {    
+    } else if ( eq ( (char *)node->data, "IF_STATEMENT" ) ) {
+        printf("[IFT, T%d, GOTO L%d]\n", rel_counter, rel_counter);
     } else if ( eq ( (char *)node->data, "WHILE_STATEMENT" ) ) {    
+        printf("[LABEL, , , L%d]\n", ++rel_counter);
+        
     } else if ( eq ( (char *)node->data, "RETURN_STATEMENT" ) ) {    
     } else if ( eq ( (char *)node->data, "ASSIGN_EXP" ) ) {    
-    } else if ( eq ( (char *)node->data, "BINARY_EXP" ) ) {    
-    } else if ( eq ( (char *)node->data, "BINARY_OP" ) ) {    
+        //node->firstchild->prevsibling->data = Tn;
+        //sprintf(node->firstchild->prevsibling->data, Tn)
+        //node->prevsibling = targetsibling;
+    } else if ( eq ( (char *)node->data, "BINARY_EXP" ) ) { 
+        //printf("HIJOS: %d\n",count_children(node));   
+    } else if ( eq ( (char *)node->data, "BINARY_OP" ) ) {  
+        skip_constant = 1; 
+        //todo, checar el caso numero + numero
+        //tod, +,-,* instead of arith_op
+        sprintf(Tn, "T%d", counter++);
+        printf("[%s, %s, %s, T%d]\n", (char*) node->firstchild->data, (char *)node->prevsibling->firstchild->data, (char *)node->nextsibling->firstchild->firstchild->data, counter);
+        if ( eq ( (char *)node->data, "rel_op" ) ) {
+            rel_counter = counter - 1;
+        }
+
     } else if ( eq ( (char *)node->data, "PRIMARY_EXPR" ) ) {    
     } else if ( eq ( (char *)node->data, "CONSTANT" ) ) {    
+        //sprintf(Tn, "T%d", counter++);
+        if(!skip_constant) {
+          printf("[=, %s,  , %s]\n", (char *) node->firstchild->dataReal, (char*) node->firstchild->name);    
+        } else {
+          skip_constant = 0;
+        }
     } else {
         addFirst(ast, node->data);
-    }
-
-    if( eq ( (char *)node->data, "var_name" ) ) {
-        printf("--Todo, save from tokens[localidad].nombre and apply here -- ");
     }
 	
 	//printf("\nWTF %d",(int) node->dataType);
@@ -201,9 +235,9 @@ pre_order (struct Node* node, VoidNode ** ast) {
     if (!node->data ) {
         return NULL;
     } else if((int) node->dataType != -1) {
-        printf ("Dato del Nodo:%s, Nombre de Dato:%s, Valor de Dato:%s\n", (char *)node->data, (char *) node->name,(char *)node->dataReal);
+        //printf ("Dato del Nodo:%s, Nombre de Dato:%s, Valor de Dato:%s\n", (char *)node->data, (char *) node->name,(char *)node->dataReal);
     } else {
-        printf ("Dato del Nodo:%s\n", (char *)node->data);
+        //printf ("Dato del Nodo: %s\n", (char *)node->data);
     }
 
     
@@ -291,6 +325,19 @@ _delete_node (struct Node* node, int raw) {
     free (node);
     
     return 1;
+}
+
+int count_children(struct Node* node) {
+    int count = 0;
+    struct Node *start, *next;
+    start = next = node->firstchild;
+    if (start) {
+        count++;
+        while ((next = next->nextsibling) != start) {
+            count++;
+        }
+    }
+    return count;
 }
 
 /*
@@ -427,3 +474,4 @@ searchFirstLevel (struct Node* node, void* a, int (*compare)(void* a, void * b))
     
     return NULL;
 }
+
