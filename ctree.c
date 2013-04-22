@@ -221,7 +221,7 @@ pre_order (struct Node* node, VoidNode ** ast) {
     if (!node->data ) {
         return NULL;
     } else if((int) node->dataType != -1) {
-        printf ("Dato del Nodo:%s, Tipo de Dato:%s, Valor de Dato:%s\n", (char *)node->data, (char *) node->dataType,(char *)node->dataReal);
+        printf ("Dato del Nodo:%s, Nombre de Dato:%s, Valor de Dato:%s\n", (char *)node->data, (char *) node->name,(char *)node->dataReal);
     } else {
         printf ("Dato del Nodo: %s\n", (char *)node->data);
     }
