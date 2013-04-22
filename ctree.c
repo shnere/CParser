@@ -58,7 +58,6 @@ insert_node_under (struct Node* node, struct Node* targetparent) {
 /*
  * creates and returns poiner to a child under a given node
  */
-struct Node* create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal);
 struct Node*
 create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal) {
     

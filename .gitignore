@@ -8,3 +8,4 @@ cparser
 .DS_Store
 build
 a.out*
+output.txt

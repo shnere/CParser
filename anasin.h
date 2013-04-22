@@ -494,7 +494,7 @@ int anasin(){
 		if (actual.tipo == ACEPTA) {
 			imprimeFormato(3, i, -1);
 			pre_order(root, &ast);
-      printCharList(&ast);
+			printCharList(&ast);
 			return 0;
 		} else if (actual.tipo == D) {
 			// Imprime
@@ -569,8 +569,19 @@ int anasin(){
 				}
                 soyToken = 1;
 			}
-             
-            
+			
+			// Reduccion a a ASSIGN EXPRESSION var_name equal BINARY_EXP
+			// i = ; i-1 = valor i-2 = i-3 = var_name
+			if(actual.valor == 24){
+				/*
+					TODO Sacar los valores
+				*/
+				// fprintf(stdout, "%s\n", "\nHago reduccion a ASSIGN EXPRESSION var_name equal BINARY_EXP\n\n ");
+				// fprintf(stdout, "inputReal[i-3]: %s\n", inputReal[i-5]);
+				// localidad = getTokenIndex(inputReal[i-5]);
+				// fprintf(stdout, "LOCALIDAD: %d\n", localidad);
+			}
+
 			// Si la derivacion no es a epsilon se hace pop
 			if (!eq(uno,"epsilon")) {
 				
