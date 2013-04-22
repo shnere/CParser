@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "stack.c"
+#include "voidstack.c"
 #include "ctree.c"
 
 #define eq(str1, str2) (strcmp(str1, str2) == 0)
@@ -98,6 +99,7 @@ derivacion *gramatica;
 siguiente *siguientes;
 token *tokens;
 Stack pila;
+VoidNode * ast = NULL;
 
 int fdOutput,eleccion;
 
@@ -491,7 +493,8 @@ int anasin(){
 		// Si es D#
 		if (actual.tipo == ACEPTA) {
 			imprimeFormato(3, i, -1);
-			pre_order(root);
+			pre_order(root, &ast);
+      printCharList(&ast);
 			return 0;
 		} else if (actual.tipo == D) {
 			// Imprime
