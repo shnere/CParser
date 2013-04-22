@@ -494,7 +494,7 @@ int anasin(){
 		if (actual.tipo == ACEPTA) {
 			imprimeFormato(3, i, -1);
 			pre_order(root, &ast);
-      printCharList(&ast);
+      //printCharList(&ast);
 			return 0;
 		} else if (actual.tipo == D) {
 			// Imprime
