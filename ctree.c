@@ -160,70 +160,32 @@ traverse_node (struct Node* node,
 
 
 struct Node*
-pre_order (struct Node* node) {
+pre_order (struct Node* node, VoidNode ** ast) {
     struct Node *start, *next, *temp;
     start = next = node->firstchild;
 
     if( eq ( (char *)node->data, "PROGRAM" ) ) {
-        printf("--Todo, delete this node -- ");
-
-    } else if ( eq ( (char *)node->data, "#" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "MAIN_DEF" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "DECLARATION" ) ) {
-        printf("--Todo, delete this node -- ");        
-
-    } else if ( eq ( (char *)node->data, "VAR_TYPE" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "VAR_LIST" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "VAR_ITEM" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "FUNCTION_BODY" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "INTERNAL_DECLARATIONS" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "STATEMENT_LIST" ) ) {
-        printf("--Todo, delete this node -- ");        
-
-    } else if ( eq ( (char *)node->data, "STATEMENT" ) ) {
-        printf("--Todo, delete this node -- ");        
-
-    } else if ( eq ( (char *)node->data, "EXPRESSION" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "IF_STATEMENT" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "WHILE_STATEMENT" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "RETURN_STATEMENT" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "ASSIGN_EXP" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "BINARY_EXP" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "BINARY_OP" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "PRIMARY_EXPR" ) ) {
-        printf("--Todo, delete this node -- ");    
-
-    } else if ( eq ( (char *)node->data, "CONSTANT" ) ) {
-        printf("--Todo, delete this node -- ");    
-
+    } else if ( eq ( (char *)node->data, "#" ) ) {    
+    } else if ( eq ( (char *)node->data, "MAIN_DEF" ) ) {    
+    } else if ( eq ( (char *)node->data, "DECLARATION" ) ) {        
+    } else if ( eq ( (char *)node->data, "VAR_TYPE" ) ) {    
+    } else if ( eq ( (char *)node->data, "VAR_LIST" ) ) {    
+    } else if ( eq ( (char *)node->data, "VAR_ITEM" ) ) {    
+    } else if ( eq ( (char *)node->data, "FUNCTION_BODY" ) ) {    
+    } else if ( eq ( (char *)node->data, "INTERNAL_DECLARATIONS" ) ) {    
+    } else if ( eq ( (char *)node->data, "STATEMENT_LIST" ) ) {        
+    } else if ( eq ( (char *)node->data, "STATEMENT" ) ) {        
+    } else if ( eq ( (char *)node->data, "EXPRESSION" ) ) {    
+    } else if ( eq ( (char *)node->data, "IF_STATEMENT" ) ) {    
+    } else if ( eq ( (char *)node->data, "WHILE_STATEMENT" ) ) {    
+    } else if ( eq ( (char *)node->data, "RETURN_STATEMENT" ) ) {    
+    } else if ( eq ( (char *)node->data, "ASSIGN_EXP" ) ) {    
+    } else if ( eq ( (char *)node->data, "BINARY_EXP" ) ) {    
+    } else if ( eq ( (char *)node->data, "BINARY_OP" ) ) {    
+    } else if ( eq ( (char *)node->data, "PRIMARY_EXPR" ) ) {    
+    } else if ( eq ( (char *)node->data, "CONSTANT" ) ) {    
+    } else {
+        addFirst(ast, node->data);
     }
 
     if( eq ( (char *)node->data, "var_name" ) ) {
@@ -241,10 +203,10 @@ pre_order (struct Node* node) {
     
 
     if (start) {
-        if ( (temp = pre_order (start)) )
+        if ( (temp = pre_order (start, ast)) )
             return temp;
         while ( (next = next->nextsibling) != start)
-            if ( (temp = pre_order (next)) )
+            if ( (temp = pre_order (next, ast)) )
                 return temp;
     }
 
