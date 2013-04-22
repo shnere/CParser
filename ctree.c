@@ -58,7 +58,7 @@ insert_node_under (struct Node* node, struct Node* targetparent) {
 /*
  * creates and returns poiner to a child under a given node
  */
-struct Node* create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal);
+//struct Node* create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal);
 struct Node*
 create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal) {
     
@@ -198,8 +198,6 @@ pre_order (struct Node* node, VoidNode ** ast) {
     } else if ( eq ( (char *)node->data, "WHILE_STATEMENT" ) ) {    
     } else if ( eq ( (char *)node->data, "RETURN_STATEMENT" ) ) {    
     } else if ( eq ( (char *)node->data, "ASSIGN_EXP" ) ) {    
-        sprintf(Tn, "T%d", counter++);
-        printf("[=, %s,  , T%d]", (char*) node->firstchild->prevsibling->data, counter);
         //node->firstchild->prevsibling->data = Tn;
         //sprintf(node->firstchild->prevsibling->data, Tn)
         //node->prevsibling = targetsibling;
@@ -208,6 +206,8 @@ pre_order (struct Node* node, VoidNode ** ast) {
         printf("[%s, %s, %s, T%d]", (char*) node->firstchild->data, (char *)node->prevsibling->firstchild->data, (char *)node->nextsibling->firstchild->firstchild->data, counter++);
     } else if ( eq ( (char *)node->data, "PRIMARY_EXPR" ) ) {    
     } else if ( eq ( (char *)node->data, "CONSTANT" ) ) {    
+        //sprintf(Tn, "T%d", counter++);
+        printf("[=, %s,  , %s]", (char *) node->firstchild->dataReal, (char*) node->firstchild->name);
     } else {
         addFirst(ast, node->data);
     }
