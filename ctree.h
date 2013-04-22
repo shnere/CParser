@@ -29,7 +29,7 @@ struct Node* create_node_next_to (struct Node* node, void* data);
 /* traverse tree */
 void traverse_node (struct Node* node,
                     void (*print_data)(void*, int, int, unsigned int*));
-struct Node* pre_order(struct Node* node);
+struct Node* pre_order(struct Node* node, VoidNode ** ast);
 
 /* detach node */
 int detach_node (struct Node* node);
