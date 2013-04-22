@@ -590,9 +590,10 @@ int anasin(){
                         fprintf(stdout, "\nAGREGA:%s\n",p);
                         
                         if(soyToken == 1){
-                            nodeTerminal = create_node_under(root, p, tokens[localidad].tipo, tokens[localidad].valor);
+							// NEW (struct Node* node, void* data, void* dataType, void* name, void* dataReal)
+                            nodeTerminal = create_node_under(root, p, tokens[localidad].tipo, tokens[localidad].nombre, tokens[localidad].valor);
                         }else{
-                          nodeTerminal = create_node_under(root, p, -1, -1);
+                          nodeTerminal = create_node_under(root, p, -1, -1, -1);
                         }
                         
                         hijos[cuentaHijo] = nodeTerminal;
@@ -616,7 +617,7 @@ int anasin(){
                     if (eq(p,uno)) {
                         // Agregas el lado izquierdo (cero) al arbol
                         //fprintf(stdout, "\nAgrega lado izquierdo...\n");
-                        izq = create_node_under(root, cero, -1, -1);
+                        izq = create_node_under(root, cero, -1, -1, -1);
                         //traverse_node(root, print_string);
                         //printf("\nMueves los hijos abajo\n");
                         for (i_hijo = 0; i_hijo < cuentaHijo; i_hijo++) {
@@ -642,7 +643,7 @@ int anasin(){
 			}else{
                 // Deriva a epsilon: agregas el no terminal como hijo de /
                 fprintf(stdout, "\nDeriva a epsilon, agrega el terminal como hijo de /...\n");
-                izq = create_node_under(root, cero, -1, -1);
+                izq = create_node_under(root, cero, -1, -1, -1);
                 //traverse_node(root, print_string);
             }
             
