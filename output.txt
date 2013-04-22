@@ -8858,7 +8858,7 @@ Dato del Nodo: EXPRESSION
 Dato del Nodo: BINARY_EXP
 Dato del Nodo: PRIMARY_EXPR
 Dato del Nodo: CONSTANT
-Dato del Nodo: int_literal, Valor de Dato:3
+Dato del Nodo:int_literal, Tipo de Dato:, Valor de Dato:3
 Dato del Nodo: equal
 --Todo, save from tokens[localidad].nombre and apply here -- Dato del Nodo: var_name
 Dato del Nodo: STATEMENT
@@ -8868,7 +8868,7 @@ Dato del Nodo: EXPRESSION
 Dato del Nodo: BINARY_EXP
 Dato del Nodo: PRIMARY_EXPR
 Dato del Nodo: CONSTANT
-Dato del Nodo: int_literal, Valor de Dato:5
+Dato del Nodo:int_literal, Tipo de Dato:, Valor de Dato:5
 Dato del Nodo: equal
 --Todo, save from tokens[localidad].nombre and apply here -- Dato del Nodo: var_name
 Dato del Nodo: STATEMENT
@@ -8878,7 +8878,7 @@ Dato del Nodo: EXPRESSION
 Dato del Nodo: BINARY_EXP
 Dato del Nodo: PRIMARY_EXPR
 Dato del Nodo: CONSTANT
-Dato del Nodo: int_literal, Valor de Dato:10
+Dato del Nodo:int_literal, Tipo de Dato:, Valor de Dato:10
 Dato del Nodo: equal
 --Todo, save from tokens[localidad].nombre and apply here -- Dato del Nodo: var_name
 Dato del Nodo: STATEMENT
@@ -8888,7 +8888,7 @@ Dato del Nodo: EXPRESSION
 Dato del Nodo: BINARY_EXP
 Dato del Nodo: PRIMARY_EXPR
 Dato del Nodo: CONSTANT
-Dato del Nodo: int_literal, Valor de Dato:11
+Dato del Nodo:int_literal, Tipo de Dato:, Valor de Dato:11
 Dato del Nodo: equal
 --Todo, save from tokens[localidad].nombre and apply here -- Dato del Nodo: var_name
 Dato del Nodo: STATEMENT
@@ -8908,25 +8908,25 @@ Dato del Nodo: arith_op
 Dato del Nodo: BINARY_EXP
 Dato del Nodo: PRIMARY_EXPR
 Dato del Nodo: CONSTANT
-Dato del Nodo: int_literal, Valor de Dato:
+Dato del Nodo:int_literal, Tipo de Dato:, Valor de Dato:
 [arith_op, CONSTANT, CONSTANT, T7]Dato del Nodo: BINARY_OP
 Dato del Nodo: arith_op
 Dato del Nodo: BINARY_EXP
 Dato del Nodo: PRIMARY_EXPR
 Dato del Nodo: CONSTANT
-Dato del Nodo: int_literal, Valor de Dato:
+Dato del Nodo:int_literal, Tipo de Dato:, Valor de Dato:
 [arith_op, CONSTANT, CONSTANT, T8]Dato del Nodo: BINARY_OP
 Dato del Nodo: arith_op
 Dato del Nodo: BINARY_EXP
 Dato del Nodo: PRIMARY_EXPR
 Dato del Nodo: CONSTANT
-Dato del Nodo: int_literal, Valor de Dato:
+Dato del Nodo:int_literal, Tipo de Dato:, Valor de Dato:
 [arith_op, CONSTANT, CONSTANT, T9]Dato del Nodo: BINARY_OP
 Dato del Nodo: arith_op
 Dato del Nodo: BINARY_EXP
 Dato del Nodo: PRIMARY_EXPR
 Dato del Nodo: CONSTANT
-Dato del Nodo: int_literal, Valor de Dato:3
+Dato del Nodo:int_literal, Tipo de Dato:, Valor de Dato:3
 Dato del Nodo: equal
 --Todo, save from tokens[localidad].nombre and apply here -- Dato del Nodo: var_name
 Dato del Nodo: INTERNAL_DECLARATIONS

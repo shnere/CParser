@@ -9,7 +9,6 @@
  */
 
 #include <stdlib.h>
-
 #include "ctree.h"
 
 /*
@@ -21,6 +20,7 @@ create_tree (void* data) {
 	struct Node* root = (struct Node *) malloc(sizeof(struct Node));
 	root->data = data;
 	root->dataType = (void*) -1;
+	root->name = (void*) -1;
 	root->parent = root->firstchild = (struct Node *) NULL;
 	root->prevsibling = root->nextsibling = (struct Node *) NULL;
 	return root;
@@ -58,13 +58,15 @@ insert_node_under (struct Node* node, struct Node* targetparent) {
 /*
  * creates and returns poiner to a child under a given node
  */
+struct Node* create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal);
 struct Node*
-create_node_under (struct Node* node, void* data, void* dataReal, void* dataType) {
+create_node_under (struct Node* node, void* data, void* dataType, void* name, void* dataReal) {
     
     struct Node* newchild = (struct Node *) malloc(sizeof(struct Node));
 	newchild->data = data;
     newchild->dataReal = dataReal;
 	newchild->dataType = dataType;
+	newchild->name = name;
 	
 	newchild->firstchild = (struct Node *) NULL;
 	insert_node_under (newchild, node);
@@ -100,7 +102,9 @@ create_node_next_to (struct Node* node, void* data) {
     
 	struct Node* newsibling = (struct Node *) malloc(sizeof(struct Node));
 	newsibling->data = data;
+	newsibling->dataReal = (void *) -1;
 	newsibling->dataType = (void *) -1;
+	newsibling->name 	 = (void *) -1;
 	
 	newsibling->firstchild = (struct Node *) NULL;
 	insert_node_next_to (newsibling, node);
@@ -211,11 +215,13 @@ pre_order (struct Node* node, VoidNode ** ast) {
     if( eq ( (char *)node->data, "var_name" ) ) {
         printf("--Todo, save from tokens[localidad].nombre and apply here -- ");
     }
-
+	
+	//printf("\nWTF %d",(int) node->dataType);
+	
     if (!node->data ) {
         return NULL;
-    } else if((int) node->dataType > 0) {
-        printf ("Dato del Nodo: %s, Valor de Dato:%s\n", (char *)node->data, (char *)node->dataType);
+    } else if((int) node->dataType != -1) {
+        printf ("Dato del Nodo:%s, Tipo de Dato:%s, Valor de Dato:%s\n", (char *)node->data, (char *) node->dataType,(char *)node->dataReal);
     } else {
         printf ("Dato del Nodo: %s\n", (char *)node->data);
     }
